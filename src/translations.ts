@@ -1,6 +1,6 @@
 export const translations = {
   en: {
-    brandName: "",
+    brandName: "Fix My Future",
     nav: {
       home: "Home",
       gemstones: "Gemstones",
@@ -10,13 +10,14 @@ export const translations = {
       astrologers: "Astrologers",
     },
     hero: [
-      { title: "", subtitle: "", cta: "Shop Now" },
+      { title: "Premium Gemstones", subtitle: "Certified & Ethically Sourced", cta: "Shop Now" },
       { title: "Natural Rudraksha", subtitle: "Spiritual Protection & Peace", cta: "Explore" },
       { title: "Zodiac Bracelets", subtitle: "Wear Your Star Sign", cta: "Discover" }
     ],
     badges: [
       { title: "Guarantee of Purity", desc: "100% Natural" },
       { title: "100% Certified", desc: "Lab Verified" },
+      { title: "Ethically Sourced", desc: "Sustainable" },
       { title: "Free Shipping", desc: "On All Orders" }
     ],
     sections: {
@@ -58,6 +59,11 @@ export const translations = {
       minutes: "minutes",
       startCall: "Start Call Now"
     },
+    cta: {
+      title: "Find Your Perfect Gemstone",
+      subtitle: "Use our free gemstone calculator to find the right stone for you",
+      btn: "Try Gemstone Calculator"
+    },
     footer: {
       desc: "Your trusted destination for authentic gemstones, rudraksha, and spiritual jewelry.",
       shop: "Shop",
@@ -70,7 +76,7 @@ export const translations = {
     }
   },
   hi: {
-    brandName: "",
+    brandName: "फिक्स माई फ्यूचर",
     nav: {
       home: "होम",
       gemstones: "रत्न",
@@ -80,13 +86,14 @@ export const translations = {
       astrologers: "ज्योतिषी",
     },
     hero: [
-      { title: "", subtitle: "", cta: "अभी खरीदें" },
+      { title: "प्रीमियम रत्न (Gemstones)", subtitle: "प्रमाणित और नैतिक रूप से प्राप्त", cta: "अभी खरीदें" },
       { title: "प्राकृतिक रुद्राक्ष", subtitle: "आध्यात्मिक सुरक्षा और शांति", cta: "एक्सप्लोर करें" },
       { title: "राशि ब्रेसलेट", subtitle: "अपनी राशि का सितारा पहनें", cta: "खोजें" }
     ],
     badges: [
       { title: "शुद्धता की गारंटी", desc: "100% प्राकृतिक" },
       { title: "100% प्रमाणित", desc: "लैब द्वारा सत्यापित" },
+      { title: "नैतिक स्रोत", desc: "टिकाऊ/सस्टेनेबल" },
       { title: "फ्री शिपिंग", desc: "सभी ऑर्डर्स पर" }
     ],
     sections: {
@@ -146,37 +153,7 @@ export const translations = {
   }
 };
 
-export const productsHi = [
-  { id: 1, name: 'प्राकृतिक 7 मुखी रुद्राक्ष (नेपाली)', price: '₹2,499' },
-  { id: 2, name: 'धन योग ब्रेसलेट (लक्ष्मी प्राप्ति)', price: '₹1,999' },
-  { id: 3, name: 'प्राकृतिक 5 मुखी रुद्राक्ष माला', price: '₹1,299' },
-  { id: 4, name: 'एमेथिस्ट (जामुनिया) ब्रेसलेट', price: '₹1,499' },
-  { id: 5, name: 'पायराइट (मनी मैग्नेट) ब्रेसलेट', price: '₹1,299' },
-  { id: 6, name: 'हरा एवेंट्यूरिन (भाग्य वर्धक) ब्रेसलेट', price: '₹1,399' },
-  { id: 7, name: 'रोज़ क्वार्ट्ज़ (प्रेम संबंध) ब्रेसलेट', price: '₹1,199' },
-  { id: 8, name: 'प्राकृतिक सिट्रीन (सुनहला) ब्रेसलेट', price: '₹1,599' },
-];
 
-export const gemstonesHi = [
-  { id: 21, name: 'ब्राज़ीलियन पन्ना (Emerald)', price: '₹15,999' },
-  { id: 22, name: 'ब्राज़ीलियन पन्ना (Emerald)', price: '₹18,999' },
-  { id: 23, name: 'अफ्रीकन रूबी (माणिक्य)', price: '₹22,999' },
-  { id: 24, name: 'पुखराज (Yellow Sapphire)', price: '₹19,999' },
-];
-
-export const rudrakshaHi = [
-  { id: 31, name: '7 मुखी रुद्राक्ष (सिद्ध)', price: '₹2,499' },
-  { id: 32, name: '5 मुखी रुद्राक्ष (नेपाली)', price: '₹1,299' },
-  { id: 33, name: '6 मुखी रुद्राक्ष (कार्तिकेय)', price: '₹1,899' },
-  { id: 34, name: 'प्राकृतिक गौरी शंकर रुद्राक्ष', price: '₹3,999' },
-];
-
-export const zodiacProductsHi = [
-  { id: 11, name: 'मिथुन राशि विशेष ब्रेसलेट', price: '₹1,799', sign: 'Gemini (मिथुन)' },
-  { id: 12, name: 'वृषभ राशि विशेष ब्रेसलेट', price: '₹1,799', sign: 'Taurus (वृषभ)' },
-  { id: 13, name: 'सिंह राशि विशेष ब्रेसलेट', price: '₹1,899', sign: 'Leo (सिंह)' },
-  { id: 14, name: 'मेष राशि विशेष ब्रेसलेट', price: '₹1,699', sign: 'Aries (मेष)' },
-];
 
 export const astrologersHi = [
   {

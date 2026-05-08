@@ -77,14 +77,16 @@ export default function ChatRoom({
   };
 
   return (
-    <div className="fixed inset-0 z-[64] bg-[var(--primary-bg)] flex flex-col">
+    <div className="fixed inset-0 z-[64] bg-gray-800 flex flex-col">
       {/* Header */}
-      <div className="bg-[var(--primary-bg)]/95  border-b border-[var(--border-color)] p-4 flex items-center justify-between">
+      <div className="bg-gray-800/95 backdrop-blur-md border-b border-white/10 p-4 flex items-center justify-between">
         <button
           onClick={onBack}
-          className="flex items-center space-x-2 text-[var(--text-primary)] hover:text-[var(--accent-color)] transition-colors"
+          className="flex items-center space-x-2 text-white hover:text-amber-600 transition-colors"
         >
-          <i className="fas fa-arrow-left w-5 h-5 flex items-center justify-center"></i>
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
           <span>{lang === 'hi' ? 'वापस' : 'Back'}</span>
         </button>
 
@@ -92,20 +94,20 @@ export default function ChatRoom({
           <img
             src={astrologer.image}
             alt={astrologer.name}
-            className="w-10 h-10 rounded-full border-2 border-[var(--border-color)]"
+            className="w-10 h-10 rounded-full border-2 border-white/20"
           />
           <div>
-            <h3 className="text-[var(--text-primary)] font-bold">{astrologer.name}</h3>
+            <h3 className="text-white font-bold">{astrologer.name}</h3>
             <div className="flex items-center space-x-2">
               <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-              <span className="text-text-muted text-sm">{lang === 'hi' ? 'ऑनलाइन' : 'Online'}</span>
+              <span className="text-gray-400 text-sm">{lang === 'hi' ? 'ऑनलाइन' : 'Online'}</span>
             </div>
           </div>
         </div>
 
         <div className="text-right">
           <div className="text-green-400 font-bold">₹{astrologer.price}/min</div>
-          <div className="text-text-muted text-sm">{astrologer.waitTime}</div>
+          <div className="text-gray-400 text-sm">{astrologer.waitTime}</div>
         </div>
       </div>
 
@@ -119,8 +121,8 @@ export default function ChatRoom({
             <div
               className={`max-w-xs lg:max-w-md px-4 py-2 rounded-2xl ${
                 message.sender === 'user'
-                  ? 'bg-[var(--accent-color)] text-[var(--text-primary)] rounded-br-sm'
-                  : 'glass-light text-text-main rounded-bl-sm'
+                  ? 'bg-amber-700 text-white rounded-br-sm'
+                  : 'bg-gray-700 text-stone-200 rounded-bl-sm'
               }`}
             >
               <p className="text-sm">{message.text}</p>
@@ -134,7 +136,7 @@ export default function ChatRoom({
       </div>
 
       {/* Input */}
-      <div className="bg-[var(--primary-bg)]/95  border-t border-[var(--border-color)] p-4">
+      <div className="bg-gray-800/95 backdrop-blur-md border-t border-white/10 p-4">
         <div className="flex space-x-3">
           <input
             type="text"
@@ -142,14 +144,16 @@ export default function ChatRoom({
             onChange={(e) => setNewMessage(e.target.value)}
             onKeyPress={handleKeyPress}
             placeholder={lang === 'hi' ? 'अपना संदेश लिखें...' : 'Type your message...'}
-            className="flex-1 glass-light border border-[var(--border-color)] rounded-xl px-4 py-3 text-[var(--text-primary)] placeholder-[var(--text-secondary)] focus:outline-none focus:border-[var(--accent-color)]/50"
+            className="flex-1 bg-gray-700 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-stone-500 focus:outline-none focus:border-amber-600/50"
           />
           <button
             onClick={handleSendMessage}
             disabled={!newMessage.trim()}
-            className="bg-gradient-to-r from-amber-600-500 to-blue-500 hover:from-amber-600-600 hover:to-blue-600 disabled:from-gray-700 disabled:to-gray-800 text-[var(--text-primary)] font-bold px-6 py-3 rounded-xl transition-all shadow-lg hover:shadow-[var(--accent-color)]/30 disabled:cursor-not-allowed flex items-center space-x-2"
+            className="bg-gradient-to-r from-amber-600-500 to-blue-500 hover:from-amber-600-600 hover:to-blue-600 disabled:from-gray-700 disabled:to-gray-800 text-white font-bold px-6 py-3 rounded-xl transition-all shadow-lg hover:shadow-amber-600-500/30 disabled:cursor-not-allowed flex items-center space-x-2"
           >
-            <i className="fas fa-paper-plane w-5 h-5 flex items-center justify-center"></i>
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+            </svg>
             <span className="hidden sm:inline">{lang === 'hi' ? 'भेजें' : 'Send'}</span>
           </button>
         </div>
@@ -157,8 +161,3 @@ export default function ChatRoom({
     </div>
   );
 }
-
-
-
-
-

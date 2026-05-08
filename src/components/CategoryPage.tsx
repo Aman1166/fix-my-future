@@ -45,23 +45,19 @@ function CategoryProductCard({ product, showCarat = false }: { product: Product;
     <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="group glass-heavy rounded-2xl shadow-xl hover:shadow-2xl border border-[var(--accent-color)]/20 hover:border-[var(--accent-color)]/40 transition-all duration-500 flex flex-col overflow-hidden hover-3d cursor-pointer"
+      className="group glass-strong rounded-2xl shadow-xl hover:shadow-2xl border border-amber-600/20 hover:border-amber-600/40 transition-all duration-500 flex flex-col overflow-hidden hover-3d cursor-pointer"
     >
-      <div className="relative overflow-hidden aspect-square glass-light">
+      <div className="relative overflow-hidden aspect-square bg-gradient-to-br from-gray-800 to-gray-800">
         <img
           src={product.image}
           alt={product.name}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
         />
-        <button className="absolute top-4 right-4 w-10 h-10 glass rounded-full flex items-center justify-center text-[var(--text-primary)] hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 duration-300">
-          <i className="far fa-heart"></i>
-        </button>
-        <div className="absolute inset-0 bg-gradient-to-t from-bg-primary/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
+        <div className="absolute inset-0 bg-gradient-to-t from-gray-800/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
         {/* Badges */}
         {showCarat && product.carat && (
-          <span className="absolute top-3 left-3 glass border border-[var(--accent-color)]/30 text-[var(--accent-color)] font-black text-[10px] tracking-wider uppercase px-3 py-1.5 rounded-full shadow-lg  neon-glow">
+          <span className="absolute top-3 left-3 glass border border-amber-600/30 text-amber-600 font-black text-[10px] tracking-wider uppercase px-3 py-1.5 rounded-full shadow-lg backdrop-blur-sm neon-glow">
             ✦ {product.carat}
           </span>
         )}
@@ -77,34 +73,33 @@ function CategoryProductCard({ product, showCarat = false }: { product: Product;
 
         {/* Add Button */}
         <div className={`absolute inset-x-0 bottom-4 px-4 flex justify-center transition-all duration-300 transform ${isHovered ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
-          <button onClick={handleAddToCart} className="w-full btn-accent text-gray-800 px-4 py-2.5 rounded-xl font-bold text-xs tracking-wider uppercase shadow-2xl transition-all duration-300 flex items-center justify-center space-x-1">
+          <button onClick={handleAddToCart} className="w-full btn-cyan text-gray-800 px-4 py-2.5 rounded-xl font-bold text-xs tracking-wider uppercase shadow-2xl transition-all duration-300 flex items-center justify-center space-x-1">
             <span>{lang === 'hi' ? 'कार्ट में जोड़ें' : 'Add to Cart'}</span>
             <span className="text-sm">🛒</span>
           </button>
         </div>
       </div>
 
-      <div className="p-4 flex-1 flex flex-col justify-between glass-light">
+      <div className="p-4 flex-1 flex flex-col justify-between bg-gradient-to-b from-transparent to-gray-800/50">
         <div>
           {/* Stars */}
           <div className="flex items-center mb-2">
-            <div className="flex text-[var(--accent-color)] text-xs">
+            <div className="flex text-amber-600 text-xs">
               {[...Array(5)].map((_, i) => (
                 <span key={i} className="drop-shadow">★</span>
               ))}
             </div>
-            <span className="text-[10px] text-text-muted font-bold ml-1.5">(120+)</span>
+            <span className="text-[10px] text-slate-400 font-bold ml-1.5">(120+)</span>
           </div>
 
-          <h3 className="font-extrabold text-text-main text-sm md:text-base mb-2 group-hover:text-accent-theme transition-colors line-clamp-2 leading-snug">
-
+          <h3 className="font-extrabold text-gray-200 text-sm md:text-base mb-2 group-hover:text-amber-600 transition-colors line-clamp-2 leading-snug">
             {product.name}
           </h3>
         </div>
 
-        <div className="flex items-baseline space-x-2 mt-2 pt-2 border-t border-[var(--accent-color)]/20">
-          <p className="text-lg font-black text-[var(--accent-color)] tracking-tight">{product.price}</p>
-          <p className="text-[10px] text-text-muted font-bold line-through">
+        <div className="flex items-baseline space-x-2 mt-2 pt-2 border-t border-amber-600/20">
+          <p className="text-lg font-black text-amber-600 tracking-tight">{product.price}</p>
+          <p className="text-[10px] text-slate-500 font-bold line-through">
             ₹{parseInt(product.price.replace(/[^\d]/g, '')) * 2 - 1}
           </p>
         </div>
@@ -119,23 +114,23 @@ function SectionHeader({ title, subtitle }: { title: string; subtitle?: string }
   return (
     <div className="text-center mb-12">
       <div className="flex items-center justify-center space-x-2 mb-2">
-        <span className="text-[var(--accent-color)] text-xs animate-pulse">✦</span>
-        <span className="text-[var(--accent-color)] tracking-[0.2em] font-extrabold text-[10px] uppercase">
+        <span className="text-amber-600 text-xs animate-pulse">✦</span>
+        <span className="text-amber-600 tracking-[0.2em] font-extrabold text-[10px] uppercase">
           {lang === 'hi' ? 'प्रीमियम कलेक्शन' : 'Premium Collection'}
         </span>
-        <span className="text-[var(--accent-color)] text-xs animate-pulse">✦</span>
+        <span className="text-amber-600 text-xs animate-pulse">✦</span>
       </div>
-      <h2 className="text-3xl md:text-5xl font-black text-text-main mb-4 tracking-tight gradient-text-strong">
+      <h2 className="text-3xl md:text-5xl font-black text-gray-100 mb-4 tracking-tight gradient-text-strong">
         {title}
       </h2>
       {subtitle && (
-        <p className="text-sm md:text-base text-text-muted max-w-2xl mx-auto font-medium leading-relaxed">
+        <p className="text-sm md:text-base text-slate-400 max-w-2xl mx-auto font-medium leading-relaxed">
           {subtitle}
         </p>
       )}
       <div className="flex items-center justify-center space-x-1 mt-6">
         <div className="w-12 h-0.5 bg-gradient-to-r from-transparent to-amber-600-400 rounded-full"></div>
-        <span className="text-[var(--accent-color)] text-[8px] transform rotate-45">◆</span>
+        <span className="text-amber-600 text-[8px] transform rotate-45">◆</span>
         <div className="w-12 h-0.5 bg-gradient-to-l from-transparent to-amber-600-400 rounded-full"></div>
       </div>
     </div>
@@ -171,8 +166,7 @@ const CategoryPage: React.FC<CategoryPageProps> = ({
   categoryIcon,
   products
 }) => {
-  const { lang } = useContext(LanguageContext);
-
+  const { lang, t } = useContext(LanguageContext);
 
   if (!isOpen) return null;
 
@@ -180,61 +174,55 @@ const CategoryPage: React.FC<CategoryPageProps> = ({
     <>
       {/* Backdrop */}
       <div 
-        className="fixed inset-0 z-40 glass-heavy transition-opacity duration-300"
+        className="fixed inset-0 z-40 bg-gray-800/80 backdrop-blur-md transition-opacity duration-300"
         onClick={onClose}
       />
       
       {/* Category Overlay */}
       <div className="fixed inset-0 z-50 overflow-y-auto p-4 md:p-8 lg:p-12 transition-all duration-300">
-        <button onClick={onClose} className="fixed top-6 right-6 z-30 w-12 h-12 glass-heavy border border-[var(--border-color)] rounded-full flex items-center justify-center text-[var(--text-primary)] hover:glass-light transition-all shadow-xl hover:scale-110 active:scale-95">
-          <i className="fas fa-times text-xl"></i>
-        </button>
         <div className="max-w-7xl mx-auto h-full flex flex-col">
           {/* Header */}
-          <div className="glass-heavy rounded-3xl p-6 md:p-8 mb-6 md:mb-8 shadow-2xl border border-accent-theme/30 flex items-center justify-between sticky top-4 z-10 backdrop-blur-xl bg-bg-primary/90">
-
+          <div className="glass-strong rounded-3xl p-6 md:p-8 mb-6 md:mb-8 shadow-2xl border border-amber-600/30 flex items-center justify-between sticky top-4 z-10 backdrop-blur-xl bg-gray-800/90">
             <div className="flex items-center space-x-4">
               <button
                 onClick={onClose}
-                className="text-2xl hover:scale-110 transition-transform text-text-muted hover:text-[var(--text-primary)]"
+                className="text-2xl hover:scale-110 transition-transform text-slate-400 hover:text-gray-200"
                 aria-label="Close"
               >
                 ←
               </button>
               <div className="text-3xl animate-pulse">{categoryIcon}</div>
               <div>
-                <h1 className="text-2xl md:text-3xl font-black text-text-main tracking-tight gradient-text-strong">
-
+                <h1 className="text-2xl md:text-3xl font-black text-gray-100 tracking-tight gradient-text-strong">
                   {categoryTitle}
                 </h1>
-                <p className="text-sm text-text-muted mt-1 capitalize">
+                <p className="text-sm text-slate-400 mt-1 capitalize">
                   {category} • {products.length} {lang === 'hi' ? 'उत्पाद' : 'products'} available
                 </p>
               </div>
             </div>
             
             {/* Actions */}
-            <div className="flex items-center space-x-3 mb-6">
-              <div className="flex items-center space-x-3 mb-6">
-                <i className="fas fa-filter text-[var(--accent-color)]"></i>
-                <h3 className="font-bold text-[var(--text-primary)] uppercase tracking-widest text-xs">{lang === 'hi' ? 'फ़िल्टर' : 'Filter by Category'}</h3>
-              </div>
-              <button className="btn-accent px-6 py-2.5 text-sm font-black uppercase tracking-wider flex items-center space-x-2 hover:scale-105">
-                <i className="fas fa-filter"></i>
+            <div className="flex items-center space-x-3">
+              <button className="btn-cyan px-6 py-2.5 text-sm font-black uppercase tracking-wider flex items-center space-x-2 hover:scale-105">
+                <span>🔍</span>
                 <span>{lang === 'hi' ? 'फ़िल्टर' : 'Filter'}</span>
               </button>
-              <button className="p-2.5 rounded-xl text-text-muted hover:text-[var(--accent-color)] hover:bg-[var(--accent-color)]/10 transition-all">
-                <i className="far fa-heart text-xl"></i>
+              <button className="p-2.5 rounded-xl text-slate-400 hover:text-amber-600 hover:bg-amber-700/10 transition-all">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
               </button>
-              <button className="p-2.5 rounded-xl text-text-muted hover:text-[var(--accent-color)] hover:bg-[var(--accent-color)]/10 transition-all">
-                <i className="fas fa-shopping-bag text-xl"></i>
+              <button className="p-2.5 rounded-xl text-slate-400 hover:text-amber-600 hover:bg-amber-700/10 transition-all">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
               </button>
             </div>
           </div>
 
           {/* Content */}
-          <div className="glass-heavy rounded-3xl p-6 md:p-8 flex-1 overflow-y-auto shadow-2xl border border-accent-theme/20 backdrop-blur-xl bg-bg-primary/70">
-
+          <div className="glass-strong rounded-3xl p-6 md:p-8 flex-1 overflow-y-auto shadow-2xl border border-amber-600/20 backdrop-blur-xl bg-gray-800/70">
             {/* Category Description */}
             <div className="mb-8 text-center">
               <SectionHeader 
@@ -247,14 +235,13 @@ const CategoryPage: React.FC<CategoryPageProps> = ({
             {products.length > 0 ? (
               <ProductGrid products={products} showCarat={false} />
             ) : (
-              <div className="flex flex-col items-center justify-center h-64 text-center text-text-muted">
+              <div className="flex flex-col items-center justify-center h-64 text-center text-slate-400">
                 <div className="text-6xl mb-4 opacity-30">🛍️</div>
-                <h3 className="text-2xl font-bold mb-2 text-text-main">No products found</h3>
-
+                <h3 className="text-2xl font-bold mb-2 text-slate-300">No products found</h3>
                 <p className="text-sm mb-6">Try adjusting your filters or check back later</p>
                 <button 
                   onClick={onClose}
-                  className="btn-accent px-8 py-3 font-bold uppercase tracking-wider"
+                  className="btn-cyan px-8 py-3 font-bold uppercase tracking-wider"
                 >
                   Browse All Products
                 </button>
@@ -268,10 +255,4 @@ const CategoryPage: React.FC<CategoryPageProps> = ({
 };
 
 export default CategoryPage;
-
-
-
-
-
-
 

@@ -55,13 +55,7 @@ function getAIResponse(userMsg: string): string {
   return aiResponses.default[Math.floor(Math.random() * aiResponses.default.length)];
 }
 
-import { getGlassClass } from './utils/Glass';
-
-export default function AIChat({ 
-  variant = 'heavy' 
-}: { 
-  variant?: 'light' | 'medium' | 'heavy' 
-}) {
+export default function AIChat() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     { id: 0, text: "🙏 Namaste! I'm your AI Astrologer at Fix My Future. Ask me about gemstones, Rudraksha, zodiac signs, career, love, or health! I'm here to guide you for FREE.", sender: 'ai', time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }
@@ -74,7 +68,7 @@ export default function AIChat({
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  const handleSend = () => {
+  const sendMessage = () => {
     if (!input.trim()) return;
     const userMsg: Message = {
       id: Date.now(),
@@ -104,15 +98,13 @@ export default function AIChat({
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 z-50 w-16 h-16 bg-[var(--accent-color)] rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform group animate-float"
+        className="fixed bottom-6 right-6 z-50 w-16 h-16 bg-gradient-to-br from-purple-600 to-gray-600 rounded-full shadow-2xl shadow-purple-500/30 flex items-center justify-center hover:scale-110 transition-transform group animate-float"
       >
-        <span className="text-3xl group-hover:rotate-12 transition-transform text-gray-800 dark:text-white">
-          <i className="fas fa-robot"></i>
-        </span>
+        <span className="text-3xl group-hover:rotate-12 transition-transform">🤖</span>
         <span className="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
           <span className="w-2 h-2 bg-white rounded-full animate-ping"></span>
         </span>
-        <span className="absolute -top-10 right-0 glass text-[var(--text-primary)] text-xs font-bold px-3 py-1.5 rounded-lg whitespace-nowrap shadow-xl opacity-0 group-hover:opacity-100 transition-opacity border border-[var(--border-color)]">
+        <span className="absolute -top-10 right-0 bg-gray-800 text-white text-xs font-bold px-3 py-1.5 rounded-lg whitespace-nowrap shadow-xl opacity-0 group-hover:opacity-100 transition-opacity border border-purple-500/30">
           Free AI Astrologer ✨
         </span>
       </button>
@@ -120,41 +112,41 @@ export default function AIChat({
   }
 
   return (
-    <div className={`fixed bottom-6 right-6 z-50 w-[380px] max-w-[calc(100vw-2rem)] h-[550px] max-h-[calc(100vh-4rem)] ${getGlassClass(variant)} rounded-2xl shadow-2xl border border-[var(--border-color)] flex flex-col overflow-hidden animate-fadeIn`}>
+    <div className="fixed bottom-6 right-6 z-50 w-[380px] max-w-[calc(100vw-2rem)] h-[550px] max-h-[calc(100vh-4rem)] bg-gray-800 rounded-2xl shadow-2xl border border-purple-500/20 flex flex-col overflow-hidden animate-fadeIn">
       {/* Header */}
-      <div className="bg-[var(--primary-bg)]/90 p-4 flex items-center justify-between border-b border-[var(--border-color)]">
+      <div className="bg-gradient-to-r from-purple-900 via-gray-900 to-purple-900 p-4 flex items-center justify-between border-b border-purple-500/20">
         <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 bg-[var(--accent-color)] rounded-full flex items-center justify-center text-xl shadow-lg text-gray-800 dark:text-white">
-            <i className="fas fa-robot"></i>
+          <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-gray-500 rounded-full flex items-center justify-center text-xl shadow-lg">
+            🤖
           </div>
           <div>
-            <h3 className="font-black text-[var(--text-primary)] text-sm">AI Astrologer</h3>
+            <h3 className="font-black text-white text-sm">AI Astrologer</h3>
             <p className="text-[10px] text-green-400 font-bold flex items-center">
               <span className="w-1.5 h-1.5 bg-green-400 rounded-full mr-1 animate-pulse"></span>
               Online • Free Consultation
             </p>
           </div>
         </div>
-        <button onClick={() => setIsOpen(false)} className="text-[var(--text-primary)]/60 hover:text-[var(--text-primary)] transition-colors text-xl font-bold">✕</button>
+        <button onClick={() => setIsOpen(false)} className="text-white/60 hover:text-white transition-colors text-xl font-bold">✕</button>
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-[var(--primary-bg)]/30">
+      <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-800/80">
         {messages.map((msg) => (
           <div key={msg.id} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-            <div className={`max-w-[85%] rounded-2xl px-4 py-3 ${msg.sender === 'user' ? 'bg-[var(--accent-color)] text-gray-900 rounded-br-md font-bold' : 'glass-light text-[var(--text-primary)] rounded-bl-md border border-white/5'}`}>
+            <div className={`max-w-[85%] rounded-2xl px-4 py-3 ${msg.sender === 'user' ? 'bg-gradient-to-r from-purple-600 to-gray-600 text-white rounded-br-md' : 'bg-gray-700/80 text-stone-200 rounded-bl-md border border-white/5'}`}>
               <p className="text-sm leading-relaxed">{msg.text}</p>
-              <p className={`text-[9px] mt-1.5 ${msg.sender === 'user' ? 'text-gray-900/60' : 'text-[var(--text-secondary)]'}`}>{msg.time}</p>
+              <p className={`text-[9px] mt-1.5 ${msg.sender === 'user' ? 'text-white/50' : 'text-stone-500'}`}>{msg.time}</p>
             </div>
           </div>
         ))}
         {isTyping && (
           <div className="flex justify-start">
-            <div className="glass-light rounded-2xl rounded-bl-md px-4 py-3 border border-white/5">
+            <div className="bg-gray-700/80 rounded-2xl rounded-bl-md px-4 py-3 border border-white/5">
               <div className="flex space-x-1.5">
-                <span className="w-2 h-2 bg-[var(--accent-color)] rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
-                <span className="w-2 h-2 bg-[var(--accent-color)] rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
-                <span className="w-2 h-2 bg-[var(--accent-color)] rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
+                <span className="w-2 h-2 bg-purple-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
+                <span className="w-2 h-2 bg-purple-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
+                <span className="w-2 h-2 bg-purple-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
               </div>
             </div>
           </div>
@@ -163,12 +155,12 @@ export default function AIChat({
       </div>
 
       {/* Quick Questions */}
-      <div className="px-4 py-2 flex gap-2 overflow-x-auto border-t border-white/5 bg-[var(--primary-bg)]/50">
+      <div className="px-4 py-2 flex gap-2 overflow-x-auto border-t border-white/5 bg-gray-800/50">
         {quickQuestions.map((q) => (
           <button
             key={q}
             onClick={() => { setInput(q); }}
-            className="flex-shrink-0 text-[10px] font-bold px-3 py-1.5 rounded-full bg-[var(--accent-color)]/5 text-gray-300 border border-[var(--border-color)] hover:bg-[var(--bg-secondary)] transition-colors"
+            className="flex-shrink-0 text-[10px] font-bold px-3 py-1.5 rounded-full bg-purple-500/10 text-purple-300 border border-purple-500/20 hover:bg-purple-500/20 transition-colors"
           >
             {q}
           </button>
@@ -176,30 +168,24 @@ export default function AIChat({
       </div>
 
       {/* Input */}
-      <div className="p-3 border-t border-[var(--border-color)] bg-[var(--primary-bg)]/40">
+      <div className="p-3 border-t border-white/10 bg-gray-800/80">
         <div className="flex items-center space-x-2">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && handleSend()}
+            onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
             placeholder="Ask about gemstones, astrology..."
-            className="flex-1 bg-[var(--accent-color)]/5 border border-[var(--border-color)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-[var(--text-secondary)] focus:outline-none focus:border-[var(--accent-color)]/50"
+            className="flex-1 bg-gray-700 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder-stone-500 focus:outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/20"
           />
           <button
-            onClick={handleSend}
-            disabled={!input.trim()}
-            className="bg-gradient-to-r from-amber-500 to-amber-600 hover:scale-110 active:scale-95 disabled:opacity-50 disabled:scale-100 p-3 rounded-xl text-white transition-all shadow-lg"
+            onClick={sendMessage}
+            className="w-10 h-10 bg-gradient-to-r from-purple-500 to-gray-500 rounded-xl flex items-center justify-center hover:from-purple-600 hover:to-gray-600 transition-all shadow-lg active:scale-90"
           >
-            <i className="fas fa-paper-plane text-sm"></i>
+            <svg className="w-5 h-5 text-white fill-current" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
           </button>
         </div>
       </div>
     </div>
   );
 }
-
-
-
-
-

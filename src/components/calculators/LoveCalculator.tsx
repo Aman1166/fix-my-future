@@ -48,10 +48,10 @@ export default function LoveCalculator({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[64] overflow-y-auto bg-[var(--primary-bg)]">
+    <div className="fixed inset-0 z-[64] overflow-y-auto bg-gray-800">
       <button
         onClick={onClose}
-        className="fixed top-6 right-6 z-30 w-12 h-12 glass-heavy border border-[var(--border-color)] rounded-full flex items-center justify-center text-[var(--text-primary)] hover:glass-light transition-all shadow-xl hover:scale-110 active:scale-95"
+        className="fixed top-6 right-6 z-30 w-12 h-12 bg-gray-800/80 backdrop-blur-md border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-gray-700 transition-all shadow-xl hover:scale-110 active:scale-95"
       >
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
@@ -64,15 +64,15 @@ export default function LoveCalculator({
         </div>
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
           <span className="text-5xl md:text-7xl mb-4 animate-float">❤️</span>
-          <h1 className="text-4xl md:text-6xl font-black text-[var(--text-primary)] mb-3 tracking-tight drop-shadow-xl animate-slideInUp">
+          <h1 className="text-4xl md:text-6xl font-black text-white mb-3 tracking-tight drop-shadow-xl animate-slideInUp">
             {lang === 'hi' ? 'लव कैल्कुलेटर: अपना परफेक्ट मैच खोजें' : 'Love Calculator: Find Your Perfect Match'}
           </h1>
-          <div className="w-20 h-1 bg-[var(--accent-color)] mt-6 rounded-full"></div>
+          <div className="w-20 h-1 bg-amber-700 mt-6 rounded-full"></div>
         </div>
       </div>
 
       <div className="max-w-4xl mx-auto px-4 md:px-8 py-12">
-        <div className="glass-heavy rounded-2xl border border-[var(--border-color)] p-8">
+        <div className="bg-gray-800/80 backdrop-blur-md rounded-2xl border border-white/10 p-8">
           {!result ? (
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
@@ -85,7 +85,7 @@ export default function LoveCalculator({
                     name="yourName"
                     value={formData.yourName}
                     onChange={handleInputChange}
-                    className="w-full input-glass border border-[var(--border-color)] rounded-xl px-4 py-3 text-[var(--text-primary)] placeholder-[var(--text-secondary)] focus:outline-none focus:border-[var(--accent-color)]/50"
+                    className="w-full bg-gray-700 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-stone-500 focus:outline-none focus:border-amber-500/50"
                     placeholder={lang === 'hi' ? 'अपना नाम दर्ज करें' : 'Enter your name'}
                     required
                   />
@@ -98,7 +98,7 @@ export default function LoveCalculator({
                     name="yourGender"
                     value={formData.yourGender}
                     onChange={handleInputChange}
-                    className="w-full input-glass border border-[var(--border-color)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-color)]/50"
+                    className="w-full bg-gray-700 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500/50"
                     required
                   >
                     <option value="">
@@ -123,7 +123,7 @@ export default function LoveCalculator({
                     name="partnerName"
                     value={formData.partnerName}
                     onChange={handleInputChange}
-                    className="w-full input-glass border border-[var(--border-color)] rounded-xl px-4 py-3 text-[var(--text-primary)] placeholder-[var(--text-secondary)] focus:outline-none focus:border-[var(--accent-color)]/50"
+                    className="w-full bg-gray-700 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-stone-500 focus:outline-none focus:border-amber-500/50"
                     placeholder={lang === 'hi' ? 'पार्टनर का नाम दर्ज करें' : 'Enter partner name'}
                     required
                   />
@@ -136,7 +136,7 @@ export default function LoveCalculator({
                     name="partnerGender"
                     value={formData.partnerGender}
                     onChange={handleInputChange}
-                    className="w-full input-glass border border-[var(--border-color)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-color)]/50"
+                    className="w-full bg-gray-700 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500/50"
                     required
                   >
                     <option value="">
@@ -154,7 +154,7 @@ export default function LoveCalculator({
               <div className="text-center">
                 <button
                   type="submit"
-                  className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-[var(--text-primary)] font-black py-4 px-8 rounded-xl transition-all shadow-xl hover:shadow-pink-500/30 text-lg"
+                  className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white font-black py-4 px-8 rounded-xl transition-all shadow-xl hover:shadow-pink-500/30 text-lg"
                 >
                   {lang === 'hi' ? 'लव % कैल्कुलेट करें' : 'Calculate Love %'}
                 </button>
@@ -162,7 +162,7 @@ export default function LoveCalculator({
             </form>
           ) : (
             <div className="text-center">
-              <div className="glass rounded-xl p-8 mb-6">
+              <div className="bg-gray-700/50 rounded-xl p-8 mb-6">
                 <div className="text-8xl font-black text-pink-400 mb-4">
                   {result.percentage}%
                 </div>
@@ -182,7 +182,7 @@ export default function LoveCalculator({
               </div>
               <button
                 onClick={() => setResult(null)}
-                className="btn-accent text-gray-800 font-bold text-[var(--text-primary)] font-bold py-2 px-6 rounded-xl transition-all"
+                className="bg-slate-700 hover:bg-slate-600 text-white font-bold py-2 px-6 rounded-xl transition-all"
               >
                 {lang === 'hi' ? 'दोबारा कैल्कुलेट करें' : 'Calculate Again'}
               </button>
@@ -193,8 +193,3 @@ export default function LoveCalculator({
     </div>
   );
 }
-
-
-
-
-

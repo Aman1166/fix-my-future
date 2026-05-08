@@ -1,8 +1,6 @@
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three";
-import { useRef, useMemo, useState, useContext, Suspense } from "react";
-import { LanguageContext, ThemeContext } from "../App";
-
+import { useRef, useMemo, useState } from "react";
 import * as THREE from "three";
 
 // Background Image Component
@@ -79,27 +77,17 @@ function CardsOrbit() {
   const groupRef = useRef<THREE.Group>(null);
   const cardRefs = useRef<(THREE.Mesh | null)[]>([]);
   const [open, setOpen] = useState(false);
-  
-  // Use theme context
-  const { isDark } = useContext(ThemeContext);
 
   const images = useMemo(
-    () => isDark ? [
+    () => [
       "/astro/CARD 1.jpg.jpeg",
       "/astro/CARD 2.jpg.jpeg",
       "/astro/CARD 3.jpg.jpeg",
       "/astro/CARD 4.jpg.jpeg",
       "/astro/CARD 5.jpg.jpeg",
       "/astro/CARD 6.jpg.jpeg",
-    ] : [
-      "/astro/light/CARD1.jpeg",
-      "/astro/light/CARD2.jpeg",
-      "/astro/light/CARD3.jpeg",
-      "/astro/light/CARD4.jpeg",
-      "/astro/light/CARD5.jpeg",
-      "/astro/light/CARD6.jpeg",
     ],
-    [isDark]
+    []
   );
 
   const textures = useLoader(TextureLoader, images);
@@ -177,58 +165,53 @@ function StarField() {
 
   return (
     <points ref={pointsRef} geometry={geometry}>
-      <pointsMaterial size={0.03} color="var(--accent-color)" sizeAttenuation transparent opacity={0.8} />
-
+      <pointsMaterial size={0.03} color="#edbc7d" sizeAttenuation transparent opacity={0.8} />
     </points>
   );
 }
 
 // Main Hero Section Component
 export default function HeroSection({ onShopNow }: { onShopNow?: () => void }) {
-  const { t } = useContext(LanguageContext);
-
   return (
-    <section className="relative h-[70vh] md:h-[90vh] bg-bg-primary overflow-hidden">
-
+    <section className="relative h-[70vh] md:h-[90vh] bg-dark-gradient overflow-hidden">
       {/* Background Image Layer */}
       <ImageBackground />
 
       {/* Gradient Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-bg-primary/60 via-transparent to-bg-primary z-[5]"></div>
-      <div className="absolute inset-0 bg-gradient-to-r from-bg-primary/80 via-transparent to-bg-primary/80 z-[5]"></div>
-
+      <div className="absolute inset-0 bg-gradient-to-b from-bg-secondary/60 via-transparent to-bg-primary z-[5]"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-bg-secondary/80 via-transparent to-bg-primary/80 z-[5]"></div>
 
       {/* 3D Canvas Layer */}
       <div className="absolute inset-0 z-[6]">
         <Canvas camera={{ position: [0, 0, 9], fov: 45 }}>
-          <Suspense fallback={null}>
-            <ambientLight intensity={0.6} />
-            <pointLight position={[5, 5, 5]} intensity={1.2} color="#edbc7d" />
-            <pointLight position={[-5, 3, 2]} intensity={0.5} color="#f5d9a8" />
+          <ambientLight intensity={0.6} />
+          <pointLight position={[5, 5, 5]} intensity={1.2} color="#edbc7d" />
+          <pointLight position={[-5, 3, 2]} intensity={0.5} color="#f5d9a8" />
 
-            <StarField />
-            <Earth />
-            <CardsOrbit />
-          </Suspense>
+          <StarField />
+          <Earth />
+          <CardsOrbit />
         </Canvas>
       </div>
 
       {/* Text Overlay */}
       <div className="absolute inset-0 z-[10] flex flex-col items-center justify-center text-center px-4 pointer-events-none">
+<span className="text-amber-600 font-extrabold text-xs md:text-sm tracking-[0.3em] uppercase mb-4 animate-fadeIn drop-shadow-lg neon-glow">
+            
+        </span>
         <h1 className="text-4xl md:text-7xl lg:text-8xl font-black mb-4 tracking-tight animate-fadeIn leading-none drop-shadow-2xl">
           <span className="gradient-text-strong">
-            {t.brandName}
+            
           </span>
         </h1>
-        <p className="text-base md:text-xl mb-8 font-medium tracking-wide text-text-muted max-w-xl mx-auto drop-shadow-md animate-slideInRight">
-          {t.hero[0].title}
+        <p className="text-base md:text-xl mb-8 font-medium tracking-wide text-gray-200/80 max-w-xl mx-auto drop-shadow-md animate-slideInRight">
+          
         </p>
-
-        <p className="text-[var(--text-secondary)] text-[10px] tracking-widest uppercase font-bold animate-pulse mb-4">
+        <p className="text-slate-400 text-[10px] tracking-widest uppercase font-bold animate-pulse mb-4">
           Click on cards to expand ✦
         </p>
-        <div className="pointer-events-auto mt-[28rem]">
-          <button onClick={onShopNow} className="group relative btn-accent px-6 py-2 rounded-full overflow-hidden transition-all duration-300 transform hover:scale-105 shadow-2xl shadow-[var(--accent-color)]/30 active:scale-95">
+        <div className="pointer-events-auto mt-116">
+          <button onClick={onShopNow} className="group relative btn-cyan px-6 py-2 rounded-full overflow-hidden transition-all duration-300 transform hover:scale-105 shadow-2xl shadow-amber-600-500/30 active:scale-95">
             <span className="relative z-10 text-gray-800 font-extrabold text-sm tracking-wider uppercase flex items-center justify-center space-x-2">
               <span>Shop Now</span>
               <svg className="w-4 h-4 stroke-current fill-none group-hover:translate-x-1.5 transition-transform" viewBox="0 0 24 24">
@@ -243,9 +226,3 @@ export default function HeroSection({ onShopNow }: { onShopNow?: () => void }) {
     </section>
   );
 }
-
-
-
-
-
-

@@ -126,10 +126,10 @@ export default function TalkToAstrologer({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[64] overflow-y-auto bg-[var(--primary-bg)]">
+    <div className="fixed inset-0 z-[64] overflow-y-auto bg-gray-800">
       <button
         onClick={onClose}
-        className="fixed top-6 right-6 z-30 w-12 h-12 glass-heavy border border-[var(--border-color)] rounded-full flex items-center justify-center text-[var(--text-primary)] hover:glass-light transition-all shadow-xl hover:scale-110 active:scale-95"
+        className="fixed top-6 right-6 z-30 w-12 h-12 bg-gray-800/80 backdrop-blur-md border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-gray-700 transition-all shadow-xl hover:scale-110 active:scale-95"
       >
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
@@ -142,32 +142,32 @@ export default function TalkToAstrologer({
         </div>
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
           <span className="text-5xl md:text-7xl mb-4 animate-float">📞</span>
-          <h1 className="text-4xl md:text-6xl font-black text-[var(--text-primary)] mb-3 tracking-tight drop-shadow-xl animate-slideInUp">
+          <h1 className="text-4xl md:text-6xl font-black text-white mb-3 tracking-tight drop-shadow-xl animate-slideInUp">
             {lang === 'hi' ? 'ज्योतिषी से बात करें' : 'Talk to Astrologer'}
           </h1>
-          <div className="w-20 h-1 bg-[var(--accent-color)] mt-6 rounded-full"></div>
+          <div className="w-20 h-1 bg-amber-700 mt-6 rounded-full"></div>
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-12">
         {/* Search Bar */}
-        <div className="glass-heavy rounded-2xl border border-[var(--border-color)] p-6 mb-8">
+        <div className="bg-gray-800/80 backdrop-blur-md rounded-2xl border border-white/10 p-6 mb-8">
           <div className="relative">
             <input
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder={lang === 'hi' ? 'नाम खोजें...' : 'Search name...'}
-              className="w-full input-glass border border-[var(--border-color)] rounded-xl px-4 py-3 pl-12 text-[var(--text-primary)] placeholder-[var(--text-secondary)] focus:outline-none focus:border-[var(--accent-color)]/50"
+              className="w-full bg-gray-700 border border-white/10 rounded-xl px-4 py-3 pl-12 text-white placeholder-stone-500 focus:outline-none focus:border-amber-500/50"
             />
-            <svg className="w-5 h-5 absolute left-4 top-3.5 text-[var(--text-secondary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 absolute left-4 top-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </div>
         </div>
 
         {/* Filters */}
-        <div className="glass-heavy rounded-2xl border border-[var(--border-color)] p-6 mb-8">
+        <div className="bg-gray-800/80 backdrop-blur-md rounded-2xl border border-white/10 p-6 mb-8">
           <div className="flex flex-wrap gap-2 overflow-x-auto">
             {filters.map(filter => (
               <button
@@ -175,8 +175,8 @@ export default function TalkToAstrologer({
                 onClick={() => setSelectedFilter(filter.id)}
                 className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
                   selectedFilter === filter.id
-                    ? 'bg-[var(--accent-color)] text-gray-800'
-                    : 'glass-light text-gray-300 hover:glass-light'
+                    ? 'bg-amber-700 text-gray-800'
+                    : 'bg-gray-700 text-gray-300 hover:bg-slate-700'
                 }`}
               >
                 {filter.label}
@@ -190,24 +190,24 @@ export default function TalkToAstrologer({
           {filteredAstrologers.map((astrologer) => (
             <div
               key={astrologer.id}
-              className="glass-heavy rounded-2xl border border-[var(--border-color)] hover:border-green-500/50 p-6 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-green-500/20 group"
+              className="bg-gray-800/80 backdrop-blur-md rounded-2xl border border-white/10 hover:border-green-500/50 p-6 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-green-500/20 group"
             >
               <div className="flex items-start space-x-4 mb-4">
                 <img
                   src={astrologer.image}
                   alt={astrologer.name}
-                  className="w-16 h-16 rounded-full border-2 border-[var(--border-color)] group-hover:border-green-400 transition-colors"
+                  className="w-16 h-16 rounded-full border-2 border-white/20 group-hover:border-green-400 transition-colors"
                 />
                 <div className="flex-1">
                   <div className="flex items-center justify-between mb-1">
-                    <h3 className="text-[var(--text-primary)] font-bold text-lg">{astrologer.name}</h3>
+                    <h3 className="text-white font-bold text-lg">{astrologer.name}</h3>
                     {astrologer.verified && (
                       <span className="bg-green-500/20 text-green-400 text-xs px-2 py-1 rounded-full border border-green-500/30">
                         {lang === 'hi' ? 'सत्यापित' : 'Verified'}
                       </span>
                     )}
                   </div>
-                  <div className="flex items-center space-x-2 text-sm text-[var(--text-secondary)] mb-2">
+                  <div className="flex items-center space-x-2 text-sm text-gray-400 mb-2">
                     <div className="flex text-yellow-400">
                       {[...Array(5)].map((_, i) => (
                         <span key={i} className={i < Math.floor(astrologer.rating) ? '' : 'text-stone-600'}>
@@ -219,7 +219,7 @@ export default function TalkToAstrologer({
                     <span>•</span>
                     <span>{astrologer.orders} orders</span>
                   </div>
-                  <div className="text-[var(--text-secondary)] text-xs mb-2">
+                  <div className="text-gray-400 text-xs mb-2">
                     {astrologer.waitTime}
                   </div>
                 </div>
@@ -228,15 +228,15 @@ export default function TalkToAstrologer({
               <div className="mb-4">
                 <div className="flex flex-wrap gap-1 mb-2">
                   {astrologer.skills.map((skill: string, index: number) => (
-                    <span key={index} className="bg-[var(--accent-color)]/20 text-[var(--accent-color)] text-xs px-2 py-1 rounded-full">
+                    <span key={index} className="bg-amber-700/20 text-amber-500 text-xs px-2 py-1 rounded-full">
                       {skill}
                     </span>
                   ))}
                 </div>
-                <div className="text-[var(--text-secondary)] text-sm mb-2">
+                <div className="text-gray-400 text-sm mb-2">
                   {lang === 'hi' ? 'भाषाएं' : 'Languages'}: {astrologer.languages.join(', ')}
                 </div>
-                <div className="text-[var(--text-secondary)] text-sm">
+                <div className="text-gray-400 text-sm">
                   {lang === 'hi' ? 'अनुभव' : 'Experience'}: {astrologer.experience} {lang === 'hi' ? 'साल' : 'years'}
                 </div>
               </div>
@@ -244,13 +244,13 @@ export default function TalkToAstrologer({
               <div className="flex items-center justify-between mb-4">
                 <div className="text-2xl font-black text-green-400">
                   ₹{astrologer.price}
-                  <span className="text-sm text-[var(--text-secondary)] font-normal">/min</span>
+                  <span className="text-sm text-gray-400 font-normal">/min</span>
                 </div>
               </div>
 
               <button
                 onClick={() => handleCall(astrologer)}
-                className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-[var(--text-primary)] font-bold py-3 px-4 rounded-xl transition-all shadow-xl hover:shadow-green-500/30 flex items-center justify-center space-x-2"
+                className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-xl hover:shadow-green-500/30 flex items-center justify-center space-x-2"
               >
                 <span>📞</span>
                 <span>{lang === 'hi' ? 'कॉल करें' : 'Call Now'}</span>
@@ -262,8 +262,3 @@ export default function TalkToAstrologer({
     </div>
   );
 }
-
-
-
-
-
