@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { LanguageContext } from '../App';
+import { LanguageContext, ThemeContext } from '../App';
 
 export default function BestAstrologers({
   isOpen,
@@ -9,6 +9,7 @@ export default function BestAstrologers({
   onClose: () => void;
 }) {
   const { lang } = useContext(LanguageContext);
+  const { isDark } = useContext(ThemeContext);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedCity, setSelectedCity] = useState<string>('all');
   const [balance] = useState(0);
@@ -143,7 +144,7 @@ export default function BestAstrologers({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[64] overflow-y-auto bg-gray-800">
+    <div className={`fixed inset-0 z-[64] overflow-y-auto ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
       <button
         onClick={onClose}
         className="fixed top-6 right-6 z-30 w-12 h-12 bg-gray-800/80 backdrop-blur-md border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-gray-700 transition-all shadow-xl hover:scale-110 active:scale-95"
@@ -158,7 +159,7 @@ export default function BestAstrologers({
           <div className="absolute inset-0 bg-gradient-to-b from-gray-800/60 via-gray-950/40 to-gray-900"></div>
         </div>
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
-          <span className="text-5xl md:text-7xl mb-4 animate-float">🔮</span>
+          <span className="text-5xl md:text-7xl mb-4 animate-float text-amber-500"><i className="fa-solid fa-wand-magic-sparkles"></i></span>
           <h1 className="text-4xl md:text-6xl font-black text-white mb-3 tracking-tight drop-shadow-xl animate-slideInUp">
             {lang === 'hi' ? 'अलवर में सर्वश्रेष्ठ ज्योतिषी' : 'Best Astrologer in Alwar'}
           </h1>
@@ -268,8 +269,8 @@ export default function BestAstrologers({
                   <div className="flex items-center space-x-2 text-sm text-gray-400 mb-2">
                     <div className="flex text-yellow-400">
                       {[...Array(5)].map((_, i) => (
-                        <span key={i} className={i < Math.floor(astrologer.rating) ? '' : 'text-stone-600'}>
-                          ⭐
+                        <span key={i} className={i < Math.floor(astrologer.rating) ? 'text-yellow-400' : 'text-stone-600'}>
+                          <i className="fa-solid fa-star"></i>
                         </span>
                       ))}
                     </div>
@@ -310,7 +311,7 @@ export default function BestAstrologers({
                 onClick={() => handleCall(astrologer)}
                 className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-xl hover:shadow-green-500/30 flex items-center justify-center space-x-2"
               >
-                <span>📞</span>
+                <span><i className="fa-solid fa-phone"></i></span>
                 <span>{lang === 'hi' ? 'कॉल करें' : 'Call Now'}</span>
               </button>
             </div>

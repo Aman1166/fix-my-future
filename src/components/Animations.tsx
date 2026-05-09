@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef, useContext } from 'react';
 import { useCart } from '../store';
 import { LanguageContext } from '../App';
+import { ThemeContext } from '../contexts/ThemeContext';
+
 
 // Hook for scroll animations
 export function useScrollAnimation(threshold = 0.1) {
@@ -55,6 +57,7 @@ export function AnimatedCounter({ end, duration = 2000, suffix = '' }: { end: nu
 
 // Testimonials Slider
 export function TestimonialsSlider() {
+  const { isDark } = useContext(ThemeContext);
   const [current, setCurrent] = useState(0);
   const testimonials = [
     { name: 'Priya Sharma', location: 'Delhi', rating: 5, text: 'I bought the Yellow Sapphire and my career took off within months! The quality is exceptional and the certification gave me confidence. Highly recommend!', image: '/astro/L1.jpg' },
@@ -71,7 +74,7 @@ export function TestimonialsSlider() {
   }, [testimonials.length]);
 
   return (
-    <section className="py-20 bg-gradient-to-b from-gray-800 to-gray-800 overflow-hidden">
+    <section className={`py-20 overflow-hidden ${isDark ? 'bg-gradient-to-b from-gray-800 to-gray-800' : 'glass-strong border-t border-[#083f1d]/15'}`}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <span className="text-amber-500 text-xs font-bold tracking-[0.3em] uppercase">Testimonials</span>
@@ -86,7 +89,7 @@ export function TestimonialsSlider() {
               className={`absolute inset-0 transition-all duration-700 ${i === current ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'}`}
               style={{ position: i === current ? 'relative' : 'absolute' }}
             >
-              <div className="bg-gradient-to-br from-gray-800/80 to-gray-800/80 backdrop-blur-md rounded-3xl p-8 md:p-12 border border-white/10 shadow-2xl">
+              <div className={`${isDark ? 'bg-gradient-to-br from-gray-800/80 to-gray-800/80 border-white/10' : 'glass border-[#083f1d]/10'} backdrop-blur-md rounded-3xl p-8 md:p-12 shadow-2xl`}>
                 <div className="flex items-center gap-4 mb-6">
                   <img src={t.image} alt={t.name} className="w-16 h-16 rounded-full object-cover border-2 border-amber-500/50" />
                   <div>
@@ -126,28 +129,28 @@ export function TestimonialsSlider() {
 export function StatsSection() {
   const { ref, isVisible } = useScrollAnimation();
 
+
   return (
-    <section ref={ref} className="py-16 bg-gradient-to-r from-amber-600 via-amber-500-500 to-amber-600 relative overflow-hidden">
+    <section ref={ref} className="py-16 relative overflow-hidden stats-section">
       {/* Animated Background */}
-      <div className="absolute inset-0 opacity-20">
+      <div className="absolute inset-0 opacity-20 stats-bg-anim">
         <div className="absolute top-0 left-0 w-72 h-72 bg-white rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-amber-200 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
       </div>
-
+ 
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {[
-            { count: 50000, suffix: '+', label: 'Happy Customers', icon: '😊' },
-            { count: 100, suffix: '+', label: 'Certified Products', icon: '📜' },
-            { count: 15, suffix: '+', label: 'Years Experience', icon: '🏆' },
-            { count: 4.9, suffix: '★', label: 'Average Rating', icon: '⭐' },
+            { count: 50000, suffix: '+', label: 'Happy Customers' },
+            { count: 100, suffix: '+', label: 'Certified Products' },
+            { count: 15, suffix: '+', label: 'Years Experience' },
+            { count: 4.9, suffix: '★', label: 'Average Rating' },
           ].map((stat, i) => (
             <div key={i} className={`text-center transform transition-all duration-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`} style={{ transitionDelay: `${i * 150}ms` }}>
-              <div className="text-4xl mb-2">{stat.icon}</div>
-              <div className="text-4xl md:text-5xl font-black text-white mb-1">
+              <div className="text-4xl md:text-5xl font-black mb-1 stats-number">
                 {typeof stat.count === 'number' && stat.count < 10 ? stat.count.toFixed(1) : <AnimatedCounter end={stat.count} suffix={stat.suffix} />}
               </div>
-              <div className="text-white/80 font-bold text-sm uppercase tracking-wider">{stat.label}</div>
+              <div className="font-bold text-sm uppercase tracking-wider stats-label">{stat.label}</div>
             </div>
           ))}
         </div>

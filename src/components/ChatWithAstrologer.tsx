@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { LanguageContext } from '../App';
+import { LanguageContext, ThemeContext } from '../App';
 import ChatRoom from './ChatRoom';
 
 export default function ChatWithAstrologer({
@@ -10,6 +10,7 @@ export default function ChatWithAstrologer({
   onClose: () => void;
 }) {
   const { lang } = useContext(LanguageContext);
+  const { isDark } = useContext(ThemeContext);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedFilter, setSelectedFilter] = useState('all');
   const [selectedAstrologer, setSelectedAstrologer] = useState<any | null>(null);
@@ -134,7 +135,7 @@ export default function ChatWithAstrologer({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[64] overflow-y-auto bg-gray-800">
+    <div className={`fixed inset-0 z-[64] overflow-y-auto ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
       <button
         onClick={onClose}
         className="fixed top-6 right-6 z-30 w-12 h-12 bg-gray-800/80 backdrop-blur-md border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-gray-700 transition-all shadow-xl hover:scale-110 active:scale-95"

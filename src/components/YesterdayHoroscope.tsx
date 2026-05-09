@@ -1,8 +1,15 @@
 import { useContext, useState } from 'react';
-import { LanguageContext } from '../App';
+import { LanguageContext, ThemeContext } from '../App';
 
-export default function YesterdayHoroscope({ isOpen, onClose }: { isOpen: boolean; onClose: () => void; }) {
+export default function DailyHoroscope({
+  isOpen,
+  onClose,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+}) {
   const { lang } = useContext(LanguageContext);
+  const { isDark } = useContext(ThemeContext);
   const [selectedSign, setSelectedSign] = useState<string | null>(null);
 
   const zodiacSigns = [
@@ -21,16 +28,15 @@ export default function YesterdayHoroscope({ isOpen, onClose }: { isOpen: boolea
   ];
 
   const getHoroscopeData = (signName: string) => {
-    // Sample yesterday's horoscope data
     return {
-      love: "Yesterday brought emotional insights and deeper understanding in relationships. You may have experienced moments of clarity about what you truly value in your connections.",
-      personal: "Personal matters required attention yesterday. You may have dealt with important decisions or completed significant tasks that contribute to your growth journey.",
-      career: "Work environment presented opportunities for learning and collaboration. Your contributions were valued, and you may have received positive feedback from others.",
-      health: "Yesterday emphasized the importance of balance. You may have noticed how rest and activity work together to maintain your well-being and energy levels.",
-      emotions: "Emotional experiences yesterday taught valuable lessons about resilience and inner strength. You discovered new aspects of your emotional landscape.",
-      lucky: "Lucky numbers: 3, 9, 18. Lucky color: Blue. Lucky time: Evening hours. Lucky activity: Creative expression or helping others.",
-      travel: "Any travel yesterday was smooth and provided new perspectives. Local journeys brought pleasant discoveries and learning opportunities.",
-      remedies: "Reflect on yesterday's experiences with gratitude. Write down three positive things that happened. Practice deep breathing for inner peace."
+      love: "Daily focus on emotional connections brings harmony. Express your feelings openly to strengthen bonds with loved ones.",
+      personal: "Today emphasizes personal growth through self-reflection. Take time to assess your goals and make positive changes.",
+      career: "Professional opportunities arise through networking. Your dedication and skills will be recognized by superiors.",
+      health: "Maintain balance in daily routine. Light exercise and healthy eating will boost your energy levels throughout the day.",
+      emotions: "Emotional stability is key today. Practice mindfulness to stay grounded amidst daily challenges.",
+      lucky: "Lucky numbers: 3, 7, 12. Lucky color: Green. Lucky day for making important decisions.",
+      travel: "Short local trips bring pleasant experiences. Plan travel activities that promote relaxation and enjoyment.",
+      remedies: "Meditate for 10 minutes daily. Wear green colored clothing. Chant your birth mantra in the morning."
     };
   };
 
@@ -38,24 +44,32 @@ export default function YesterdayHoroscope({ isOpen, onClose }: { isOpen: boolea
     setSelectedSign(signName);
   };
 
-  const yesterdayDate = new Date();
-  yesterdayDate.setDate(yesterdayDate.getDate() - 1);
-
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[64] overflow-y-auto bg-gray-800">
-      <button onClick={onClose} className="fixed top-6 right-6 z-30 w-12 h-12 bg-gray-800/80 backdrop-blur-md border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-gray-700 transition-all shadow-xl hover:scale-110 active:scale-95">
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
+    <div className={`fixed inset-0 z-[64] overflow-y-auto ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
+      <button
+        onClick={onClose}
+        className={`fixed top-6 right-6 z-30 w-12 h-12 backdrop-blur-md border rounded-full flex items-center justify-center transition-all shadow-xl hover:scale-110 active:scale-95 ${isDark ? 'bg-gray-800/80 border-white/10 text-white hover:bg-gray-700' : 'bg-white/80 border-gray-200 text-gray-900 hover:bg-gray-100'}`}
+      >
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+        </svg>
       </button>
+
       <div className="relative h-[32vh] md:h-[40vh] overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/astro/g.jpeg')] bg-cover bg-center"><div className="absolute inset-0 bg-gradient-to-b from-gray-800/60 via-gray-950/40 to-gray-900"></div></div>
+        <div className="absolute inset-0 bg-[url('/astro/g.jpeg')] bg-cover bg-center">
+          <div className={`absolute inset-0 ${isDark ? 'bg-gradient-to-b from-gray-800/60 via-gray-950/40 to-gray-900' : 'bg-gradient-to-b from-white/60 via-white/40 to-white'}`}></div>
+        </div>
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
-          <span className="text-5xl md:text-7xl mb-4 animate-float">📜</span>
-          <h1 className="text-4xl md:text-6xl font-black text-white mb-3 tracking-tight drop-shadow-xl animate-slideInUp">{lang === 'hi' ? 'कल का राशिफल' : 'Yesterday\'s Horoscope'}</h1>
-          <div className="w-20 h-1 bg-amber-700 mt-6 rounded-full"></div>
+          <span className="text-5xl md:text-7xl mb-4 animate-float">📅</span>
+          <h1 className={`text-4xl md:text-6xl font-black mb-3 tracking-tight drop-shadow-xl animate-slideInUp ${isDark ? 'text-white' : 'text-gray-900'}`}>
+            {lang === 'hi' ? 'दैनिक राशिफल' : 'Daily Horoscope'}
+          </h1>
+          <div className="w-20 h-1 bg-amber-500 mt-6 rounded-full"></div>
         </div>
       </div>
+
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-12">
         {!selectedSign ? (
           <>
@@ -65,16 +79,16 @@ export default function YesterdayHoroscope({ isOpen, onClose }: { isOpen: boolea
                 <button
                   key={index}
                   onClick={() => handleSignClick(sign.name)}
-                  className="bg-gray-700/50 backdrop-blur-md rounded-2xl border border-white/10 hover:border-amber-600/50 p-4 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-amber-600-500/20 group"
+                  className={`rounded-2xl border p-4 transition-all duration-300 hover:scale-105 hover:shadow-xl group ${isDark ? 'bg-gray-700/50 backdrop-blur-md border-white/10 hover:border-amber-500/50 hover:shadow-amber-500/20' : 'bg-gray-50 border-gray-200 hover:border-amber-500/50 hover:shadow-amber-500/20'}`}
                 >
                   <div className="text-center">
                     <div className="text-3xl mb-2 group-hover:scale-110 transition-transform duration-300">
                       {sign.symbol}
                     </div>
-                    <h3 className="text-white font-bold text-sm mb-1 group-hover:text-amber-600-300 transition-colors">
+                    <h3 className={`font-bold text-sm mb-1 group-hover:text-amber-500 transition-colors ${isDark ? 'text-white' : 'text-gray-900'}`}>
                       {lang === 'hi' ? sign.hiName : sign.name}
                     </h3>
-                    <p className="text-gray-400 text-xs">
+                    <p className={`text-xs ${isDark ? 'text-white' : 'text-gray-500'}`}>
                       {sign.dates}
                     </p>
                   </div>
@@ -84,24 +98,24 @@ export default function YesterdayHoroscope({ isOpen, onClose }: { isOpen: boolea
           </>
         ) : (
           /* Detailed Horoscope */
-          <div className="bg-gray-800/80 backdrop-blur-md rounded-2xl border border-white/10 p-8">
+          <div className={`rounded-2xl border p-8 ${isDark ? 'bg-gray-800/80 backdrop-blur-md border-white/10' : 'bg-gray-50 border-gray-200'}`}>
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center space-x-4">
                 <div className="text-4xl">
                   {zodiacSigns.find(s => s.name === selectedSign)?.symbol}
                 </div>
                 <div>
-                  <h2 className="text-2xl font-black text-white">
+                  <h2 className={`text-2xl font-black ${isDark ? 'text-white' : 'text-gray-900'}`}>
                     {lang === 'hi' ? zodiacSigns.find(s => s.name === selectedSign)?.hiName : selectedSign}
                   </h2>
-                  <p className="text-gray-400">
-                    {lang === 'hi' ? 'कल का राशिफल' : 'Yesterday\'s Horoscope'} - {yesterdayDate.toLocaleDateString()}
+                  <p className={isDark ? 'text-white' : 'text-gray-500'}>
+                    {lang === 'hi' ? 'दैनिक राशिफल' : 'Daily Horoscope'} - {new Date().toLocaleDateString()}
                   </p>
                 </div>
               </div>
               <button
                 onClick={() => setSelectedSign(null)}
-                className="bg-slate-700 hover:bg-slate-600 text-white font-bold py-2 px-4 rounded-xl transition-all"
+                className={`font-bold py-2 px-4 rounded-xl transition-all ${isDark ? 'bg-slate-700 hover:bg-slate-600 text-white' : 'bg-gray-200 hover:bg-gray-300 text-gray-900'}`}
               >
                 {lang === 'hi' ? 'दूसरा राशि चुनें' : 'Select Other Sign'}
               </button>
@@ -109,76 +123,76 @@ export default function YesterdayHoroscope({ isOpen, onClose }: { isOpen: boolea
 
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-4">
-                <div className="bg-gray-700/50 rounded-xl p-4">
+                <div className={`rounded-xl p-4 ${isDark ? 'bg-gray-700/50' : 'bg-white border border-gray-200'}`}>
                   <h3 className="text-amber-500 font-bold text-lg mb-2">
                     {lang === 'hi' ? 'प्रेम और संबंध' : 'Love & Relationships'}
                   </h3>
-                  <p className="text-gray-300 text-sm">
+                  <p className={`text-sm ${isDark ? 'text-white' : 'text-gray-700'}`}>
                     {getHoroscopeData(selectedSign).love}
                   </p>
                 </div>
 
-                <div className="bg-gray-700/50 rounded-xl p-4">
-                  <h3 className="text-amber-600 font-bold text-lg mb-2">
+                <div className={`rounded-xl p-4 ${isDark ? 'bg-gray-700/50' : 'bg-white border border-gray-200'}`}>
+                  <h3 className="text-amber-500 font-bold text-lg mb-2">
                     {lang === 'hi' ? 'व्यक्तिगत जीवन' : 'Personal Life'}
                   </h3>
-                  <p className="text-gray-300 text-sm">
+                  <p className={`text-sm ${isDark ? 'text-white' : 'text-gray-700'}`}>
                     {getHoroscopeData(selectedSign).personal}
                   </p>
                 </div>
 
-                <div className="bg-gray-700/50 rounded-xl p-4">
-                  <h3 className="text-green-400 font-bold text-lg mb-2">
+                <div className={`rounded-xl p-4 ${isDark ? 'bg-gray-700/50' : 'bg-white border border-gray-200'}`}>
+                  <h3 className="text-green-500 font-bold text-lg mb-2">
                     {lang === 'hi' ? 'करियर और वित्त' : 'Career & Finance'}
                   </h3>
-                  <p className="text-gray-300 text-sm">
+                  <p className={`text-sm ${isDark ? 'text-white' : 'text-gray-700'}`}>
                     {getHoroscopeData(selectedSign).career}
                   </p>
                 </div>
 
-                <div className="bg-gray-700/50 rounded-xl p-4">
-                  <h3 className="text-red-400 font-bold text-lg mb-2">
+                <div className={`rounded-xl p-4 ${isDark ? 'bg-gray-700/50' : 'bg-white border border-gray-200'}`}>
+                  <h3 className="text-red-500 font-bold text-lg mb-2">
                     {lang === 'hi' ? 'स्वास्थ्य और कल्याण' : 'Health & Wellness'}
                   </h3>
-                  <p className="text-gray-300 text-sm">
+                  <p className={`text-sm ${isDark ? 'text-white' : 'text-gray-700'}`}>
                     {getHoroscopeData(selectedSign).health}
                   </p>
                 </div>
               </div>
 
               <div className="space-y-4">
-                <div className="bg-gray-700/50 rounded-xl p-4">
-                  <h3 className="text-purple-400 font-bold text-lg mb-2">
+                <div className={`rounded-xl p-4 ${isDark ? 'bg-gray-700/50' : 'bg-white border border-gray-200'}`}>
+                  <h3 className="text-purple-500 font-bold text-lg mb-2">
                     {lang === 'hi' ? 'भावनाएं और मन' : 'Emotions & Mind'}
                   </h3>
-                  <p className="text-gray-300 text-sm">
+                  <p className={`text-sm ${isDark ? 'text-white' : 'text-gray-700'}`}>
                     {getHoroscopeData(selectedSign).emotions}
                   </p>
                 </div>
 
-                <div className="bg-gray-700/50 rounded-xl p-4">
-                  <h3 className="text-yellow-400 font-bold text-lg mb-2">
+                <div className={`rounded-xl p-4 ${isDark ? 'bg-gray-700/50' : 'bg-white border border-gray-200'}`}>
+                  <h3 className="text-yellow-500 font-bold text-lg mb-2">
                     {lang === 'hi' ? 'भाग्यशाली अंतर्दृष्टि' : 'Lucky Insights'}
                   </h3>
-                  <p className="text-gray-300 text-sm">
+                  <p className={`text-sm ${isDark ? 'text-white' : 'text-gray-700'}`}>
                     {getHoroscopeData(selectedSign).lucky}
                   </p>
                 </div>
 
-                <div className="bg-gray-700/50 rounded-xl p-4">
-                  <h3 className="text-indigo-400 font-bold text-lg mb-2">
+                <div className={`rounded-xl p-4 ${isDark ? 'bg-gray-700/50' : 'bg-white border border-gray-200'}`}>
+                  <h3 className="text-indigo-500 font-bold text-lg mb-2">
                     {lang === 'hi' ? 'यात्रा और गति' : 'Travel & Movement'}
                   </h3>
-                  <p className="text-gray-300 text-sm">
+                  <p className={`text-sm ${isDark ? 'text-white' : 'text-gray-700'}`}>
                     {getHoroscopeData(selectedSign).travel}
                   </p>
                 </div>
 
-                <div className="bg-gray-700/50 rounded-xl p-4">
-                  <h3 className="text-orange-400 font-bold text-lg mb-2">
+                <div className={`rounded-xl p-4 ${isDark ? 'bg-gray-700/50' : 'bg-white border border-gray-200'}`}>
+                  <h3 className="text-orange-500 font-bold text-lg mb-2">
                     {lang === 'hi' ? 'उपाय' : 'Remedies'}
                   </h3>
-                  <p className="text-gray-300 text-sm">
+                  <p className={`text-sm ${isDark ? 'text-white' : 'text-gray-700'}`}>
                     {getHoroscopeData(selectedSign).remedies}
                   </p>
                 </div>

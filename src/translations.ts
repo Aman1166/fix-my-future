@@ -59,11 +59,7 @@ export const translations = {
       minutes: "minutes",
       startCall: "Start Call Now"
     },
-    cta: {
-      title: "Find Your Perfect Gemstone",
-      subtitle: "Use our free gemstone calculator to find the right stone for you",
-      btn: "Try Gemstone Calculator"
-    },
+
     footer: {
       desc: "Your trusted destination for authentic gemstones, rudraksha, and spiritual jewelry.",
       shop: "Shop",
@@ -134,11 +130,6 @@ export const translations = {
       estTalkTime: "अनुमानित बातचीत का समय:",
       minutes: "मिनट",
       startCall: "अभी कॉल शुरू करें"
-    },
-    cta: {
-      title: "अपना आदर्श रत्न खोजें",
-      subtitle: "अपने लिए सही रत्न खोजने के लिए हमारे निःशुल्क रत्न कैलकुलेटर का उपयोग करें",
-      btn: "रत्न कैलकुलेटर आज़माएं"
     },
     footer: {
       desc: "प्रामाणिक रत्न, रुद्राक्ष और आध्यात्मिक आभूषणों के लिए आपका विश्वसनीय स्थान।",

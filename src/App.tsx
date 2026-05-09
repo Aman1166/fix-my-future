@@ -26,6 +26,8 @@ import BestAstrologers from './components/BestAstrologers';
 import ChatWithAstrologer from './components/ChatWithAstrologer';
 import TalkToAstrologer from './components/TalkToAstrologer';
 import ThemeToggle from './components/ThemeToggle';
+import ProductCategoryPage, { Product as CategoryProduct } from './components/ProductCategoryPage';
+import ShopNowPage from './components/ShopNowPage';
 import { CartProvider, useCart } from './store';
 import {
   TestimonialsSlider,
@@ -71,6 +73,34 @@ interface Astrologer {
 // Product Data - Using local images from public/product/
 const products: Product[] = [];
 
+// Category-specific product data
+const gemstoneProducts: CategoryProduct[] = [
+  { id: 201, name: 'Blue Sapphire (Neelam)', price: '₹12,999', image: '/product/blue-sapphire.jpg', category: 'gemstones', carat: '5.2 Ct' },
+  { id: 202, name: 'Emerald (Panna)', price: '₹15,999', image: '/product/emerald.jpg', category: 'gemstones', carat: '4.8 Ct' },
+  { id: 203, name: 'Ruby (Manik)', price: '₹18,999', image: '/product/ruby.jpg', category: 'gemstones', carat: '6.1 Ct' },
+  { id: 204, name: 'Yellow Sapphire (Pukhraj)', price: '₹14,999', image: '/product/yellow-sapphire.jpg', category: 'gemstones', carat: '5.5 Ct' },
+  { id: 205, name: 'Diamond Ring', price: '₹25,999', image: '/product/jewelry-ring.jpg', category: 'gemstones', carat: '1.2 Ct' },
+  { id: 206, name: 'Premium Gemstone Set', price: '₹35,999', image: '/product/a9.webp', category: 'gemstones' },
+];
+
+const rudrakshaProducts: CategoryProduct[] = [
+  { id: 301, name: '5 Mukhi Rudraksha', price: '₹1,499', image: '/product/rudraksha.jpg', category: 'rudraksha' },
+  { id: 302, name: '7 Mukhi Rudraksha', price: '₹2,499', image: '/product/a3.avif', category: 'rudraksha' },
+  { id: 303, name: '9 Mukhi Rudraksha', price: '₹3,999', image: '/product/a4.webp', category: 'rudraksha' },
+  { id: 304, name: '11 Mukhi Rudraksha', price: '₹5,999', image: '/product/a5.webp', category: 'rudraksha' },
+  { id: 305, name: 'Gauri Shankar Rudraksha', price: '₹4,499', image: '/product/a6.webp', category: 'rudraksha' },
+  { id: 306, name: 'Mala (108 Beads)', price: '₹2,999', image: '/product/a7.webp', category: 'rudraksha' },
+];
+
+const braceletProducts: CategoryProduct[] = [
+  { id: 401, name: 'Dhan Yog Bracelet', price: '₹1,999', image: '/product/a1.jpg', category: 'bracelets' },
+  { id: 402, name: 'Rudraksha Bracelet', price: '₹1,499', image: '/product/a2.jpg', category: 'bracelets' },
+  { id: 403, name: 'Crystal Bracelet', price: '₹999', image: '/product/a8.webp', category: 'bracelets' },
+  { id: 404, name: 'Gold Plated Bracelet', price: '₹2,499', image: '/product/a3.avif', category: 'bracelets' },
+  { id: 405, name: 'Silver Bracelet', price: '₹1,799', image: '/product/a4.webp', category: 'bracelets' },
+  { id: 406, name: 'Premium Bracelet Set', price: '₹3,999', image: '/product/a5.webp', category: 'bracelets' },
+];
+
 
 
 
@@ -83,28 +113,21 @@ function CTAButtons() {
 
   const ctaCards = [
     {
-      icon: '💬',
-      title: lang === 'hi' ? 'अभी चैट करें' : 'Chat Now',
-      subtitle: lang === 'hi' ? 'मुफ्त में एआई ज्योतिषी से बात करें' : 'Chat with AI Astrologer for free',
-      action: () => (window as any).__chat?.(),
-      glow: 'hover:shadow-amber-600-500/20'
-    },
-    {
-      icon: '💬',
+      icon: <i className="fa-regular fa-comment-dots"></i>,
       title: lang === 'hi' ? 'ज्योतिषी से चैट' : 'Chat with Astrologer',
       subtitle: lang === 'hi' ? 'व्यक्तिगत मार्गदर्शन प्राप्त करें' : 'Get personalized guidance',
       action: () => (window as any).__chat?.(),
       glow: 'hover:shadow-blue-500/20'
     },
     {
-      icon: '📞',
+      icon: <i className="fa-solid fa-phone"></i>,
       title: lang === 'hi' ? 'ज्योतिषी से बात करें' : 'Talk to Astrologer',
       subtitle: lang === 'hi' ? 'फोन पर विस्तृत परामर्श' : 'Detailed consultation over call',
       action: () => (window as any).__talk?.(),
       glow: 'hover:shadow-purple-500/20'
     },
     {
-      icon: '🕉️',
+      icon: <i className="fa-solid fa-om"></i>,
       title: lang === 'hi' ? 'पूजा बुक करें' : 'Book A Pooja',
       subtitle: lang === 'hi' ? 'घर बैठे पूजा करवाएं' : 'Book pooja from home',
       action: () => (window as any).__pooja?.(),
@@ -124,7 +147,7 @@ function CTAButtons() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {ctaCards.map((card, index) => (
             <div
               key={index}
@@ -158,23 +181,6 @@ function CTAButtons() {
           ))}
         </div>
 
-        {/* Additional CTA */}
-        <div className="text-center mt-8">
-          <p className="text-sm text-slate-500 mb-4">
-            {lang === 'hi' ? 'कुंडली, मिलान, राशिफल और बहुत कुछ...' : 'Kundli, Matching, Horoscopes and much more...'}
-          </p>
-          <button
-            className="inline-flex items-center space-x-2 px-6 py-3 glass hover:glass-strong rounded-xl transition-all duration-300 text-gray-200 hover:text-amber-600 hover:scale-105"
-          >
-            <span className="text-lg">✨</span>
-            <span className="font-medium">
-              {lang === 'hi' ? 'सभी सेवाएं देखें' : 'Explore All Services'}
-            </span>
-            <svg className="w-4 h-4 stroke-current fill-none" viewBox="0 0 24 24">
-              <path d="M5 12h14M12 5l7 7-7 7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
-        </div>
       </div>
     </section>
   );
@@ -230,7 +236,7 @@ function Header() {
   ];
 
   return (
-    <header className={`fixed top-12 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-bg-secondary/95 backdrop-blur-md border-b border-amber-600/30 shadow-2xl' : 'bg-gradient-to-b from-bg-primary/90 to-bg-secondary/80'}`}>
+    <header className={`fixed top-12 left-0 right-0 z-50 transition-all duration-300 dark ${isScrolled ? 'glass-strong border-b border-amber-600/30 shadow-2xl' : 'bg-gray-900/40 backdrop-blur-md border-b border-white/5'}`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo Home Button */}
@@ -238,7 +244,7 @@ function Header() {
             onClick={() => (window as any).__goHome?.()}
             className="flex items-center space-x-2 flex-shrink-0 hover:scale-105 transition-transform duration-300 group"
           >
-            <span className="text-2xl md:text-3xl animate-float neon-glow group-hover:scale-110">💎</span>
+            <span className="text-2xl md:text-3xl animate-float neon-glow group-hover:scale-110 text-amber-500"><i className="fa-solid fa-gem"></i></span>
             <span className="text-sm md:text-lg font-black gradient-text-strong whitespace-nowrap">{t.brandName}</span>
           </button>
 
@@ -271,6 +277,9 @@ function Header() {
                   onClick={item.action}
                   className="font-bold text-[10px] md:text-xs lg:text-sm tracking-wide uppercase transition-all duration-300 hover:scale-110 text-slate-300 hover:text-amber-400 px-2 lg:px-3 py-2 rounded-lg hover:bg-amber-700/10 whitespace-nowrap group"
                 >
+                  <span className="absolute -top-10 right-0 bg-gray-800 text-white text-xs font-bold px-3 py-1.5 rounded-lg whitespace-nowrap shadow-xl opacity-0 group-hover:opacity-100 transition-opacity border border-purple-500/30">
+          Free AI Astrologer <i className="fa-solid fa-sparkles text-amber-500"></i>
+        </span> 
                   <span className="group-hover:inline-block opacity-0 group-hover:opacity-100 transition-opacity mr-1">→</span>
                   {item.label}
                 </button>
@@ -309,7 +318,7 @@ function Header() {
               onClick={() => setLang(lang === 'en' ? 'hi' : 'en')}
               className="hidden sm:flex items-center space-x-1.5 px-3 lg:px-4 py-1.5 lg:py-2 rounded-xl font-bold text-xs lg:text-sm border transition-all duration-300 glass hover:glass-strong text-slate-300 hover:text-amber-400 border-amber-600/30 hover:border-amber-600/60 hover:scale-105 active:scale-95"
             >
-              <span className="animate-float text-base">🌐</span>
+              <span className="text-base"><i className="fa-solid fa-globe"></i></span>
               <span>{lang === 'en' ? 'HI' : 'EN'}</span>
             </button>
 
@@ -666,8 +675,8 @@ function AstrologerSection() {
         <div className="max-w-4xl mx-auto bg-gradient-to-r from-gray-800/80 to-gray-950/50 backdrop-blur-md p-5 rounded-2xl shadow-2xl mb-12 flex flex-wrap items-center justify-between border border-white/10 relative group">
           <div className="absolute inset-0 bg-gradient-to-r from-amber-500/5 to-transparent rounded-2xl pointer-events-none"></div>
           <div className="flex items-center space-x-4 mb-3 sm:mb-0 relative z-10">
-            <div className="w-14 h-14 bg-gradient-to-br from-amber-500 to-amber-600-500 rounded-xl flex items-center justify-center text-3xl shadow-xl shadow-amber-500/20 group-hover:scale-105 transition-transform">
-              👛
+            <div className="w-14 h-14 bg-gradient-to-br from-amber-500 to-amber-600 rounded-xl flex items-center justify-center text-3xl shadow-xl shadow-amber-500/20 group-hover:scale-105 transition-transform text-gray-800">
+              <i className="fa-solid fa-wallet"></i>
             </div>
             <div>
               <p className="text-[10px] text-amber-500 font-bold uppercase tracking-widest">{t.astroMeta.walletText}</p>
@@ -676,9 +685,9 @@ function AstrologerSection() {
           </div>
           <button 
             onClick={() => { setSelectedAstro(null); setShowPaymentModal(true); }}
-            className="relative z-10 px-5 py-3 bg-gradient-to-r from-amber-500 to-amber-600-500 hover:from-amber-600 hover:to-amber-600-600 text-gray-800 text-xs font-black uppercase rounded-xl shadow-xl shadow-amber-500/10 hover:shadow-amber-500/20 transition-all flex items-center space-x-2 group active:scale-95"
+            className="relative z-10 px-5 py-3 bg-gradient-to-r from-amber-500 to-amber-600 text-gray-800 text-xs font-black uppercase rounded-xl shadow-xl shadow-amber-500/10 hover:shadow-amber-500/20 transition-all flex items-center space-x-2 group active:scale-95"
           >
-            <span className="text-lg">➕</span>
+            <span className="text-lg"><i className="fa-solid fa-plus"></i></span>
             <span>{t.astroMeta.rechargeText}</span>
           </button>
         </div>
@@ -870,7 +879,7 @@ function AstrologerSection() {
                     {/* Offer Banner - Premium Glow */}
                     <div className="bg-gradient-to-r from-green-950/50 to-gray-950/30 border border-green-500/20 p-4 rounded-xl mb-6 flex items-start space-x-3 text-green-400 shadow-xl shadow-green-500/5 relative overflow-hidden">
                       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-green-400/10 via-transparent to-transparent"></div>
-                      <span className="text-2xl animate-float flex-shrink-0">🎉</span>
+                      <span className="text-2xl animate-float flex-shrink-0"><i className="fa-solid fa-gift"></i></span>
                       <p className="text-xs font-semibold leading-relaxed text-stone-200">
                         {t.astroMeta.specialOffer}
                       </p>
@@ -928,9 +937,10 @@ function AstrologerSection() {
 // About Section
 function AboutSection() {
   const { t, lang } = useContext(LanguageContext);
+  const { isDark } = useContext(ThemeContext);
 
   return (
-    <section className="py-16 bg-gradient-to-b from-gray-800 to-gray-800">
+    <section className={`py-16 ${isDark ? 'bg-gradient-to-b from-gray-800 to-gray-800' : 'glass-strong border-t border-[#083f1d]/15'}`}>
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-100 mb-6 text-center gradient-text-strong">{t.sections.about.title}</h2>
@@ -975,6 +985,7 @@ function AboutSection() {
 // Footer Component
 function Footer() {
   const { lang } = useContext(LanguageContext);
+  const { isDark } = useContext(ThemeContext);
 
 
 
@@ -994,17 +1005,19 @@ function Footer() {
   ];
 
   return (
-    <footer className="bg-gradient-to-b from-gray-800 via-gray-900 to-gray-900 text-white pt-20 pb-8 border-t border-amber-600/20">
+    <footer className={`${isDark ? 'bg-gradient-to-b from-gray-800 via-gray-900 to-gray-900 text-white border-t border-amber-600/20' : 'glass-strong text-[#083f1d] border-t border-[#083f1d]/15'} pt-20 pb-8`}>
       <div className="container mx-auto px-4">
         {/* Main Footer Grid */}
         <div className="grid md:grid-cols-5 gap-8 mb-16">
           {/* Brand Section */}
           <div className="md:col-span-1">
-            <button onClick={() => (window as any).__goHome?.()} className="text-2xl font-black mb-6 flex items-center hover:text-amber-400 transition-colors group">
-              <span className="text-3xl mr-3 animate-float group-hover:scale-125 transition-transform">💎</span>
+            <button onClick={() => (window as any).__goHome?.()} className={`text-2xl font-black mb-6 flex items-center transition-colors group ${isDark ? 'hover:text-amber-400' : 'hover:text-[#083f1d]'}`}>
+              <span className="text-3xl mr-3 animate-float neon-glow group-hover:scale-110 text-amber-500">
+                <i className="fa-solid fa-gem"></i>
+              </span>
               <span className="gradient-text-strong">{lang === 'hi' ? 'Fix My Future' : 'Fix My Future'}</span>
             </button>
-            <p className="text-slate-400 leading-relaxed mb-6 text-sm">
+            <p className={`${isDark ? 'text-slate-400' : 'text-[#0a5c2a]'} leading-relaxed mb-6 text-sm`}>
               {lang === 'hi'
                 ? 'प्रमाणित रत्न, रुद्राक्ष और आध्यात्मिक आभूषणों के लिए आपका विश्वसनीय स्थान।'
                 : 'Your trusted destination for authentic gemstones, rudraksha, and spiritual jewelry.'}
@@ -1012,15 +1025,15 @@ function Footer() {
             {/* Social Links */}
             <div className="flex space-x-4">
               {[
-                { icon: '📘', label: 'Facebook' },
-                { icon: '📷', label: 'Instagram' },
-                { icon: '🐦', label: 'Twitter' },
-                { icon: '▶️', label: 'YouTube' },
+                { icon: <i className="fa-brands fa-facebook"></i>, label: 'Facebook' },
+                { icon: <i className="fa-brands fa-instagram"></i>, label: 'Instagram' },
+                { icon: <i className="fa-brands fa-twitter"></i>, label: 'Twitter' },
+                { icon: <i className="fa-brands fa-youtube"></i>, label: 'YouTube' },
               ].map((social) => (
                 <button
                   key={social.label}
                   aria-label={social.label}
-                  className="w-11 h-11 glass rounded-full flex items-center justify-center text-lg hover:bg-amber-700/20 hover:text-amber-400 transition-all duration-300 hover:scale-110 active:scale-95"
+                  className={`w-11 h-11 glass rounded-full flex items-center justify-center text-lg transition-all duration-300 hover:scale-110 active:scale-95 ${isDark ? 'hover:bg-amber-700/20 hover:text-amber-400' : 'hover:bg-[#083f1d]/10 hover:text-[#083f1d]'}`}
                   title={social.label}
                 >
                   {social.icon}
@@ -1031,16 +1044,15 @@ function Footer() {
 
           {/* Shop Links */}
           <div>
-            <h4 className="font-black text-lg mb-6 text-amber-400 uppercase tracking-wide">{lang === 'hi' ? 'Shop करें' : 'Shop'}</h4>
+            <h4 className={`font-black text-lg mb-6 uppercase tracking-wide ${isDark ? 'text-amber-400' : 'text-[#083f1d]'}`}>{lang === 'hi' ? 'Shop करें' : 'Shop'}</h4>
             <ul className="space-y-3">
               {[
-                { label: lang === 'hi' ? 'रत्न' : 'Gemstones', action: () => {} },
-                { label: lang === 'hi' ? 'रुद्राक्ष' : 'Rudraksha', action: () => {} },
-                { label: lang === 'hi' ? 'ब्रेसलेट' : 'Bracelets', action: () => {} },
-                { label: lang === 'hi' ? 'ज्योतिषी' : 'Astrologers', action: () => {} }
+                { label: lang === 'hi' ? 'रत्न' : 'Gemstones', action: () => (window as any).__gemstones?.() },
+                { label: lang === 'hi' ? 'रुद्राक्ष' : 'Rudraksha', action: () => (window as any).__rudraksha?.() },
+                { label: lang === 'hi' ? 'ब्रेसलेट' : 'Bracelets', action: () => (window as any).__bracelets?.() }
               ].map((item) => (
                 <li key={item.label}>
-                  <button onClick={item.action} className="text-slate-400 hover:text-amber-400 transition-colors text-sm font-medium hover:translate-x-1 transform duration-300">
+                  <button onClick={item.action} className={`${isDark ? 'text-slate-400 hover:text-amber-400' : 'text-[#0a5c2a] hover:text-[#083f1d]'} transition-colors text-sm font-medium hover:translate-x-1 transform duration-300`}>
                     → {item.label}
                   </button>
                 </li>
@@ -1050,11 +1062,11 @@ function Footer() {
 
           {/* Info Links */}
           <div>
-            <h4 className="font-black text-lg mb-6 text-amber-400 uppercase tracking-wide">{lang === 'hi' ? 'जानकारी' : 'Information'}</h4>
+            <h4 className={`font-black text-lg mb-6 uppercase tracking-wide ${isDark ? 'text-amber-400' : 'text-[#083f1d]'}`}>{lang === 'hi' ? 'जानकारी' : 'Information'}</h4>
             <ul className="space-y-3">
               {infoLinks.map((item) => (
                 <li key={item.label}>
-                  <button onClick={item.action} className="text-slate-400 hover:text-amber-400 transition-colors text-sm font-medium hover:translate-x-1 transform duration-300">
+                  <button onClick={item.action} className={`${isDark ? 'text-slate-400 hover:text-amber-400' : 'text-[#0a5c2a] hover:text-[#083f1d]'} transition-colors text-sm font-medium hover:translate-x-1 transform duration-300`}>
                     → {item.label}
                   </button>
                 </li>
@@ -1064,11 +1076,11 @@ function Footer() {
 
           {/* Astrology Links */}
           <div>
-            <h4 className="font-black text-lg mb-6 text-amber-400 uppercase tracking-wide">{lang === 'hi' ? 'ज्योतिष' : 'Astrology'}</h4>
+            <h4 className={`font-black text-lg mb-6 uppercase tracking-wide ${isDark ? 'text-amber-400' : 'text-[#083f1d]'}`}>{lang === 'hi' ? 'ज्योतिष' : 'Astrology'}</h4>
             <ul className="space-y-3">
               {astroLinks.map((item) => (
                 <li key={item.label}>
-                  <button onClick={item.action} className="text-slate-400 hover:text-amber-400 transition-colors text-sm font-medium hover:translate-x-1 transform duration-300">
+                  <button onClick={item.action} className={`${isDark ? 'text-slate-400 hover:text-amber-400' : 'text-[#0a5c2a] hover:text-[#083f1d]'} transition-colors text-sm font-medium hover:translate-x-1 transform duration-300`}>
                     → {item.label}
                   </button>
                 </li>
@@ -1078,15 +1090,15 @@ function Footer() {
 
           {/* Newsletter */}
           <div>
-            <h4 className="font-black text-lg mb-6 text-amber-400 uppercase tracking-wide">{lang === 'hi' ? 'अपडेट्स' : 'Newsletter'}</h4>
-            <p className="text-slate-400 mb-6 text-sm">
+            <h4 className={`font-black text-lg mb-6 uppercase tracking-wide ${isDark ? 'text-amber-400' : 'text-[#083f1d]'}`}>{lang === 'hi' ? 'अपडेट्स' : 'Newsletter'}</h4>
+            <p className={`${isDark ? 'text-slate-400' : 'text-[#0a5c2a]'} mb-6 text-sm`}>
               {lang === 'hi' ? 'विशेष ऑफर्स और रत्न टिप्स के लिए सब्सक्राइब करें' : 'Subscribe for exclusive offers and tips'}
             </p>
             <div className="flex flex-col space-y-3">
               <input
                 type="email"
                 placeholder={lang === 'hi' ? 'आपका ईमेल' : 'Your email'}
-                className="w-full px-4 py-3 bg-gray-700/50 border border-amber-600/30 rounded-lg focus:outline-none focus:border-amber-600 text-gray-200 placeholder-slate-600 transition-all duration-300 text-sm"
+                className={`w-full px-4 py-3 rounded-lg focus:outline-none transition-all duration-300 text-sm ${isDark ? 'bg-gray-700/50 border border-amber-600/30 focus:border-amber-600 text-gray-200 placeholder-slate-600' : 'glass border border-[#083f1d]/20 focus:border-[#083f1d] text-[#083f1d] placeholder-[#0a5c2a]/50'}`}
               />
               <button className="w-full btn-cyan py-3 rounded-lg font-bold text-sm uppercase tracking-wider transition-all duration-300 hover:scale-105 active:scale-95">
                 {lang === 'hi' ? 'Subscribe' : 'Subscribe'}
@@ -1096,27 +1108,27 @@ function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="border-t border-amber-600/20 my-12"></div>
+        <div className={`border-t my-12 ${isDark ? 'border-amber-600/20' : 'border-[#083f1d]/15'}`}></div>
 
         {/* Bottom Section */}
         <div className="grid md:grid-cols-3 gap-8 text-center md:text-left">
           <div>
-            <p className="text-slate-500 text-sm">
+            <p className={`${isDark ? 'text-slate-500' : 'text-[#0a5c2a]'} text-sm`}>
               &copy; 2026 {lang === 'hi' ? 'Fix My Future' : 'Fix My Future'}. {lang === 'hi' ? 'सभी अधिकार सुरक्षित हैं।' : 'All rights reserved.'}
             </p>
           </div>
           <div className="flex justify-center space-x-6">
-            <button onClick={() => (window as any).__openInfo?.('shipping')} className="text-slate-500 hover:text-amber-400 transition-colors text-sm font-medium">
+            <button onClick={() => (window as any).__openInfo?.('terms')} className={`${isDark ? 'text-slate-500 hover:text-amber-400' : 'text-[#0a5c2a] hover:text-[#083f1d]'} transition-colors text-sm font-medium`}>
               {lang === 'hi' ? 'शर्तें' : 'Terms'}
             </button>
-            <button onClick={() => (window as any).__openInfo?.('returns')} className="text-slate-500 hover:text-amber-400 transition-colors text-sm font-medium">
+            <button onClick={() => (window as any).__openInfo?.('policy')} className={`${isDark ? 'text-slate-500 hover:text-amber-400' : 'text-[#0a5c2a] hover:text-[#083f1d]'} transition-colors text-sm font-medium`}>
               {lang === 'hi' ? 'नीति' : 'Policy'}
             </button>
-            <button onClick={() => (window as any).__openInfo?.('contact')} className="text-slate-500 hover:text-amber-400 transition-colors text-sm font-medium">
+            <button onClick={() => (window as any).__openInfo?.('contact')} className={`${isDark ? 'text-slate-500 hover:text-amber-400' : 'text-[#0a5c2a] hover:text-[#083f1d]'} transition-colors text-sm font-medium`}>
               {lang === 'hi' ? 'संपर्क' : 'Contact'}
             </button>
           </div>
-          <div className="text-slate-500 text-sm">
+          <div className={`${isDark ? 'text-slate-500' : 'text-[#0a5c2a]'} text-sm`}>
             {lang === 'hi' ? '🙏 धन्यवाद, आपका विश्वास ही हमारी सफलता है।' : '✨ Thank you for your trust and support.'}
           </div>
         </div>
@@ -1128,19 +1140,24 @@ function Footer() {
 // Main App Component
 function App() {
   const [lang, setLang] = useState<'en' | 'hi'>('en');
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(() => {
+    return document.documentElement.classList.contains('dark');
+  });
 
   useEffect(() => {
     if (isDark) {
       document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
     } else {
       document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
     }
   }, [isDark]);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
 
-  const [activeInfoPage, setActiveInfoPage] = useState<'about' | 'contact' | 'faq' | 'shipping' | 'returns' | 'kundli-matching' | 'pooja' | 'store' | 'blogs' | null>(null);
+  const [activeInfoPage, setActiveInfoPage] = useState<'about' | 'contact' | 'faq' | 'shipping' | 'returns' | 'pooja' | 'store' | 'blogs' | 'terms' | 'policy' | null>(null);
+
   const [isFreeKundliOpen, setIsFreeKundliOpen] = useState(false);
   const [isKundliMatchingOpen, setIsKundliMatchingOpen] = useState(false);
   const [isCompatibilityOpen, setIsCompatibilityOpen] = useState(false);
@@ -1161,7 +1178,11 @@ function App() {
   const [isChatWithAstrologerOpen, setIsChatWithAstrologerOpen] = useState(false);
   const [isTalkToAstrologerOpen, setIsTalkToAstrologerOpen] = useState(false);
 
-
+  // Product Category States
+  const [isGemstonesOpen, setIsGemstonesOpen] = useState(false);
+  const [isRudrakshaOpen, setIsRudrakshaOpen] = useState(false);
+  const [isBraceletsOpen, setIsBraceletsOpen] = useState(false);
+  const [isShopNowOpen, setIsShopNowOpen] = useState(false);
 
   const t = translations[lang];
 
@@ -1173,10 +1194,11 @@ function App() {
       const event = new CustomEvent('openCart', { detail: v });
       window.dispatchEvent(event);
     };
-    (window as any).__openInfo = (value: 'about' | 'contact' | 'faq' | 'shipping' | 'returns') => {
+    (window as any).__openInfo = (value: 'about' | 'contact' | 'faq' | 'shipping' | 'returns' | 'terms' | 'policy') => {
       setActiveInfoPage(value);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
+
     (window as any).__goHome = () => {
       setActiveInfoPage(null);
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1242,6 +1264,18 @@ function App() {
     (window as any).__talk = () => {
       setIsTalkToAstrologerOpen(true);
     };
+    (window as any).__gemstones = () => {
+      setIsGemstonesOpen(true);
+    };
+    (window as any).__rudraksha = () => {
+      setIsRudrakshaOpen(true);
+    };
+    (window as any).__bracelets = () => {
+      setIsBraceletsOpen(true);
+    };
+    (window as any).__shopNow = () => {
+      setIsShopNowOpen(true);
+    };
     (window as any).__pooja = () => {
 
       setActiveInfoPage('pooja');
@@ -1270,11 +1304,11 @@ function App() {
       <ThemeContext.Provider value={{ isDark, setIsDark }}>
       <LanguageContext.Provider value={{ lang, setLang, t }}>
         <div className="min-h-screen bg-dark-gradient relative">
-        <FloatingElements />
+        {isDark && <FloatingElements />}
         <MarqueeBanner />
         <Header />
         <main id="home" className="pt-20">
-          <HeroSection />
+          <HeroSection onShopNow={() => (window as any).__shopNow?.()} />
           <CTAButtons />
           <StatsSection />
           
@@ -1304,35 +1338,7 @@ function App() {
             <AboutSection />
           </ScrollReveal>
           
-          {/* CTA Section */}
-          <section className="py-20 relative overflow-hidden">
-            {/* Animated Background */}
-            <div className="absolute inset-0 bg-cyan-gradient animate-gradient"></div>
-            <div className="absolute inset-0">
-              <div className="absolute top-10 left-10 w-20 h-20 bg-cyan-300/20 rounded-full blur-xl animate-float neon-glow"></div>
-              <div className="absolute bottom-10 right-10 w-32 h-32 bg-amber-700/20 rounded-full blur-xl animate-float" style={{ animationDelay: '1s' }}></div>
-              <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-amber-700/20 rounded-full blur-xl animate-float" style={{ animationDelay: '2s' }}></div>
-            </div>
 
-            <div className="container mx-auto px-4 text-center relative z-10">
-              <h2 className="text-4xl md:text-5xl font-black text-gray-800 mb-4 drop-shadow-lg">{t.cta.title}</h2>
-              <p className="text-xl mb-10 text-gray-700/90 max-w-2xl mx-auto">{t.cta.subtitle}</p>
-              <div className="flex flex-wrap justify-center gap-4">
-                <button className="group relative btn-cyan px-10 py-4 rounded-full text-lg font-black uppercase tracking-wider shadow-2xl hover:shadow-amber-600-500/50 hover:scale-105 active:scale-100">
-                  <span className="flex items-center gap-2">
-                    <span>{t.cta.btn}</span>
-                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </span>
-                </button>
-                <button className="glass-strong border-2 border-amber-600/30 text-amber-600 px-10 py-4 rounded-full text-lg font-black uppercase tracking-wider hover:bg-amber-700/10 hover:border-amber-600/60 transition-all hover:scale-105">
-                  📲 Get Free Consultation
-                </button>
-              </div>
-              <p className="mt-8 text-gray-600/70 text-sm font-medium">🎯 Over 50,000+ Happy Customers Trust Us</p>
-            </div>
-          </section>
         </main>
         <Footer />
 
@@ -1346,6 +1352,8 @@ function App() {
         <InformationPage isOpen={activeInfoPage === 'faq'} onClose={() => setActiveInfoPage(null)} page="faq" />
         <InformationPage isOpen={activeInfoPage === 'shipping'} onClose={() => setActiveInfoPage(null)} page="shipping" />
         <InformationPage isOpen={activeInfoPage === 'returns'} onClose={() => setActiveInfoPage(null)} page="returns" />
+        <InformationPage isOpen={activeInfoPage === 'terms'} onClose={() => setActiveInfoPage(null)} page="terms" />
+        <InformationPage isOpen={activeInfoPage === 'policy'} onClose={() => setActiveInfoPage(null)} page="policy" />
 
 
 
@@ -1381,6 +1389,35 @@ function App() {
         <BestAstrologers isOpen={isBestAstrologersOpen} onClose={() => setIsBestAstrologersOpen(false)} />
         <ChatWithAstrologer isOpen={isChatWithAstrologerOpen} onClose={() => setIsChatWithAstrologerOpen(false)} />
         <TalkToAstrologer isOpen={isTalkToAstrologerOpen} onClose={() => setIsTalkToAstrologerOpen(false)} />
+
+        {/* Product Category Pages */}
+        <ProductCategoryPage
+          isOpen={isGemstonesOpen}
+          onClose={() => setIsGemstonesOpen(false)}
+          category="gemstones"
+          categoryTitle={lang === 'hi' ? 'रत्न' : 'Gemstones'}
+          categoryIcon="💎"
+          products={gemstoneProducts}
+        />
+        <ProductCategoryPage
+          isOpen={isRudrakshaOpen}
+          onClose={() => setIsRudrakshaOpen(false)}
+          category="rudraksha"
+          categoryTitle={lang === 'hi' ? 'रुद्राक्ष' : 'Rudraksha'}
+          categoryIcon="📿"
+          products={rudrakshaProducts}
+        />
+        <ProductCategoryPage
+          isOpen={isBraceletsOpen}
+          onClose={() => setIsBraceletsOpen(false)}
+          category="bracelets"
+          categoryTitle={lang === 'hi' ? 'ब्रेसलेट' : 'Bracelets'}
+          categoryIcon="✨"
+          products={braceletProducts}
+        />
+
+        {/* Shop Now Page */}
+        <ShopNowPage isOpen={isShopNowOpen} onClose={() => setIsShopNowOpen(false)} />
 
         {/* Floating & Overlay Components */}
         <AIChat />

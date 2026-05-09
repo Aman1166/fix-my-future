@@ -45,7 +45,7 @@ export default function CartDrawer() {
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
               </button>
             )}
-            <span className="text-2xl">🛒</span>
+            <span className="text-2xl"><i className="fa-solid fa-cart-shopping text-amber-500"></i></span>
             <div>
               <h2 className="font-black text-white text-lg">{step === 'checkout' ? 'Checkout' : step === 'success' ? 'Order Placed!' : 'Your Cart'}</h2>
               {step === 'cart' && <p className="text-[10px] text-gray-400 font-bold">{totalItems} items</p>}
@@ -57,7 +57,7 @@ export default function CartDrawer() {
         {/* Success State */}
         {step === 'success' && (
           <div className="flex-1 flex flex-col items-center justify-center p-8 text-center">
-            <div className="w-24 h-24 bg-green-500/20 border border-green-500/30 rounded-full flex items-center justify-center text-5xl mb-6 animate-bounce">✓</div>
+            <div className="w-24 h-24 bg-green-500/20 border border-green-500/30 rounded-full flex items-center justify-center text-5xl mb-6 animate-bounce"><i className="fa-solid fa-check text-green-500"></i></div>
             <h3 className="text-2xl font-black text-white mb-2">Order Successful! 🎉</h3>
             <p className="text-gray-400 text-sm mb-4">Your order has been placed successfully. You will receive a confirmation email shortly.</p>
             <div className="bg-gray-800 rounded-xl p-4 border border-white/5 w-full max-w-xs">
@@ -73,7 +73,7 @@ export default function CartDrawer() {
             <div className="flex-1 overflow-y-auto p-4 space-y-3">
               {cart.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full text-center">
-                  <div className="text-6xl mb-4 opacity-30">🛒</div>
+                  <div className="text-6xl mb-4 opacity-30"><i className="fa-solid fa-cart-shopping"></i></div>
                   <h3 className="text-lg font-black text-gray-400 mb-1">Your cart is empty</h3>
                   <p className="text-sm text-stone-500">Add some gemstones or rudraksha to get started!</p>
                   <button onClick={() => setIsCartOpen(false)} className="mt-6 px-6 py-2.5 bg-amber-700 text-gray-800 font-black text-xs rounded-xl uppercase tracking-wider">
@@ -94,7 +94,7 @@ export default function CartDrawer() {
                       </div>
                     </div>
                     <div className="flex flex-col items-end space-y-2">
-                      <button onClick={() => removeFromCart(item.id)} className="text-stone-500 hover:text-red-400 transition-colors text-xs font-bold">🗑️</button>
+                      <button onClick={() => removeFromCart(item.id)} className="text-stone-500 hover:text-red-400 transition-colors text-xs font-bold"><i className="fa-solid fa-trash-can"></i></button>
                       <span className="text-white font-black text-sm">₹{item.priceNum * item.quantity}</span>
                     </div>
                   </div>
@@ -125,7 +125,7 @@ export default function CartDrawer() {
           <div className="flex-1 overflow-y-auto p-4 space-y-4">
             {/* Delivery Address */}
             <div className="bg-gray-800/80 rounded-xl p-4 border border-white/5 space-y-3">
-              <h3 className="font-black text-white text-sm flex items-center space-x-2"><span>📍</span><span>Delivery Address</span></h3>
+              <h3 className="font-black text-white text-sm flex items-center space-x-2"><span><i className="fa-solid fa-location-dot text-amber-500"></i></span><span>Delivery Address</span></h3>
               <input placeholder="Full Name" className="w-full bg-gray-700 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-stone-500 focus:outline-none focus:border-amber-500/50" />
               <input placeholder="Phone Number" className="w-full bg-gray-700 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-stone-500 focus:outline-none focus:border-amber-500/50" />
               <textarea placeholder="Full Address (House No, Street, City, Pincode)" rows={2} className="w-full bg-gray-700 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-stone-500 focus:outline-none focus:border-amber-500/50 resize-none" />
@@ -133,12 +133,12 @@ export default function CartDrawer() {
 
             {/* Payment Methods */}
             <div className="bg-gray-800/80 rounded-xl p-4 border border-white/5 space-y-3">
-              <h3 className="font-black text-white text-sm flex items-center space-x-2"><span>💳</span><span>Payment Method</span></h3>
+              <h3 className="font-black text-white text-sm flex items-center space-x-2"><span><i className="fa-solid fa-credit-card text-amber-500"></i></span><span>Payment Method</span></h3>
               {[
-                { id: 'upi', label: 'UPI (GPay / PhonePe / Paytm)', icon: '📱' },
-                { id: 'card', label: 'Credit / Debit Card', icon: '💳' },
-                { id: 'netbanking', label: 'Net Banking', icon: '🏦' },
-                { id: 'cod', label: 'Cash on Delivery', icon: '💵' },
+                { id: 'upi', label: 'UPI (GPay / PhonePe / Paytm)', icon: <i className="fa-solid fa-mobile-screen"></i> },
+                { id: 'card', label: 'Credit / Debit Card', icon: <i className="fa-solid fa-credit-card"></i> },
+                { id: 'netbanking', label: 'Net Banking', icon: <i className="fa-solid fa-building-columns"></i> },
+                { id: 'cod', label: 'Cash on Delivery', icon: <i className="fa-solid fa-money-bill-wave"></i> },
               ].map(method => (
                 <button
                   key={method.id}
@@ -154,7 +154,7 @@ export default function CartDrawer() {
 
             {/* Order Summary */}
             <div className="bg-gray-800/80 rounded-xl p-4 border border-white/5 space-y-2">
-              <h3 className="font-black text-white text-sm">📋 Order Summary</h3>
+              <h3 className="font-black text-white text-sm flex items-center space-x-2"><span><i className="fa-solid fa-list-check text-amber-500"></i></span><span>Order Summary</span></h3>
               {cart.map(item => (
                 <div key={item.id} className="flex justify-between text-xs text-gray-400">
                   <span className="truncate mr-2">{item.name} × {item.quantity}</span>

@@ -1,7 +1,8 @@
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three";
-import { useRef, useMemo, useState } from "react";
+import { useRef, useMemo, useState, useContext } from "react";
 import * as THREE from "three";
+import { ThemeContext } from "../contexts/ThemeContext";
 
 // Background Image Component
 function ImageBackground() {
@@ -172,6 +173,7 @@ function StarField() {
 
 // Main Hero Section Component
 export default function HeroSection({ onShopNow }: { onShopNow?: () => void }) {
+  const { isDark } = useContext(ThemeContext);
   return (
     <section className="relative h-[70vh] md:h-[90vh] bg-dark-gradient overflow-hidden">
       {/* Background Image Layer */}
@@ -188,7 +190,7 @@ export default function HeroSection({ onShopNow }: { onShopNow?: () => void }) {
           <pointLight position={[5, 5, 5]} intensity={1.2} color="#edbc7d" />
           <pointLight position={[-5, 3, 2]} intensity={0.5} color="#f5d9a8" />
 
-          <StarField />
+          {isDark && <StarField />}
           <Earth />
           <CardsOrbit />
         </Canvas>
@@ -212,7 +214,7 @@ export default function HeroSection({ onShopNow }: { onShopNow?: () => void }) {
         </p>
         <div className="pointer-events-auto mt-116">
           <button onClick={onShopNow} className="group relative btn-cyan px-6 py-2 rounded-full overflow-hidden transition-all duration-300 transform hover:scale-105 shadow-2xl shadow-amber-600-500/30 active:scale-95">
-            <span className="relative z-10 text-gray-800 font-extrabold text-sm tracking-wider uppercase flex items-center justify-center space-x-2">
+            <span className={`relative z-10 font-extrabold text-sm tracking-wider uppercase flex items-center justify-center space-x-2 ${isDark ? 'text-white' : 'text-gray-800'}`}>
               <span>Shop Now</span>
               <svg className="w-4 h-4 stroke-current fill-none group-hover:translate-x-1.5 transition-transform" viewBox="0 0 24 24">
                 <path d="M5 12h14M12 5l7 7-7 7" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>

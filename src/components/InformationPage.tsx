@@ -2,12 +2,13 @@ import { useContext, useState } from 'react';
 import { LanguageContext } from '../App';
 import { useCart } from '../store';
 
-type InfoPageType = 'about' | 'contact' | 'faq' | 'shipping' | 'returns' | 'horoscopes' | 'pooja' | 'store' | 'blogs';
+type InfoPageType = 'about' | 'contact' | 'faq' | 'shipping' | 'returns' | 'pooja' | 'store' | 'blogs' | 'terms' | 'policy';
+
 
 // Store Content Component
 function StoreContent() {
   const { lang } = useContext(LanguageContext);
-  const { addItem } = useCart();
+  const { addToCart } = useCart();
   const [addedItems, setAddedItems] = useState<Set<number>>(new Set());
 
   const storeProducts = [
@@ -17,10 +18,11 @@ function StoreContent() {
   ];
 
   const handleAddToCart = (product: typeof storeProducts[0]) => {
-    addItem({
+    addToCart({
       id: product.id,
       name: product.name,
       price: product.price,
+      priceNum: parseInt(product.price.replace(/[^0-9]/g, '')) || 0,
       image: product.image,
     });
     setAddedItems(new Set([...addedItems, product.id]));
@@ -85,20 +87,20 @@ function StoreContent() {
                     : 'bg-amber-700/20 text-amber-400 border border-amber-600/50 hover:bg-amber-700/40 hover:text-amber-200 hover:scale-105'
                 }`}
               >
-                {addedItems.has(product.id) ? `✓ ${lang === 'hi' ? 'जोड़ा गया' : 'Added'}` : `🛒 ${lang === 'hi' ? 'कार्ट में जोड़ें' : 'Add to Cart'}`}
+                {addedItems.has(product.id) ? `✓ ${lang === 'hi' ? 'जोड़ा गया' : 'Added'}` : <span><i className="fa-solid fa-cart-shopping"></i> {lang === 'hi' ? 'कार्ट में जोड़ें' : 'Add to Cart'}</span>}
               </button>
 
               {/* Rating */}
               <div className="flex items-center justify-center gap-1 mt-3">
                 {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-lg">⭐</span>
+                  <span key={i} className="text-lg text-yellow-400"><i className="fa-solid fa-star"></i></span>
                 ))}
               </div>
             </div>
 
             {/* Quick view badge */}
             <div className="absolute top-3 right-3 bg-amber-700/80 text-white px-3 py-1 rounded-full text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity">
-              ⚡ {lang === 'hi' ? 'लोकप्रिय' : 'Popular'}
+              <i className="fa-solid fa-bolt text-amber-500"></i> {lang === 'hi' ? 'लोकप्रिय' : 'Popular'}
             </div>
           </div>
         ))}
@@ -107,17 +109,17 @@ function StoreContent() {
       {/* Store Features */}
       <div className="grid md:grid-cols-3 gap-6 mt-12 pt-8 border-t border-amber-600/20">
         <div className="text-center">
-          <div className="text-4xl mb-3">🚚</div>
+          <div className="text-4xl mb-3"><i className="fa-solid fa-truck-fast text-amber-500"></i></div>
           <h4 className="font-bold text-amber-400 mb-2">{lang === 'hi' ? 'तेज़ डिलीवरी' : 'Fast Delivery'}</h4>
           <p className="text-slate-400 text-sm">{lang === 'hi' ? '3-5 दिनों में पूरे भारत में डिलीवरी' : 'Delivery across India in 3-5 days'}</p>
         </div>
         <div className="text-center">
-          <div className="text-4xl mb-3">✅</div>
+          <div className="text-4xl mb-3"><i className="fa-solid fa-certificate text-amber-500"></i></div>
           <h4 className="font-bold text-amber-400 mb-2">{lang === 'hi' ? 'प्रमाणित उत्पाद' : 'Certified Products'}</h4>
           <p className="text-slate-400 text-sm">{lang === 'hi' ? 'सभी उत्पाद प्रमाणित और परीक्षित' : 'All products certified & tested'}</p>
         </div>
         <div className="text-center">
-          <div className="text-4xl mb-3">🔄</div>
+          <div className="text-4xl mb-3"><i className="fa-solid fa-rotate-left text-amber-500"></i></div>
           <h4 className="font-bold text-amber-400 mb-2">{lang === 'hi' ? 'आसान रिटर्न' : 'Easy Returns'}</h4>
           <p className="text-slate-400 text-sm">{lang === 'hi' ? '15 दिनों के भीतर बिना सवाल के' : '15 days no questions asked'}</p>
         </div>
@@ -142,7 +144,7 @@ export default function InformationPage({
 
   const pageContent = {
     about: {
-      icon: '✨',
+      icon: <i className="fa-solid fa-sparkles"></i>,
       title: lang === 'hi' ? 'हमारे बारे में' : 'About Us',
       subtitle:
         lang === 'hi'
@@ -150,7 +152,7 @@ export default function InformationPage({
           : 'Fix My Future — Your trusted astrology and gemstone platform',
     },
     contact: {
-      icon: '📞',
+      icon: <i className="fa-solid fa-phone"></i>,
       title: lang === 'hi' ? 'संपर्क करें' : 'Contact Us',
       subtitle:
         lang === 'hi'
@@ -158,7 +160,7 @@ export default function InformationPage({
           : 'Our team is always ready to help you',
     },
     faq: {
-      icon: '❓',
+      icon: <i className="fa-solid fa-circle-question"></i>,
       title: lang === 'hi' ? 'अक्सर पूछे जाने वाले सवाल' : 'Frequently Asked Questions',
       subtitle:
         lang === 'hi'
@@ -166,7 +168,7 @@ export default function InformationPage({
           : 'Answers to your most common questions',
     },
     shipping: {
-      icon: '🚚',
+      icon: <i className="fa-solid fa-truck-fast"></i>,
       title: lang === 'hi' ? 'शिपिंग पॉलिसी' : 'Shipping Policy',
       subtitle:
         lang === 'hi'
@@ -174,20 +176,15 @@ export default function InformationPage({
           : 'Complete delivery and shipping information',
     },
     returns: {
-      icon: '↩️',
+      icon: <i className="fa-solid fa-rotate-left"></i>,
       title: lang === 'hi' ? 'रिटर्न पॉलिसी' : 'Returns Policy',
       subtitle:
         lang === 'hi'
           ? 'रिटर्न और रिफंड की जानकारी'
           : 'Return and refund details',
     },
-
-
-
-
-
     pooja: {
-      icon: '🕉️',
+      icon: <i className="fa-solid fa-om"></i>,
       title: lang === 'hi' ? 'पूजा बुक करें' : 'Book A Pooja',
       subtitle:
         lang === 'hi'
@@ -195,7 +192,7 @@ export default function InformationPage({
           : 'Book pooja from home',
     },
     store: {
-      icon: '🛒',
+      icon: <i className="fa-solid fa-cart-shopping"></i>,
       title: lang === 'hi' ? 'एस्ट्रोटॉक स्टोर' : 'Astrotalk Store',
       subtitle:
         lang === 'hi'
@@ -203,13 +200,30 @@ export default function InformationPage({
           : 'Astrology related products',
     },
     blogs: {
-      icon: '📝',
+      icon: <i className="fa-solid fa-file-contract"></i>,
       title: lang === 'hi' ? 'ब्लॉग' : 'Blogs',
       subtitle:
         lang === 'hi'
           ? 'ज्योतिष और आत्मा से संबंधित लेख'
           : 'Articles on astrology and spirituality',
     },
+    terms: {
+      icon: <i className="fa-solid fa-scale-balanced"></i>,
+      title: lang === 'hi' ? 'सेवा की शर्तें' : 'Terms of Service',
+      subtitle:
+        lang === 'hi'
+          ? 'Fix My Future के उपयोग के नियम और शर्तें'
+          : 'Terms and conditions for using Fix My Future',
+    },
+    policy: {
+      icon: <i className="fa-solid fa-shield-halved"></i>,
+      title: lang === 'hi' ? 'गोपनीयता नीति' : 'Privacy Policy',
+      subtitle:
+        lang === 'hi'
+          ? 'आपकी जानकारी की सुरक्षा और गोपनीयता'
+          : 'Your information security and privacy',
+    },
+
   } as const;
 
   const faqItems = [
@@ -291,12 +305,12 @@ export default function InformationPage({
             <div className="grid grid-cols-2 gap-4">
               {[
                 { value: '50,000+', label: lang === 'hi' ? 'खुश ग्राहक' : 'Happy Customers' },
-                { value: '100%', label: lang === 'hi' ? 'प्रमाणित प्रोडक्ट्स' : 'Certified Products' },
+                { value: '100+', label: lang === 'hi' ? 'प्रमाणित प्रोडक्ट्स' : 'Certified Products' },
                 { value: '15+', label: lang === 'hi' ? 'सालों का अनुभव' : 'Years Experience' },
                 { value: '24/7', label: lang === 'hi' ? 'सपोर्ट' : 'Support' },
               ].map((item) => (
                 <div key={item.label} className="bg-gray-800/80 backdrop-blur-md rounded-2xl border border-white/10 p-6 text-center">
-                  <div className="text-3xl font-black text-amber-500 mb-2">{item.value}</div>
+                  <div className="text-3xl font-black text-amber-500 mb-2 stats-number-white">{item.value}</div>
                   <div className="text-gray-300 text-sm font-bold">{item.label}</div>
                 </div>
               ))}
@@ -310,9 +324,9 @@ export default function InformationPage({
               <div>
                 <h3 className="text-white font-black text-2xl mb-4">{lang === 'hi' ? 'संपर्क विवरण' : 'Contact Details'}</h3>
                 <div className="space-y-4 text-gray-300">
-                  <div className="flex items-start gap-3"><span>📞</span><div><div className="font-bold text-white">+91 98765 43210</div><div className="text-sm text-gray-400">{lang === 'hi' ? 'सुबह 9 बजे - रात 9 बजे' : '9 AM - 9 PM'}</div></div></div>
-                  <div className="flex items-start gap-3"><span>📧</span><div><div className="font-bold text-white">support@fixmyfuture.com</div><div className="text-sm text-gray-400">{lang === 'hi' ? '24 घंटे ईमेल सपोर्ट' : '24/7 email support'}</div></div></div>
-                  <div className="flex items-start gap-3"><span>📍</span><div><div className="font-bold text-white">New Delhi, India</div><div className="text-sm text-gray-400">{lang === 'hi' ? 'हेडक्वार्टर ऑफिस' : 'Headquarters Office'}</div></div></div>
+                  <div className="flex items-start gap-3"><span><i className="fa-solid fa-phone text-amber-500"></i></span><div><div className="font-bold text-white">+91 98765 43210</div><div className="text-sm text-gray-400">{lang === 'hi' ? 'सुबह 9 बजे - रात 9 बजे' : '9 AM - 9 PM'}</div></div></div>
+                  <div className="flex items-start gap-3"><span><i className="fa-solid fa-envelope text-amber-500"></i></span><div><div className="font-bold text-white">support@fixmyfuture.com</div><div className="text-sm text-gray-400">{lang === 'hi' ? '24 घंटे ईमेल सपोर्ट' : '24/7 email support'}</div></div></div>
+                  <div className="flex items-start gap-3"><span><i className="fa-solid fa-location-dot text-amber-500"></i></span><div><div className="font-bold text-white">New Delhi, India</div><div className="text-sm text-gray-400">{lang === 'hi' ? 'हेडक्वार्टर ऑफिस' : 'Headquarters Office'}</div></div></div>
                 </div>
               </div>
             </div>
@@ -355,17 +369,17 @@ export default function InformationPage({
               {
                 title: lang === 'hi' ? 'स्टैंडर्ड डिलीवरी' : 'Standard Delivery',
                 text: lang === 'hi' ? '3-5 business days' : '3-5 business days',
-                icon: '🚚',
+                icon: <i className="fa-solid fa-truck-fast"></i>,
               },
               {
                 title: lang === 'hi' ? 'फ्री शिपिंग' : 'Free Shipping',
                 text: lang === 'hi' ? '₹999 से ऊपर के ऑर्डर पर' : 'On orders above ₹999',
-                icon: '🎁',
+                icon: <i className="fa-solid fa-gift"></i>,
               },
               {
                 title: lang === 'hi' ? 'एक्सप्रेस डिलीवरी' : 'Express Delivery',
                 text: lang === 'hi' ? 'Metro cities में उपलब्ध' : 'Available in metro cities',
-                icon: '⚡',
+                icon: <i className="fa-solid fa-bolt"></i>,
               },
             ].map((item) => (
               <div key={item.title} className="bg-gray-800/80 backdrop-blur-md rounded-2xl border border-white/10 p-6 text-center">
@@ -391,12 +405,53 @@ export default function InformationPage({
 
         {(page === 'pooja' || page === 'blogs') && (
           <div className="bg-gray-800/80 backdrop-blur-md rounded-2xl border border-white/10 p-8 text-center">
-            <div className="text-6xl mb-6">🚧</div>
+            <div className="text-6xl mb-6 text-amber-500"><i className="fa-solid fa-person-digging"></i></div>
             <h3 className="text-white font-black text-2xl mb-4">{current.title}</h3>
             <p className="text-gray-300 text-lg mb-6">Content coming soon...</p>
             <p className="text-gray-400">{lang === 'hi' ? 'हम इस पेज पर काम कर रहे हैं। जल्द ही यह उपलब्ध होगा।' : 'We are working on this page. It will be available soon.'}</p>
           </div>
         )}
+
+        {page === 'terms' && (
+          <div className="bg-gray-800/80 backdrop-blur-md rounded-2xl border border-white/10 p-8">
+            <h3 className="text-white font-black text-2xl mb-6">{lang === 'hi' ? 'सेवा की शर्तें' : 'Terms of Service'}</h3>
+            <div className="space-y-6 text-gray-300 leading-relaxed">
+              <section>
+                <h4 className="text-amber-500 font-bold mb-2">{lang === 'hi' ? '1. समझौते की स्वीकृति' : '1. Acceptance of Terms'}</h4>
+                <p>{lang === 'hi' ? 'Fix My Future का उपयोग करके, आप इन शर्तों से सहमत होते हैं। यदि आप सहमत नहीं हैं, तो कृपया सेवाओं का उपयोग न करें।' : 'By using Fix My Future, you agree to these terms. If you do not agree, please do not use the services.'}</p>
+              </section>
+              <section>
+                <h4 className="text-amber-500 font-bold mb-2">{lang === 'hi' ? '2. ज्योतिषीय सलाह' : '2. Astrological Guidance'}</h4>
+                <p>{lang === 'hi' ? 'ज्योतिषीय भविष्यवाणियाँ केवल मार्गदर्शन के लिए हैं। हम किसी भी सटीकता की गारंटी नहीं देते हैं और निर्णय लेने की जिम्मेदारी आपकी है।' : 'Astrological predictions are for guidance only. We do not guarantee accuracy and decision-making responsibility lies with you.'}</p>
+              </section>
+              <section>
+                <h4 className="text-amber-500 font-bold mb-2">{lang === 'hi' ? '3. भुगतान और रिफंड' : '3. Payments & Refunds'}</h4>
+                <p>{lang === 'hi' ? 'डिजिटल सेवाओं और परामर्श के लिए भुगतान रिफंडेबल नहीं है, जब तक कि सेवा प्रदान करने में कोई तकनीकी खराबी न हो।' : 'Payments for digital services and consultations are non-refundable unless there is a technical failure in providing the service.'}</p>
+              </section>
+            </div>
+          </div>
+        )}
+
+        {page === 'policy' && (
+          <div className="bg-gray-800/80 backdrop-blur-md rounded-2xl border border-white/10 p-8">
+            <h3 className="text-white font-black text-2xl mb-6">{lang === 'hi' ? 'गोपनीयता नीति' : 'Privacy Policy'}</h3>
+            <div className="space-y-6 text-gray-300 leading-relaxed">
+              <section>
+                <h4 className="text-amber-500 font-bold mb-2">{lang === 'hi' ? '1. डेटा संग्रह' : '1. Data Collection'}</h4>
+                <p>{lang === 'hi' ? 'हम आपकी कुंडली बनाने और बेहतर अनुभव प्रदान करने के लिए नाम, जन्म तिथि और स्थान जैसी जानकारी एकत्र करते हैं।' : 'We collect information such as name, date of birth, and location to create your kundli and provide a better experience.'}</p>
+              </section>
+              <section>
+                <h4 className="text-amber-500 font-bold mb-2">{lang === 'hi' ? '2. डेटा सुरक्षा' : '2. Data Security'}</h4>
+                <p>{lang === 'hi' ? 'हम आपकी निजी जानकारी को सुरक्षित रखने के लिए उद्योग-मानक एन्क्रिप्शन और सुरक्षा उपायों का उपयोग करते हैं।' : 'We use industry-standard encryption and security measures to protect your private information.'}</p>
+              </section>
+              <section>
+                <h4 className="text-amber-500 font-bold mb-2">{lang === 'hi' ? '3. गोपनीयता' : '3. Confidentiality'}</h4>
+                <p>{lang === 'hi' ? 'आपकी ज्योतिषीय रिपोर्ट और परामर्श पूरी तरह से गोपनीय हैं और किसी तीसरे पक्ष के साथ साझा नहीं किए जाते हैं।' : 'Your astrological reports and consultations are strictly confidential and are not shared with any third parties.'}</p>
+              </section>
+            </div>
+          </div>
+        )}
+
 
         {page === 'store' && (
           <StoreContent />
