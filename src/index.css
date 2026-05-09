@@ -656,6 +656,7 @@ html:not(.dark) .text-stone-500 { color: #3d6e52 !important; }
 
 /* REVERT for Header (Keep it dark even in Light Mode) */
 html:not(.dark) header .text-white { color: #ffffff !important; }
+html:not(.dark) header button span { color: inherit !important; }
 html:not(.dark) header .text-gray-100 { color: #f3f4f6 !important; }
 html:not(.dark) header .text-gray-200 { color: #e5e7eb !important; }
 html:not(.dark) header .text-gray-300 { color: #d1d5db !important; }

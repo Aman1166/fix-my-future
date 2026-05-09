@@ -278,9 +278,6 @@ function Header() {
                   onClick={item.action}
                   className={`font-bold text-[10px] md:text-xs lg:text-sm tracking-wide uppercase transition-all duration-300 hover:scale-110 px-2 lg:px-3 py-2 rounded-lg whitespace-nowrap group ${isDark ? 'text-slate-300 hover:text-amber-400 hover:bg-amber-700/10' : 'text-white hover:text-amber-300 hover:bg-white/10'}`}
                 >
-                  <span className="absolute -top-10 right-0 bg-gray-800 text-white text-xs font-bold px-3 py-1.5 rounded-lg whitespace-nowrap shadow-xl opacity-0 group-hover:opacity-100 transition-opacity border border-purple-500/30">
-          Free AI Astrologer <i className="fa-solid fa-sparkles text-amber-500"></i>
-        </span> 
                   <span className="group-hover:inline-block opacity-0 group-hover:opacity-100 transition-opacity mr-1">→</span>
                   {item.label}
                 </button>
