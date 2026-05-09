@@ -27,7 +27,7 @@ export default function DailyHoroscope({
     { name: 'Pisces', hiName: 'मीन', symbol: '♓', dates: 'Feb 19 - Mar 20' },
   ];
 
-  const getHoroscopeData = (signName: string) => {
+  const getHoroscopeData = () => {
     return {
       love: "Daily focus on emotional connections brings harmony. Express your feelings openly to strengthen bonds with loved ones.",
       personal: "Today emphasizes personal growth through self-reflection. Take time to assess your goals and make positive changes.",
@@ -128,7 +128,7 @@ export default function DailyHoroscope({
                     {lang === 'hi' ? 'प्रेम और संबंध' : 'Love & Relationships'}
                   </h3>
                   <p className={`text-sm ${isDark ? 'text-white' : 'text-gray-700'}`}>
-                    {getHoroscopeData(selectedSign).love}
+                    {getHoroscopeData().love}
                   </p>
                 </div>
 
@@ -137,7 +137,7 @@ export default function DailyHoroscope({
                     {lang === 'hi' ? 'व्यक्तिगत जीवन' : 'Personal Life'}
                   </h3>
                   <p className={`text-sm ${isDark ? 'text-white' : 'text-gray-700'}`}>
-                    {getHoroscopeData(selectedSign).personal}
+                    {getHoroscopeData().personal}
                   </p>
                 </div>
 
@@ -146,7 +146,7 @@ export default function DailyHoroscope({
                     {lang === 'hi' ? 'करियर और वित्त' : 'Career & Finance'}
                   </h3>
                   <p className={`text-sm ${isDark ? 'text-white' : 'text-gray-700'}`}>
-                    {getHoroscopeData(selectedSign).career}
+                    {getHoroscopeData().career}
                   </p>
                 </div>
 
@@ -155,7 +155,7 @@ export default function DailyHoroscope({
                     {lang === 'hi' ? 'स्वास्थ्य और कल्याण' : 'Health & Wellness'}
                   </h3>
                   <p className={`text-sm ${isDark ? 'text-white' : 'text-gray-700'}`}>
-                    {getHoroscopeData(selectedSign).health}
+                    {getHoroscopeData().health}
                   </p>
                 </div>
               </div>
@@ -166,7 +166,7 @@ export default function DailyHoroscope({
                     {lang === 'hi' ? 'भावनाएं और मन' : 'Emotions & Mind'}
                   </h3>
                   <p className={`text-sm ${isDark ? 'text-white' : 'text-gray-700'}`}>
-                    {getHoroscopeData(selectedSign).emotions}
+                    {getHoroscopeData().emotions}
                   </p>
                 </div>
 
@@ -175,7 +175,7 @@ export default function DailyHoroscope({
                     {lang === 'hi' ? 'भाग्यशाली अंतर्दृष्टि' : 'Lucky Insights'}
                   </h3>
                   <p className={`text-sm ${isDark ? 'text-white' : 'text-gray-700'}`}>
-                    {getHoroscopeData(selectedSign).lucky}
+                    {getHoroscopeData().lucky}
                   </p>
                 </div>
 
@@ -184,7 +184,7 @@ export default function DailyHoroscope({
                     {lang === 'hi' ? 'यात्रा और गति' : 'Travel & Movement'}
                   </h3>
                   <p className={`text-sm ${isDark ? 'text-white' : 'text-gray-700'}`}>
-                    {getHoroscopeData(selectedSign).travel}
+                    {getHoroscopeData().travel}
                   </p>
                 </div>
 
@@ -193,7 +193,7 @@ export default function DailyHoroscope({
                     {lang === 'hi' ? 'उपाय' : 'Remedies'}
                   </h3>
                   <p className={`text-sm ${isDark ? 'text-white' : 'text-gray-700'}`}>
-                    {getHoroscopeData(selectedSign).remedies}
+                    {getHoroscopeData().remedies}
                   </p>
                 </div>
               </div>
