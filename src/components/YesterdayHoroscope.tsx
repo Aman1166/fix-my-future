@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { LanguageContext, ThemeContext } from '../App';
 
 export default function YesterdayHoroscope({
@@ -10,196 +10,227 @@ export default function YesterdayHoroscope({
 }) {
   const { lang } = useContext(LanguageContext);
   const { isDark } = useContext(ThemeContext);
-  const [selectedSign, setSelectedSign] = useState<string | null>(null);
 
   const zodiacSigns = [
-    { name: 'Aries', hiName: 'मेष', symbol: '♈', dates: 'Mar 21 - Apr 19' },
-    { name: 'Taurus', hiName: 'वृषभ', symbol: '♉', dates: 'Apr 20 - May 20' },
-    { name: 'Gemini', hiName: 'मिथुन', symbol: '♊', dates: 'May 21 - Jun 21' },
-    { name: 'Cancer', hiName: 'कर्क', symbol: '♋', dates: 'Jun 22 - Jul 22' },
-    { name: 'Leo', hiName: 'सिंह', symbol: '♌', dates: 'Jul 23 - Aug 22' },
-    { name: 'Virgo', hiName: 'कन्या', symbol: '♍', dates: 'Aug 23 - Sep 22' },
-    { name: 'Libra', hiName: 'तुला', symbol: '♎', dates: 'Sep 23 - Oct 23' },
-    { name: 'Scorpio', hiName: 'वृश्चिक', symbol: '♏', dates: 'Oct 24 - Nov 21' },
-    { name: 'Sagittarius', hiName: 'धनु', symbol: '♐', dates: 'Nov 22 - Dec 21' },
-    { name: 'Capricorn', hiName: 'मकर', symbol: '♑', dates: 'Dec 22 - Jan 19' },
-    { name: 'Aquarius', hiName: 'कुंभ', symbol: '♒', dates: 'Jan 20 - Feb 18' },
-    { name: 'Pisces', hiName: 'मीन', symbol: '♓', dates: 'Feb 19 - Mar 20' },
+    { 
+      name: 'Aries', 
+      hiName: 'मेष', 
+      symbol: '♈', 
+      icon: '♈',
+      color: 'bg-red-100',
+      textColor: 'text-red-600',
+      desc: 'Aries, yesterday was a day of reflection and learning. The lessons you gathered will serve as a foundation for your future growth and success.'
+    },
+    { 
+      name: 'Taurus', 
+      hiName: 'वृषभ', 
+      symbol: '♉', 
+      icon: '♉',
+      color: 'bg-green-100',
+      textColor: 'text-green-600',
+      desc: 'Taurus, yesterday’s stability allowed you to process recent changes with grace. The peace you found will help you navigate today’s tasks with ease.'
+    },
+    { 
+      name: 'Gemini', 
+      hiName: 'मिथुन', 
+      symbol: '♊', 
+      icon: '♊',
+      color: 'bg-yellow-100',
+      textColor: 'text-yellow-600',
+      desc: 'Gemini, the conversations you had yesterday opened up new possibilities. The connections you made are already beginning to bear fruit.'
+    },
+    { 
+      name: 'Cancer', 
+      hiName: 'कर्क', 
+      symbol: '♋', 
+      icon: '♋',
+      color: 'bg-blue-100',
+      textColor: 'text-blue-600',
+      desc: 'Cancer, yesterday was a time for nurturing your inner self. The emotional balance you achieved will guide you through the rest of the week.'
+    },
+    { 
+      name: 'Leo', 
+      hiName: 'सिंह', 
+      symbol: '♌', 
+      icon: '♌',
+      color: 'bg-orange-100',
+      textColor: 'text-orange-600',
+      desc: 'Leo, your radiant energy from yesterday continues to inspire those around you. The impact you made is still felt in your social circles.'
+    },
+    { 
+      name: 'Virgo', 
+      hiName: 'कन्या', 
+      symbol: '♍', 
+      icon: '♍',
+      color: 'bg-emerald-100',
+      textColor: 'text-emerald-600',
+      desc: 'Virgo, the meticulous work you did yesterday has laid the groundwork for today’s achievements. Your attention to detail is your greatest asset.'
+    },
+    { 
+      name: 'Libra', 
+      hiName: 'तुला', 
+      symbol: '♎', 
+      icon: '♎',
+      color: 'bg-indigo-100',
+      textColor: 'text-indigo-600',
+      desc: 'Libra, the harmony you created yesterday remains a source of strength. Your diplomatic efforts have successfully resolved recent tensions.'
+    },
+    { 
+      name: 'Scorpio', 
+      hiName: 'वृश्चिक', 
+      symbol: '♏', 
+      icon: '♏',
+      color: 'bg-purple-100',
+      textColor: 'text-purple-600',
+      desc: 'Scorpio, the deep insights you gained yesterday have clarified your path. Trusting your intuition was the right choice for your journey.'
+    },
+    { 
+      name: 'Sagittarius', 
+      hiName: 'धनु', 
+      symbol: '♐', 
+      icon: '♐',
+      color: 'bg-amber-100',
+      textColor: 'text-amber-600',
+      desc: 'Sagittarius, the adventurous spirit you embraced yesterday has opened up new horizons. The energy you gathered is fueling your today’s drive.'
+    },
+    { 
+      name: 'Capricorn', 
+      hiName: 'मकर', 
+      symbol: '♑', 
+      icon: '♑',
+      color: 'bg-stone-100',
+      textColor: 'text-stone-600',
+      desc: 'Capricorn, the discipline you showed yesterday is already yielding results. Your commitment to your goals is paving the way for success.'
+    },
+    { 
+      name: 'Aquarius', 
+      hiName: 'कुंभ', 
+      symbol: '♒', 
+      icon: '♒',
+      color: 'bg-cyan-100',
+      textColor: 'text-cyan-600',
+      desc: 'Aquarius, the innovative ideas you shared yesterday are being well-received. Your unique perspective is highly valued in your community.'
+    },
+    { 
+      name: 'Pisces', 
+      hiName: 'मीन', 
+      symbol: '♓', 
+      icon: '♓',
+      color: 'bg-pink-100',
+      textColor: 'text-pink-600',
+      desc: 'Pisces, the creative energy you channeled yesterday has brought you a sense of fulfillment. Trusting your inner voice was the key.'
+    },
   ];
-
-  const getHoroscopeData = () => {
-    return {
-      love: "Daily focus on emotional connections brings harmony. Express your feelings openly to strengthen bonds with loved ones.",
-      personal: "Today emphasizes personal growth through self-reflection. Take time to assess your goals and make positive changes.",
-      career: "Professional opportunities arise through networking. Your dedication and skills will be recognized by superiors.",
-      health: "Maintain balance in daily routine. Light exercise and healthy eating will boost your energy levels throughout the day.",
-      emotions: "Emotional stability is key today. Practice mindfulness to stay grounded amidst daily challenges.",
-      lucky: "Lucky numbers: 3, 7, 12. Lucky color: Green. Lucky day for making important decisions.",
-      travel: "Short local trips bring pleasant experiences. Plan travel activities that promote relaxation and enjoyment.",
-      remedies: "Meditate for 10 minutes daily. Wear green colored clothing. Chant your birth mantra in the morning."
-    };
-  };
-
-  const handleSignClick = (signName: string) => {
-    setSelectedSign(signName);
-  };
 
   if (!isOpen) return null;
 
   return (
-    <div className={`fixed inset-0 z-64 overflow-y-auto ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
+    <div className={`fixed inset-0 z-100 overflow-y-auto ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
+      {/* Navbar overlay button */}
       <button
         onClick={onClose}
-        className={`fixed top-6 right-6 z-30 w-12 h-12 backdrop-blur-md border rounded-full flex items-center justify-center transition-all shadow-xl hover:scale-110 active:scale-95 ${isDark ? 'bg-gray-800/80 border-white/10 text-white hover:bg-gray-700' : 'bg-white/80 border-gray-200 text-gray-900 hover:bg-gray-100'}`}
+        className={`fixed top-6 right-6 z-110 w-12 h-12 backdrop-blur-md border rounded-full flex items-center justify-center transition-all shadow-xl hover:scale-110 active:scale-95 ${isDark ? 'bg-gray-800/80 border-white/10 text-white hover:bg-gray-700' : 'bg-white/80 border-gray-200 text-gray-900 hover:bg-gray-100'}`}
       >
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
 
-      <div className="relative h-[32vh] md:h-[40vh] overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/astro/g.jpeg')] bg-cover bg-center">
-          <div className={`absolute inset-0 ${isDark ? 'bg-linear-to-b from-gray-800/60 via-gray-950/40 to-gray-900' : 'bg-linear-to-b from-white/60 via-white/40 to-white'}`}></div>
-        </div>
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
-          <span className="text-5xl md:text-7xl mb-4 animate-float">📅</span>
-          <h1 className={`text-4xl md:text-6xl font-black mb-3 tracking-tight drop-shadow-xl animate-slideInUp ${isDark ? 'text-white' : 'text-gray-900'}`}>
-            {lang === 'hi' ? 'कल का राशिफल' : 'Yesterday\'s Horoscope'}
-          </h1>
-          <div className="w-20 h-1 bg-amber-500 mt-6 rounded-full"></div>
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-12">
-        {!selectedSign ? (
-          <>
-            {/* Zodiac Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-8">
-              {zodiacSigns.map((sign, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleSignClick(sign.name)}
-                  className={`rounded-2xl border p-4 transition-all duration-300 hover:scale-105 hover:shadow-xl group ${isDark ? 'bg-gray-700/50 backdrop-blur-md border-white/10 hover:border-amber-500/50 hover:shadow-amber-500/20' : 'bg-gray-50 border-gray-200 hover:border-amber-500/50 hover:shadow-amber-500/20'}`}
-                >
-                  <div className="text-center">
-                    <div className="text-3xl mb-2 group-hover:scale-110 transition-transform duration-300">
-                      {sign.symbol}
-                    </div>
-                    <h3 className={`font-bold text-sm mb-1 group-hover:text-amber-500 transition-colors ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                      {lang === 'hi' ? sign.hiName : sign.name}
-                    </h3>
-                    <p className={`text-xs ${isDark ? 'text-white' : 'text-gray-500'}`}>
-                      {sign.dates}
-                    </p>
-                  </div>
-                </button>
-              ))}
+      {/* Hero Content */}
+      <div className="max-w-5xl mx-auto px-4 pt-16 pb-12 text-center">
+        <h1 className={`text-4xl md:text-5xl font-black mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+          {lang === 'hi' ? 'बीता हुआ कल का राशिफल' : "Yesterday's Horoscope"}
+        </h1>
+        <p className={`text-lg mb-8 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+          {lang === 'hi' ? 'अपना बीते हुए कल का राशिफल चेक करें' : 'Check your yesterday\'s horoscope'}
+        </p>
+        
+        <div className="flex justify-center mb-12">
+            <div className="w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center shadow-lg shadow-yellow-400/20 animate-pulse">
+                <span className="text-3xl text-white">⏮️</span>
             </div>
-          </>
-        ) : (
-          /* Detailed Horoscope */
-          <div className={`rounded-2xl border p-8 ${isDark ? 'bg-gray-800/80 backdrop-blur-md border-white/10' : 'bg-gray-50 border-gray-200'}`}>
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center space-x-4">
-                <div className="text-4xl">
-                  {zodiacSigns.find(s => s.name === selectedSign)?.symbol}
-                </div>
-                <div>
-                  <h2 className={`text-2xl font-black ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                    {lang === 'hi' ? zodiacSigns.find(s => s.name === selectedSign)?.hiName : selectedSign}
-                  </h2>
-                  <p className={isDark ? 'text-white' : 'text-gray-500'}>
-                    {lang === 'hi' ? 'कल का राशिफल' : 'Yesterday\'s Horoscope'} - {new Date().toLocaleDateString()}
-                  </p>
-                </div>
+        </div>
+
+        {/* Zodiac Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+          {zodiacSigns.map((sign) => (
+            <div 
+              key={sign.name}
+              className={`flex items-start p-6 rounded-3xl border transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 ${isDark ? 'bg-gray-800/50 border-white/5 hover:border-amber-500/30' : 'bg-white border-gray-100 hover:border-amber-500/30'}`}
+            >
+              <div className={`w-24 h-24 shrink-0 rounded-2xl flex items-center justify-center text-4xl mr-6 ${sign.color} ${sign.textColor} shadow-inner`}>
+                {sign.icon}
               </div>
-              <button
-                onClick={() => setSelectedSign(null)}
-                className={`font-bold py-2 px-4 rounded-xl transition-all ${isDark ? 'bg-slate-700 hover:bg-slate-600 text-white' : 'bg-gray-200 hover:bg-gray-300 text-gray-900'}`}
-              >
-                {lang === 'hi' ? 'दूसरा राशि चुनें' : 'Select Other Sign'}
-              </button>
+              <div className="text-left">
+                <h3 className={`text-xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                  {lang === 'hi' ? sign.hiName : sign.name} {lang === 'hi' ? 'कल का राशिफल' : "Yesterday's Horoscope"}
+                </h3>
+                <p className={`text-sm leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                  {sign.desc}
+                </p>
+              </div>
             </div>
+          ))}
+        </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="space-y-4">
-                <div className={`rounded-xl p-4 ${isDark ? 'bg-gray-700/50' : 'bg-white border border-gray-200'}`}>
-                  <h3 className="text-amber-500 font-bold text-lg mb-2">
-                    {lang === 'hi' ? 'प्रेम और संबंध' : 'Love & Relationships'}
-                  </h3>
-                  <p className={`text-sm ${isDark ? 'text-white' : 'text-gray-700'}`}>
-                    {getHoroscopeData().love}
-                  </p>
-                </div>
+        {/* Article Sections */}
+        <div className="text-left space-y-12 mb-16 px-4">
+          <section>
+            <h2 className={`text-2xl font-black mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              Understanding yesterday's horoscope
+            </h2>
+            <div className={`space-y-4 text-base leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-700'}`}>
+              <p>
+                A yesterday's horoscope offers a valuable opportunity for reflection and integration. By reviewing the celestial influences that affected you in the past 24 hours, you can better understand your reactions and the outcomes of your actions.
+              </p>
+              <p>
+                Self-reflection is a key component of personal growth, and astrology provides a unique framework for analyzing your past experiences and preparing for a more conscious future.
+              </p>
+            </div>
+          </section>
 
-                <div className={`rounded-xl p-4 ${isDark ? 'bg-gray-700/50' : 'bg-white border border-gray-200'}`}>
-                  <h3 className="text-amber-500 font-bold text-lg mb-2">
-                    {lang === 'hi' ? 'व्यक्तिगत जीवन' : 'Personal Life'}
-                  </h3>
-                  <p className={`text-sm ${isDark ? 'text-white' : 'text-gray-700'}`}>
-                    {getHoroscopeData().personal}
-                  </p>
-                </div>
+          <section>
+            <h2 className={`text-2xl font-black mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              How is yesterday's horoscope helpful?
+            </h2>
+            <div className={`space-y-4 text-base leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-700'}`}>
+                <p>
+                    Checking your horoscope for yesterday helps in connecting the dots of your life. It allows you to see the correlations between planetary movements and your daily experiences, fostering a deeper sense of self-awareness.
+                </p>
+                <ul className="list-disc pl-6 space-y-2">
+                    <li>Provides a retrospective look at astrological trends.</li>
+                    <li>Helps in understanding past moods and behaviors.</li>
+                    <li>Identifies missed opportunities for better future planning.</li>
+                    <li>Offers closure and clarity on previous day's events.</li>
+                </ul>
+            </div>
+          </section>
+        </div>
 
-                <div className={`rounded-xl p-4 ${isDark ? 'bg-gray-700/50' : 'bg-white border border-gray-200'}`}>
-                  <h3 className="text-green-500 font-bold text-lg mb-2">
-                    {lang === 'hi' ? 'करियर और वित्त' : 'Career & Finance'}
-                  </h3>
-                  <p className={`text-sm ${isDark ? 'text-white' : 'text-gray-700'}`}>
-                    {getHoroscopeData().career}
-                  </p>
-                </div>
-
-                <div className={`rounded-xl p-4 ${isDark ? 'bg-gray-700/50' : 'bg-white border border-gray-200'}`}>
-                  <h3 className="text-red-500 font-bold text-lg mb-2">
-                    {lang === 'hi' ? 'स्वास्थ्य और कल्याण' : 'Health & Wellness'}
-                  </h3>
-                  <p className={`text-sm ${isDark ? 'text-white' : 'text-gray-700'}`}>
-                    {getHoroscopeData().health}
-                  </p>
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <div className={`rounded-xl p-4 ${isDark ? 'bg-gray-700/50' : 'bg-white border border-gray-200'}`}>
-                  <h3 className="text-purple-500 font-bold text-lg mb-2">
-                    {lang === 'hi' ? 'भावनाएं और मन' : 'Emotions & Mind'}
-                  </h3>
-                  <p className={`text-sm ${isDark ? 'text-white' : 'text-gray-700'}`}>
-                    {getHoroscopeData().emotions}
-                  </p>
-                </div>
-
-                <div className={`rounded-xl p-4 ${isDark ? 'bg-gray-700/50' : 'bg-white border border-gray-200'}`}>
-                  <h3 className="text-yellow-500 font-bold text-lg mb-2">
-                    {lang === 'hi' ? 'भाग्यशाली अंतर्दृष्टि' : 'Lucky Insights'}
-                  </h3>
-                  <p className={`text-sm ${isDark ? 'text-white' : 'text-gray-700'}`}>
-                    {getHoroscopeData().lucky}
-                  </p>
-                </div>
-
-                <div className={`rounded-xl p-4 ${isDark ? 'bg-gray-700/50' : 'bg-white border border-gray-200'}`}>
-                  <h3 className="text-indigo-500 font-bold text-lg mb-2">
-                    {lang === 'hi' ? 'यात्रा और गति' : 'Travel & Movement'}
-                  </h3>
-                  <p className={`text-sm ${isDark ? 'text-white' : 'text-gray-700'}`}>
-                    {getHoroscopeData().travel}
-                  </p>
-                </div>
-
-                <div className={`rounded-xl p-4 ${isDark ? 'bg-gray-700/50' : 'bg-white border border-gray-200'}`}>
-                  <h3 className="text-orange-500 font-bold text-lg mb-2">
-                    {lang === 'hi' ? 'उपाय' : 'Remedies'}
-                  </h3>
-                  <p className={`text-sm ${isDark ? 'text-white' : 'text-gray-700'}`}>
-                    {getHoroscopeData().remedies}
-                  </p>
-                </div>
-              </div>
+        {/* FAQ Section */}
+        <section className={`text-left p-8 rounded-3xl ${isDark ? 'bg-gray-800/40 border border-white/5' : 'bg-white border border-gray-100'}`}>
+          <h2 className={`text-2xl font-black mb-8 text-center ${isDark ? 'text-white' : 'text-gray-900'}`}>
+            FAQS YESTERDAY'S HOROSCOPE
+          </h2>
+          <div className="space-y-6">
+            <div>
+              <h4 className={`font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                Why is it important to reflect on yesterday's horoscope?
+              </h4>
+              <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                Reflecting on the past helps you recognize patterns in your life and the celestial influences at play. It's a tool for learning from experience and making more informed choices today.
+              </p>
+            </div>
+            <div>
+              <h4 className={`font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                Can yesterday's horoscope help me resolve today's issues?
+              </h4>
+              <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                Yes, by understanding the roots of yesterday's events, you can gain clarity on how to handle their repercussions today. It provides a context that can be very helpful for problem-solving.
+              </p>
             </div>
           </div>
-        )}
+        </section>
       </div>
     </div>
   );

@@ -66,7 +66,7 @@ export default function PanchangPage({
               <span className="absolute left-5 top-1/2 -translate-y-1/2 text-xl opacity-50">📍</span>
             </div>
             <button className={`px-8 py-4 rounded-2xl font-black text-lg transition-all active:scale-95 shadow-lg ${
-              isDark ? 'bg-amber-600 hover:bg-amber-700 text-gray-900' : 'bg-[#0a4f23] hover:bg-[#083f1d] text-white'
+              isDark ? 'bg-amber-600 hover:bg-amber-700 text-gray-900' : 'bg-white/80 hover:bg-green-600 text-pure-white'
             }`}>
               {lang === 'hi' ? 'पंचांग प्राप्त करें' : 'Get Panchang'}
             </button>
