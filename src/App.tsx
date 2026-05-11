@@ -23,6 +23,7 @@ import TomorrowHoroscope from './components/TomorrowHoroscope';
 import YesterdayHoroscope from './components/YesterdayHoroscope';
 import ChineseHoroscope from './components/ChineseHoroscope';
 import BestAstrologers from './components/BestAstrologers';
+import PanchangPage from './components/PanchangPage';
 import ChatWithAstrologer from './components/ChatWithAstrologer';
 import TalkToAstrologer from './components/TalkToAstrologer';
 import ThemeToggle from './components/ThemeToggle';
@@ -1242,6 +1243,7 @@ function App() {
   const [isRudrakshaOpen, setIsRudrakshaOpen] = useState(false);
   const [isBraceletsOpen, setIsBraceletsOpen] = useState(false);
   const [isShopNowOpen, setIsShopNowOpen] = useState(false);
+  const [isPanchangOpen, setIsPanchangOpen] = useState(false);
 
   const t = translations[lang];
 
@@ -1346,9 +1348,11 @@ function App() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
     (window as any).__blogs = () => {
-
       setActiveInfoPage('blogs');
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+    (window as any).__panchang = () => {
+      setIsPanchangOpen(true);
     };
   }, []);
 
@@ -1413,6 +1417,8 @@ function App() {
         <InformationPage isOpen={activeInfoPage === 'returns'} onClose={() => setActiveInfoPage(null)} page="returns" />
         <InformationPage isOpen={activeInfoPage === 'terms'} onClose={() => setActiveInfoPage(null)} page="terms" />
         <InformationPage isOpen={activeInfoPage === 'policy'} onClose={() => setActiveInfoPage(null)} page="policy" />
+
+        <PanchangPage isOpen={isPanchangOpen} onClose={() => setIsPanchangOpen(false)} />
 
 
 

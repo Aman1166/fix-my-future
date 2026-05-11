@@ -127,7 +127,7 @@ export default function TalkToAstrologer({
   if (!isOpen) return null;
 
   return (
-    <div className={`fixed inset-0 z-[64] overflow-y-auto ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
+    <div className={`fixed inset-0 z-64 overflow-y-auto ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
       <button
         onClick={onClose}
         className="fixed top-6 right-6 z-30 w-12 h-12 bg-gray-800/80 backdrop-blur-md border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-gray-700 transition-all shadow-xl hover:scale-110 active:scale-95"
@@ -139,7 +139,7 @@ export default function TalkToAstrologer({
 
       <div className="relative h-[32vh] md:h-[40vh] overflow-hidden">
         <div className="absolute inset-0 bg-[url('/astro/g.jpeg')] bg-cover bg-center">
-          <div className="absolute inset-0 bg-gradient-to-b from-gray-800/60 via-gray-950/40 to-gray-900"></div>
+          <div className="absolute inset-0 bg-linear-to-b from-gray-800/60 via-gray-950/40 to-gray-900"></div>
         </div>
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
           <span className="text-5xl md:text-7xl mb-4 animate-float">📞</span>
@@ -251,7 +251,7 @@ export default function TalkToAstrologer({
 
               <button
                 onClick={() => handleCall(astrologer)}
-                className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-xl hover:shadow-green-500/30 flex items-center justify-center space-x-2"
+                className="w-full bg-linear-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-xl hover:shadow-green-500/30 flex items-center justify-center space-x-2"
               >
                 <span>📞</span>
                 <span>{lang === 'hi' ? 'कॉल करें' : 'Call Now'}</span>

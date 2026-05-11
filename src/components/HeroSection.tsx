@@ -79,36 +79,44 @@ function CardsOrbit() {
   const { isDark } = useContext(ThemeContext);
   const groupRef = useRef<THREE.Group>(null);
   const cardRefs = useRef<(THREE.Mesh | null)[]>([]);
-  const [open, setOpen] = useState(false);
+  const [hovered, setHovered] = useState<number | null>(null);
 
   const images = useMemo(
     () => isDark ? [
-      "/astro/CARD 1.jpg.jpeg",
-      "/astro/CARD 2.jpg.jpeg",
-      "/astro/CARD 3.jpg.jpeg",
-      "/astro/CARD 4.jpg.jpeg",
-      "/astro/CARD 5.jpg.jpeg",
-      "/astro/CARD 6.jpg.jpeg",
+      "/astro/CARD 2.jpg.jpeg", // Free Kundli
+      "/astro/CARD 4.jpg.jpeg", // Kundli Matching
+      "/astro/CARD 3.jpg.jpeg", // Compatibility
+      "/astro/CARD 1.jpg.jpeg", // Daily Horoscope
+      "/astro/CARD 5.jpg.jpeg", // Chinese Horoscope
+      "/astro/CARD 6.jpg.jpeg", // Today's Panchang
     ] : [
-      "/astro/light/CARD1.jpeg",
-      "/astro/light/CARD2.jpeg",
-      "/astro/light/CARD3.jpeg",
-      "/astro/light/CARD4.jpeg",
-      "/astro/light/CARD5.jpeg",
-      "/astro/light/CARD6.jpeg",
+      "/astro/light/CARD3.jpeg", // Free Kundli
+      "/astro/light/CARD2.jpeg", // Kundli Matching
+      "/astro/light/CARD4.jpeg", // Compatibility
+      "/astro/light/CARD1.jpeg", // Daily Horoscope
+      "/astro/light/CARD5.jpeg", // Chinese Horoscope
+      "/astro/light/CARD6.jpeg", // Today's Panchang
     ],
     [isDark]
   );
 
   const textures = useLoader(TextureLoader, images);
+  const radius = 3.2;
+  const scale = 0.9;
 
-  const radius = open ? 5 : 3;
-  const scale = open ? 1.6 : 0.8;
+  const handlers = [
+    () => (window as any).__freeKundli?.(),
+    () => (window as any).__kundliMatching?.(),
+    () => (window as any).__compatibility?.(),
+    () => (window as any).__horoscopesDaily?.(),
+    () => (window as any).__horoscopesChinese?.(),
+    () => (window as any).__panchang?.(),
+  ];
 
   const cardGeometry = useMemo(() => createRoundedPlane(1.3, 2.4, 0.12), []);
 
   useFrame(({ camera }) => {
-    if (groupRef.current && !open) {
+    if (groupRef.current) {
       groupRef.current.rotation.y += 0.003;
     }
     cardRefs.current.forEach((card) => {
@@ -122,7 +130,6 @@ function CardsOrbit() {
     <group
       ref={groupRef}
       position={[0, -0.4, 0]}
-      onClick={() => setOpen(!open)}
     >
       {textures.map((texture, index) => {
         const angle = (index / textures.length) * Math.PI * 2;
@@ -135,12 +142,26 @@ function CardsOrbit() {
             ref={(el: THREE.Mesh | null) => { cardRefs.current[index] = el; }}
             position={[x, 0, z]}
             scale={[scale, scale, scale]}
+            onClick={(e) => {
+              e.stopPropagation();
+              console.log(`CARD_CLICK_DEBUG: index=${index}, path=${images[index]}`);
+              handlers[index]?.();
+            }}
+            onPointerOver={() => {
+              setHovered(index);
+              document.body.style.cursor = 'pointer';
+            }}
+            onPointerOut={() => {
+              setHovered(null);
+              document.body.style.cursor = 'auto';
+            }}
           >
             <primitive object={cardGeometry} attach="geometry" />
             <meshBasicMaterial
               map={texture}
               side={THREE.DoubleSide}
               transparent
+              opacity={hovered === index ? 1 : 0.9}
             />
           </mesh>
         );
@@ -219,7 +240,7 @@ export default function HeroSection({ onShopNow }: { onShopNow?: () => void }) {
           
         </p>
         <p className="text-slate-400 text-[10px] tracking-widest uppercase font-bold animate-pulse mb-4">
-          Click on cards to expand ✦
+          Click on cards to explore ✦
         </p>
         <div className="pointer-events-auto mt-116">
           <button onClick={onShopNow} className="group relative bg-amber-50 outline-4 outline-green-800 px-6 py-2 rounded-full overflow-hidden transition-all duration-300 transform hover:scale-105 shadow-2xl shadow-amber-600-500/30 active:scale-95">

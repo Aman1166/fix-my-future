@@ -144,7 +144,7 @@ export default function BestAstrologers({
   if (!isOpen) return null;
 
   return (
-    <div className={`fixed inset-0 z-[64] overflow-y-auto ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
+    <div className={`fixed inset-0 z-64 overflow-y-auto ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
       <button
         onClick={onClose}
         className="fixed top-6 right-6 z-30 w-12 h-12 bg-gray-800/80 backdrop-blur-md border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-gray-700 transition-all shadow-xl hover:scale-110 active:scale-95"
@@ -156,7 +156,7 @@ export default function BestAstrologers({
 
       <div className="relative h-[32vh] md:h-[40vh] overflow-hidden">
         <div className="absolute inset-0 bg-[url('/astro/g.jpeg')] bg-cover bg-center">
-          <div className="absolute inset-0 bg-gradient-to-b from-gray-800/60 via-gray-950/40 to-gray-900"></div>
+          <div className="absolute inset-0 bg-linear-to-b from-gray-800/60 via-gray-950/40 to-gray-900"></div>
         </div>
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
           <span className="text-5xl md:text-7xl mb-4 animate-float text-amber-500"><i className="fa-solid fa-wand-magic-sparkles"></i></span>
@@ -187,7 +187,7 @@ export default function BestAstrologers({
             </div>
             <button
               onClick={handleRecharge}
-              className="bg-gradient-to-r from-amber-500 to-amber-600-500 hover:from-amber-600 hover:to-amber-600-600 text-gray-800 font-bold py-3 px-6 rounded-xl transition-all shadow-xl hover:shadow-amber-500/30"
+              className="bg-linear-to-r from-amber-500 to-amber-600-500 hover:from-amber-600 hover:to-amber-600-600 text-gray-800 font-bold py-3 px-6 rounded-xl transition-all shadow-xl hover:shadow-amber-500/30"
             >
               {lang === 'hi' ? 'रिचार्ज करें' : 'Recharge'}
             </button>
@@ -309,7 +309,7 @@ export default function BestAstrologers({
 
               <button
                 onClick={() => handleCall(astrologer)}
-                className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-xl hover:shadow-green-500/30 flex items-center justify-center space-x-2"
+                className="w-full bg-linear-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-xl hover:shadow-green-500/30 flex items-center justify-center space-x-2"
               >
                 <span><i className="fa-solid fa-phone"></i></span>
                 <span>{lang === 'hi' ? 'कॉल करें' : 'Call Now'}</span>

@@ -47,13 +47,13 @@ function CategoryProductCard({ product, showCarat = false }: { product: Product;
       onMouseLeave={() => setIsHovered(false)}
       className="group glass-strong rounded-2xl shadow-xl hover:shadow-2xl border border-amber-600/20 hover:border-amber-600/40 transition-all duration-500 flex flex-col overflow-hidden hover-3d cursor-pointer"
     >
-      <div className="relative overflow-hidden aspect-square bg-gradient-to-br from-gray-800 to-gray-800">
+      <div className="relative overflow-hidden aspect-square bg-linear-to-br from-gray-800 to-gray-800">
         <img
           src={product.image}
           alt={product.name}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-800/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div className="absolute inset-0 bg-linear-to-t from-gray-800/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
         {/* Badges */}
         {showCarat && product.carat && (
@@ -80,7 +80,7 @@ function CategoryProductCard({ product, showCarat = false }: { product: Product;
         </div>
       </div>
 
-      <div className="p-4 flex-1 flex flex-col justify-between bg-gradient-to-b from-transparent to-gray-800/50">
+      <div className="p-4 flex-1 flex flex-col justify-between bg-linear-to-b from-transparent to-gray-800/50">
         <div>
           {/* Stars */}
           <div className="flex items-center mb-2">
@@ -129,9 +129,9 @@ function SectionHeader({ title, subtitle }: { title: string; subtitle?: string }
         </p>
       )}
       <div className="flex items-center justify-center space-x-1 mt-6">
-        <div className="w-12 h-0.5 bg-gradient-to-r from-transparent to-amber-600-400 rounded-full"></div>
+        <div className="w-12 h-0.5 bg-linear-to-r from-transparent to-amber-600-400 rounded-full"></div>
         <span className="text-amber-600 text-[8px] transform rotate-45">◆</span>
-        <div className="w-12 h-0.5 bg-gradient-to-l from-transparent to-amber-600-400 rounded-full"></div>
+        <div className="w-12 h-0.5 bg-linear-to-l from-transparent to-amber-600-400 rounded-full"></div>
       </div>
     </div>
   );
@@ -166,7 +166,7 @@ const CategoryPage: React.FC<CategoryPageProps> = ({
   categoryIcon,
   products
 }) => {
-  const { lang, t } = useContext(LanguageContext);
+  const { lang } = useContext(LanguageContext);
 
   if (!isOpen) return null;
 
