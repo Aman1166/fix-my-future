@@ -110,6 +110,7 @@ const braceletProducts: CategoryProduct[] = [
 // CTA Buttons Component
 function CTAButtons() {
   const { lang } = useContext(LanguageContext);
+  const { isDark } = useContext(ThemeContext);
 
   const ctaCards = [
     {
@@ -136,7 +137,7 @@ function CTAButtons() {
   ];
 
   return (
-    <section className="py-12 md:py-16 bg-gray-800 text-white">
+    <section className={`py-12 md:py-16 ${isDark ? 'bg-gray-800 text-white' : 'glass-strong border-y border-[#083f1d]/15 text-[#083f1d]'}`}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-8">
           <h2 className="text-2xl md:text-3xl font-black text-gray-100 mb-4 gradient-text-strong">
@@ -156,7 +157,7 @@ function CTAButtons() {
             >
               {/* Icon Section */}
               <div className="flex items-center justify-center p-6">
-                <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-amber-600-500/20 to-amber-600-600/20 rounded-2xl flex items-center justify-center text-4xl md:text-5xl shadow-inner border border-amber-600/30 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 text-amber-600 group-hover:neon-glow">
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-linear-to-br from-amber-600-500/20 to-amber-600-600/20 rounded-2xl flex items-center justify-center text-4xl md:text-5xl shadow-inner border border-amber-600/30 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 text-amber-600 group-hover:neon-glow">
                   {card.icon}
                 </div>
               </div>
@@ -243,7 +244,7 @@ function Header() {
           {/* Logo Home Button */}
           <button
             onClick={() => (window as any).__goHome?.()}
-            className="flex items-center space-x-2 flex-shrink-0 hover:scale-105 transition-transform duration-300 group"
+            className="flex items-center space-x-2 shrink-0 hover:scale-105 transition-transform duration-300 group"
           >
             <span className="text-2xl md:text-3xl animate-float neon-glow group-hover:scale-110 text-amber-500"><i className="fa-solid fa-gem"></i></span>
             <span className="text-sm md:text-lg font-black gradient-text-strong whitespace-nowrap">{t.brandName}</span>
@@ -286,7 +287,7 @@ function Header() {
           </nav>
 
           {/* Right Icons */}
-          <div className="flex items-center space-x-2 flex-shrink-0">
+          <div className="flex items-center space-x-2 shrink-0">
             {/* Search Button */}
             <button onClick={() => (window as any).__setSearch(true)} className={`relative p-2.5 md:p-3 rounded-xl transition-all duration-300 hover:scale-110 active:scale-95 ${isDark ? 'text-slate-300 hover:text-amber-400 hover:bg-amber-700/15' : 'text-gray-700 hover:text-amber-600 hover:bg-amber-100'}`}>
               <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -366,6 +367,7 @@ function Header() {
 function VideoSection() {
   const [activeVideo, setActiveVideo] = useState(0);
   const { t, lang } = useContext(LanguageContext);
+  const { isDark } = useContext(ThemeContext);
 
   const videos = [
     {
@@ -435,8 +437,8 @@ function VideoSection() {
               </div>
             </div>
 
-            <div className="p-6 bg-gradient-to-b from-transparent to-gray-800/50">
-              <span className="text-sm font-bold text-amber-600 tracking-wider uppercase">{videos[activeVideo].type}</span>
+            <div className="p-6 bg-linear-to-b from-transparent to-gray-800/50">
+              <span className={`text-sm font-bold tracking-wider uppercase ${isDark ? 'text-amber-600' : 'bg-emerald-700 text-white px-3 py-1 rounded-full'}`}>{videos[activeVideo].type}</span>
               <h3 className="text-2xl font-bold mt-1 mb-3 text-gray-100">{videos[activeVideo].title}</h3>
               <p className="text-slate-300 leading-relaxed">{videos[activeVideo].description}</p>
             </div>
@@ -455,7 +457,7 @@ function VideoSection() {
                 onClick={() => setActiveVideo(index)}
                 className={`w-full flex items-center p-3 rounded-xl transition-all border text-left hover-3d ${index === activeVideo ? 'glass-strong border-amber-600 shadow-lg shadow-amber-600-500/10' : 'glass border-amber-600/20 hover:border-amber-600/40'}`}
               >
-                <div className="relative w-24 h-16 rounded-lg overflow-hidden flex-shrink-0">
+                <div className="relative w-24 h-16 rounded-lg overflow-hidden shrink-0">
                   <img src={video.thumbnail} alt={video.title} className="w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
                     <div className={`w-6 h-6 rounded-full flex items-center justify-center ${index === activeVideo ? 'bg-amber-700' : 'bg-slate-400/50 backdrop-blur-sm'}`}>
@@ -470,7 +472,7 @@ function VideoSection() {
                 </div>
 
                 <div className="ml-4 flex-1">
-                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase ${index === activeVideo ? 'bg-amber-700 text-white' : 'bg-slate-700 text-slate-300'}`}>
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase ${isDark ? (index === activeVideo ? 'bg-amber-700 text-white' : 'bg-slate-700 text-slate-300') : 'bg-emerald-100 text-emerald-800 border border-emerald-200'}`}>
                     {video.type}
                   </span>
                   <h4 className={`font-semibold text-sm mt-1 line-clamp-1 ${index === activeVideo ? 'text-amber-600' : 'text-gray-200'}`}>
@@ -499,6 +501,7 @@ function VideoSection() {
 // Astrologer Section Component
 function AstrologerSection() {
   const { t, lang } = useContext(LanguageContext);
+  const { isDark } = useContext(ThemeContext);
   const [selectedAstro, setSelectedAstro] = useState<Astrologer | null>(null);
   const [walletBalance, setWalletBalance] = useState(0);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
@@ -617,9 +620,9 @@ function AstrologerSection() {
   return (
     <section id="astrologers" className="py-20 bg-gray-800 text-white relative overflow-hidden">
       {/* Astrological Background Elements */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-950/40 via-gray-950 to-gray-900 z-0"></div>
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-amber-500/20 to-transparent"></div>
-      <div className="absolute inset-0 z-0 opacity-20 mix-blend-screen pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] bg-[size:30px_30px]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))] from-gray-950/40 via-gray-950 to-gray-900 z-0"></div>
+      <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-amber-500/20 to-transparent"></div>
+      <div className="absolute inset-0 z-0 opacity-20 mix-blend-screen pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] bg-size-[30px_30px]"></div>
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
@@ -662,7 +665,7 @@ function AstrologerSection() {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-5 py-2.5 rounded-xl font-bold text-xs tracking-wider uppercase transition-all border shadow-lg ${activeTab === tab.id ? 'bg-gradient-to-r from-amber-500 to-amber-600-500 text-gray-800 font-black border-amber-400 shadow-amber-500/20' : 'bg-gray-800/60 backdrop-blur-sm border-gray-800 text-gray-300 hover:bg-gray-700 hover:border-gray-700'}`}
+              className={`px-5 py-2.5 rounded-xl font-bold text-xs tracking-wider uppercase transition-all border shadow-lg ${activeTab === tab.id ? 'bg-linear-to-r from-amber-500 to-amber-600-500 text-gray-800 font-black border-amber-400 shadow-amber-500/20' : 'bg-gray-800/60 backdrop-blur-sm border-gray-800 text-gray-300 hover:bg-gray-700 hover:border-gray-700'}`}
             >
               {tab.label}
             </button>
@@ -670,20 +673,20 @@ function AstrologerSection() {
         </div>
 
         {/* Wallet Balance Display - Glassmorphic */}
-        <div className="max-w-4xl mx-auto bg-gradient-to-r from-gray-800/80 to-gray-950/50 backdrop-blur-md p-5 rounded-2xl shadow-2xl mb-12 flex flex-wrap items-center justify-between border border-white/10 relative group">
-          <div className="absolute inset-0 bg-gradient-to-r from-amber-500/5 to-transparent rounded-2xl pointer-events-none"></div>
+        <div className={`max-w-4xl mx-auto p-5 rounded-2xl shadow-2xl mb-12 flex flex-wrap items-center justify-between border relative group overflow-hidden ${isDark ? 'bg-linear-to-r from-gray-800/80 to-gray-950/50 backdrop-blur-md border-white/10' : 'bg-white border-gray-200'}`}>
+          <div className="absolute inset-0 bg-linear-to-r from-amber-500/5 to-transparent rounded-2xl pointer-events-none"></div>
           <div className="flex items-center space-x-4 mb-3 sm:mb-0 relative z-10">
-            <div className="w-14 h-14 bg-gradient-to-br from-amber-500 to-amber-600 rounded-xl flex items-center justify-center text-3xl shadow-xl shadow-amber-500/20 group-hover:scale-105 transition-transform text-gray-800">
+            <div className="w-14 h-14 bg-linear-to-br from-amber-500 to-amber-600 rounded-xl flex items-center justify-center text-3xl shadow-xl shadow-amber-500/20 group-hover:scale-105 transition-transform text-gray-800">
               <i className="fa-solid fa-wallet"></i>
             </div>
             <div>
-              <p className="text-[10px] text-amber-500 font-bold uppercase tracking-widest">{t.astroMeta.walletText}</p>
-              <p className="text-3xl font-black text-white">₹{walletBalance}</p>
+              <p className={`text-[10px] font-bold uppercase tracking-widest ${isDark ? 'text-amber-500' : 'text-emerald-700'}`}>{t.astroMeta.walletText}</p>
+              <p className={`text-3xl font-black ${isDark ? 'text-white' : 'text-emerald-900'}`}>₹{walletBalance}</p>
             </div>
           </div>
           <button 
             onClick={() => { setSelectedAstro(null); setShowPaymentModal(true); }}
-            className="relative z-10 px-5 py-3 bg-gradient-to-r from-amber-500 to-amber-600 text-gray-800 text-xs font-black uppercase rounded-xl shadow-xl shadow-amber-500/10 hover:shadow-amber-500/20 transition-all flex items-center space-x-2 group active:scale-95"
+            className={`relative z-10 px-5 py-3 bg-linear-to-r from-amber-500 to-amber-600 text-white text-xs font-black uppercase rounded-xl shadow-xl shadow-amber-500/10 hover:shadow-amber-500/20 transition-all flex items-center space-x-2 group active:scale-95`}
           >
             <span className="text-lg"><i className="fa-solid fa-plus"></i></span>
             <span>{t.astroMeta.rechargeText}</span>
@@ -698,12 +701,12 @@ function AstrologerSection() {
               className={`bg-gray-800/60 backdrop-blur-md rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 border overflow-hidden flex flex-col group relative ${astro.online && !astro.busy ? 'border-green-500/20 hover:border-green-500/40' : 'border-gray-800 hover:border-gray-700'}`}
             >
               {/* Card background glowing gradient */}
-              <div className={`absolute inset-0 bg-gradient-to-b opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 ${astro.online && !astro.busy ? 'from-green-500/5 to-transparent' : 'from-amber-500/5 to-transparent'}`}></div>
+              <div className={`absolute inset-0 bg-linear-to-b opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 ${astro.online && !astro.busy ? 'from-green-500/5 to-transparent' : 'from-amber-500/5 to-transparent'}`}></div>
 
               {/* Top Section */}
               <div className="p-6 flex items-start space-x-4 flex-1 relative z-10">
-                <div className="relative flex-shrink-0">
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-amber-500 to-amber-600-500 opacity-20 blur-md group-hover:opacity-40 transition-opacity"></div>
+                <div className="relative shrink-0">
+                  <div className="absolute inset-0 rounded-2xl bg-linear-to-br from-amber-500 to-amber-600-500 opacity-20 blur-md group-hover:opacity-40 transition-opacity"></div>
                   <img src={astro.image} alt={astro.name} className="relative w-24 h-24 rounded-2xl object-cover border-2 border-white/10 shadow-lg group-hover:scale-105 transition-transform duration-300" />
                   
                   {astro.online && (
@@ -712,7 +715,7 @@ function AstrologerSection() {
                     </span>
                   )}
                   
-                  <div className="absolute top-0 left-0 bg-gradient-to-r from-amber-500 to-amber-600-500 text-gray-800 text-[10px] font-black px-2 py-0.5 rounded-br-lg rounded-tl-xl shadow-lg">
+                  <div className="absolute top-0 left-0 bg-linear-to-r from-amber-500 to-amber-600-500 text-gray-800 text-[10px] font-black px-2 py-0.5 rounded-br-lg rounded-tl-xl shadow-lg">
                     ★ {astro.rating}
                   </div>
                 </div>
@@ -745,7 +748,7 @@ function AstrologerSection() {
               {/* Bottom Price & Call Section */}
               <div className="bg-gray-800/80 border-t border-white/5 p-4 flex items-center justify-between relative z-10 backdrop-blur-sm">
                 <div>
-                  <span className="text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-amber-600-400 tracking-tight">₹{astro.price}</span>
+                  <span className="text-2xl font-black bg-clip-text text-transparent bg-linear-to-r from-amber-400 to-amber-600-400 tracking-tight">₹{astro.price}</span>
                   <span className="text-gray-400 text-[10px] font-bold">/{lang === 'hi' ? 'मिनट' : 'min'}</span>
                 </div>
                 
@@ -762,7 +765,7 @@ function AstrologerSection() {
                   <button 
                     disabled={!astro.online}
                     onClick={() => handleConsultation(astro)}
-                    className={`px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider shadow-xl flex items-center space-x-1.5 transition-all active:scale-95 ${!astro.online ? 'bg-gray-700 text-stone-600 cursor-not-allowed border border-gray-700' : astro.busy ? 'bg-indigo-900 border border-indigo-500/30 text-indigo-300 hover:bg-indigo-800 shadow-indigo-500/10' : 'bg-gradient-to-r from-amber-500 to-amber-600-500 text-gray-800 hover:from-amber-400 hover:to-amber-600-400 shadow-amber-500/10 hover:shadow-amber-500/30'}`}
+                    className={`px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider shadow-xl flex items-center space-x-1.5 transition-all active:scale-95 ${!astro.online ? 'bg-gray-700 text-stone-600 cursor-not-allowed border border-gray-700' : astro.busy ? 'bg-indigo-900 border border-indigo-500/30 text-indigo-300 hover:bg-indigo-800 shadow-indigo-500/10' : 'bg-linear-to-r from-amber-500 to-amber-600-500 text-gray-800 hover:from-amber-400 hover:to-amber-600-400 shadow-amber-500/10 hover:shadow-amber-500/30'}`}
                   >
                     <span>📞</span>
                     <span>{astro.busy ? (lang === 'hi' ? 'कतार' : 'Queue') : t.astroMeta.callBtn}</span>
@@ -776,31 +779,31 @@ function AstrologerSection() {
         {/* Recharge / Consultation Popup Modal - Premium Glass Dark */}
         {showPaymentModal && (
           <div className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4">
-            <div className="fixed inset-0 bg-gray-800/80 backdrop-blur-sm" onClick={() => setShowPaymentModal(false)}></div>
+            <div className={`fixed inset-0 ${isDark ? 'bg-gray-800/80' : 'bg-gray-900/40'} backdrop-blur-sm`} onClick={() => setShowPaymentModal(false)}></div>
             
-            <div className="relative bg-gray-800 w-full max-w-md rounded-2xl shadow-2xl border border-white/10 overflow-hidden animate-fadeIn text-white">
+            <div className={`relative w-full max-w-md rounded-2xl shadow-2xl border overflow-hidden animate-fadeIn ${isDark ? 'bg-gray-800 border-white/10 text-white' : 'bg-white border-gray-100 text-gray-900'}`}>
               {/* Modal Header */}
-              <div className="bg-gradient-to-r from-gray-800 via-gray-950 to-gray-900 p-5 text-center relative border-b border-white/10">
+              <div className={`p-5 text-center relative border-b ${isDark ? 'bg-linear-to-r from-gray-800 via-gray-950 to-gray-900 border-white/10' : 'bg-gray-50 border-gray-100'}`}>
                 <button 
                   onClick={() => setShowPaymentModal(false)}
-                  className="absolute right-4 top-4 text-gray-400 hover:text-white transition-colors text-xl font-bold"
+                  className={`absolute right-4 top-4 transition-colors text-xl font-bold ${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-400 hover:text-gray-900'}`}
                 >
                   ✕
                 </button>
-                <div className="text-amber-500 text-xs font-bold tracking-[0.2em] mb-1">✦ ASTRO CONSULTATION ✦</div>
-                <h3 className="text-xl font-black bg-clip-text text-transparent bg-gradient-to-r from-white via-stone-200 to-amber-200">
+                <div className="text-amber-600 text-xs font-bold tracking-[0.2em] mb-1">✦ ASTRO CONSULTATION ✦</div>
+                <h3 className={`text-xl font-black ${isDark ? 'bg-clip-text text-transparent bg-linear-to-r from-white via-stone-200 to-amber-200' : 'text-emerald-900'}`}>
                   {selectedAstro ? t.astroMeta.initConsult : t.astroMeta.rechargeTitle}
                 </h3>
-                <p className="text-[10px] text-gray-400 mt-1.5 flex items-center justify-center"><span className="text-green-400 mr-1">🔒</span> {t.astroMeta.secureConnection}</p>
+                <p className="text-[10px] text-gray-400 mt-1.5 flex items-center justify-center"><span className="text-green-500 mr-1">🔒</span> {t.astroMeta.secureConnection}</p>
               </div>
 
               {selectedAstro && (
-                <div className="p-4 bg-gray-800/50 border-b border-white/5 flex items-center space-x-4">
+                <div className={`p-4 border-b flex items-center space-x-4 ${isDark ? 'bg-gray-800/50 border-white/5' : 'bg-white border-gray-100'}`}>
                   <img src={selectedAstro.image} alt={selectedAstro.name} className="w-14 h-14 rounded-full object-cover border-2 border-amber-500/50 shadow-lg" />
                   <div>
-                    <h4 className="font-black text-white text-base tracking-tight">{selectedAstro.name}</h4>
-                    <p className="text-xs text-amber-500 font-extrabold flex items-center mt-0.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-amber-400 mr-1.5 animate-pulse"></span>
+                    <h4 className={`font-black text-base tracking-tight ${isDark ? 'text-white' : 'text-emerald-900'}`}>{selectedAstro.name}</h4>
+                    <p className="text-xs text-amber-600 font-extrabold flex items-center mt-0.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500 mr-1.5 animate-pulse"></span>
                       {lang === 'hi' ? 'परामर्श शुल्क' : 'Session Charges'}: ₹{selectedAstro.price}/{lang === 'hi' ? 'मिनट' : 'min'}
                     </p>
                   </div>
@@ -815,17 +818,17 @@ function AstrologerSection() {
                     <div className="w-20 h-20 bg-green-500/20 text-green-400 border border-green-500/30 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl animate-float">
                       📞
                     </div>
-                    <h4 className="text-xl font-black text-white mb-2 tracking-tight">{t.astroMeta.connecting} {selectedAstro.name}...</h4>
-                    <p className="text-xs text-gray-400 mb-6 leading-relaxed px-4">{t.astroMeta.sufficientBalanceDesc} {t.astroMeta.estTalkTime} <strong className="text-amber-500 bg-amber-400/10 px-1.5 py-0.5 rounded ml-1">{Math.floor(walletBalance / selectedAstro.price)} {t.astroMeta.minutes}</strong>.</p>
+                    <h4 className={`text-xl font-black mb-2 tracking-tight ${isDark ? 'text-white' : 'text-emerald-900'}`}>{t.astroMeta.connecting} {selectedAstro.name}...</h4>
+                    <p className="text-xs text-gray-400 mb-6 leading-relaxed px-4">{t.astroMeta.sufficientBalanceDesc} {t.astroMeta.estTalkTime} <strong className="text-amber-600 bg-amber-400/10 px-1.5 py-0.5 rounded ml-1">{Math.floor(walletBalance / selectedAstro.price)} {t.astroMeta.minutes}</strong>.</p>
                     
-                    <div className="p-4 bg-gray-800/60 rounded-xl border border-white/5 text-left mb-6">
+                    <div className={`p-4 rounded-xl border text-left mb-6 ${isDark ? 'bg-gray-800/60 border-white/5' : 'bg-gray-50 border-gray-100'}`}>
                       <div className="flex justify-between text-xs mb-2">
                         <span className="text-gray-400 font-medium">{lang === 'hi' ? 'वॉलेट बैलेंस' : 'Wallet Balance'}:</span>
-                        <span className="font-black text-white">₹{walletBalance}</span>
+                        <span className={`font-black ${isDark ? 'text-white' : 'text-emerald-900'}`}>₹{walletBalance}</span>
                       </div>
-                      <div className="flex justify-between text-xs pt-2 border-t border-white/5">
+                      <div className={`flex justify-between text-xs pt-2 border-t ${isDark ? 'border-white/5' : 'border-gray-200'}`}>
                         <span className="text-gray-400 font-medium">{lang === 'hi' ? 'ज्योतिषी शुल्क' : 'Astrologer Charge'}:</span>
-                        <span className="font-black text-red-400">₹{selectedAstro.price}/{lang === 'hi' ? 'मिनट' : 'min'}</span>
+                        <span className="font-black text-red-500">₹{selectedAstro.price}/{lang === 'hi' ? 'मिनट' : 'min'}</span>
                       </div>
                     </div>
 
@@ -839,7 +842,7 @@ function AstrologerSection() {
                         );
                         setShowPaymentModal(false);
                       }}
-                      className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-black py-3.5 rounded-xl shadow-lg shadow-green-500/20 active:scale-98 transition-all flex items-center justify-center space-x-2 text-sm tracking-widest uppercase"
+                      className="w-full bg-linear-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-black py-3.5 rounded-xl shadow-lg shadow-green-500/20 active:scale-98 transition-all flex items-center justify-center space-x-2 text-sm tracking-widest uppercase"
                     >
                       <span>📞 {t.astroMeta.startCall}</span>
                     </button>
@@ -862,11 +865,11 @@ function AstrologerSection() {
                         <button
                           key={amt}
                           onClick={() => setRechargeAmount(amt)}
-                          className={`p-3 rounded-xl border-2 font-black text-base transition-all text-center flex flex-col items-center justify-center relative ${rechargeAmount === amt ? 'border-amber-500 bg-amber-700/10 text-amber-500 shadow-xl shadow-amber-500/10' : 'border-white/10 text-gray-400 bg-gray-800/40 hover:border-white/20'}`}
+                          className={`p-3 rounded-xl border-2 font-black text-base transition-all text-center flex flex-col items-center justify-center relative ${rechargeAmount === amt ? 'border-amber-600 bg-amber-600/10 text-amber-600 shadow-xl shadow-amber-600/10' : (isDark ? 'border-white/10 text-gray-400 bg-gray-800/40 hover:border-white/20' : 'border-gray-200 text-gray-500 bg-gray-50 hover:border-amber-400')}`}
                         >
                           <span>₹{amt}</span>
                           {amt >= 500 && (
-                            <span className="text-[8px] bg-gradient-to-r from-green-500 to-emerald-500 text-gray-800 px-1.5 rounded-full mt-1.5 font-black uppercase tracking-wider scale-90">
+                            <span className="text-[8px] bg-linear-to-r from-green-500 to-emerald-500 text-white px-1.5 rounded-full mt-1.5 font-black uppercase tracking-wider scale-90">
                               +100% OFF
                             </span>
                           )}
@@ -875,32 +878,32 @@ function AstrologerSection() {
                     </div>
 
                     {/* Offer Banner - Premium Glow */}
-                    <div className="bg-gradient-to-r from-green-950/50 to-gray-950/30 border border-green-500/20 p-4 rounded-xl mb-6 flex items-start space-x-3 text-green-400 shadow-xl shadow-green-500/5 relative overflow-hidden">
-                      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-green-400/10 via-transparent to-transparent"></div>
-                      <span className="text-2xl animate-float flex-shrink-0"><i className="fa-solid fa-gift"></i></span>
-                      <p className="text-xs font-semibold leading-relaxed text-stone-200">
+                    <div className={`p-4 rounded-xl mb-6 flex items-start space-x-3 shadow-xl relative overflow-hidden border ${isDark ? 'bg-linear-to-r from-green-950/50 to-gray-950/30 border-green-500/20 text-green-400 shadow-green-500/5' : 'bg-emerald-50 border-emerald-200 text-emerald-700'}`}>
+                      <div className={`absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,var(--tw-gradient-stops))] from-green-400/10 via-transparent to-transparent`}></div>
+                      <span className="text-2xl animate-float shrink-0"><i className="fa-solid fa-gift"></i></span>
+                      <p className={`text-xs font-semibold leading-relaxed ${isDark ? 'text-stone-200' : 'text-emerald-800'}`}>
                         {t.astroMeta.specialOffer}
                       </p>
                     </div>
 
-                    <div className="p-4 bg-gray-800/60 rounded-xl border border-white/5 text-xs mb-6">
+                    <div className={`p-4 rounded-xl border text-xs mb-6 ${isDark ? 'bg-gray-800/60 border-white/5' : 'bg-gray-50 border-gray-100'}`}>
                       <div className="flex justify-between font-medium mb-2">
                         <span className="text-gray-400">{lang === 'hi' ? 'रिचार्ज राशि' : 'Recharge Amount'}:</span>
-                        <span className="font-bold text-white">₹{rechargeAmount}</span>
+                        <span className={`font-bold ${isDark ? 'text-white' : 'text-emerald-900'}`}>₹{rechargeAmount}</span>
                       </div>
                       <div className="flex justify-between font-medium mb-2">
                         <span className="text-gray-400">GST (18% {lang === 'hi' ? 'शामिल' : 'included'}):</span>
                         <span className="text-stone-500">₹0.00</span>
                       </div>
                       {rechargeAmount >= 500 && (
-                        <div className="flex justify-between font-bold text-green-400 mb-2 pt-2 border-t border-white/5">
+                        <div className={`flex justify-between font-bold text-green-600 mb-2 pt-2 border-t ${isDark ? 'border-white/5' : 'border-gray-200'}`}>
                           <span>{lang === 'hi' ? 'विशेष बोनस' : 'Special Bonus'}:</span>
                           <span>+ ₹{rechargeAmount}</span>
                         </div>
                       )}
-                      <div className="border-t border-white/10 my-3 pt-3 flex justify-between font-black text-white text-base">
+                      <div className={`border-t my-3 pt-3 flex justify-between font-black text-base ${isDark ? 'border-white/10 text-white' : 'border-gray-200 text-emerald-900'}`}>
                         <span>{t.astroMeta.payable}:</span>
-                        <span className="text-xl bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-amber-600-400">₹{rechargeAmount}</span>
+                        <span className={`text-xl ${isDark ? 'bg-clip-text text-transparent bg-linear-to-r from-amber-400 to-amber-600-400' : 'text-amber-700'}`}>₹{rechargeAmount}</span>
                       </div>
                     </div>
 
@@ -914,7 +917,7 @@ function AstrologerSection() {
                         );
                         setShowPaymentModal(false);
                       }}
-                      className="w-full bg-gradient-to-r from-amber-500 to-amber-600-500 hover:from-amber-400 hover:to-amber-600-400 text-gray-800 font-black py-4 rounded-xl shadow-xl shadow-amber-500/10 hover:shadow-amber-500/20 active:scale-98 transition-all flex items-center justify-center space-x-2 text-sm tracking-widest uppercase"
+                      className="w-full bg-linear-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-white font-black py-4 rounded-xl shadow-xl shadow-amber-600/10 hover:shadow-amber-600/20 active:scale-98 transition-all flex items-center justify-center space-x-2 text-sm tracking-widest uppercase"
                     >
                       <span>💳 {t.astroMeta.rechargeBtn}</span>
                     </button>
@@ -938,35 +941,35 @@ function AboutSection() {
   const { isDark } = useContext(ThemeContext);
 
   return (
-    <section className={`py-16 ${isDark ? 'bg-gradient-to-b from-gray-800 to-gray-800' : 'glass-strong border-t border-[#083f1d]/15'}`}>
+    <section className={`py-16 ${isDark ? 'bg-linear-to-b from-gray-800 to-gray-800' : 'glass-strong border-t border-[#083f1d]/15'}`}>
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-100 mb-6 text-center gradient-text-strong">{t.sections.about.title}</h2>
-          <p className="text-slate-300 leading-relaxed mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center gradient-text-strong">{t.sections.about.title}</h2>
+          <p className={`leading-relaxed mb-6 ${isDark ? 'text-slate-300' : 'text-emerald-900/80 font-medium'}`}>
             {lang === 'hi'
               ? `रत्नों को प्राचीन काल से ही उनकी सुंदरता और ग्रहों की ऊर्जा के साथ उनके जुड़ाव के लिए जाना जाता है। ${t.brandName} में, हम एक भरोसेमंद ऑनलाइन रत्न स्टोर प्रस्तुत करते हैं जहाँ आप रत्न आभूषण और ज्योतिषीय उद्देश्यों के लिए उपयुक्त प्राकृतिक रत्न पा सकते हैं।`
               : `Gemstones have been known since ancient times for their beauty and their association with planetary energies. At ${t.brandName}, we present a trustworthy online gemstone store where you can find natural gemstones suitable for gemstone jewelry and astrology purposes.`
             }
           </p>
-          <p className="text-slate-300 leading-relaxed mb-6">
+          <p className={`leading-relaxed mb-6 ${isDark ? 'text-slate-300' : 'text-emerald-900/80 font-medium'}`}>
             {lang === 'hi'
               ? `हमारे संग्रह के हर रत्न को रत्न मानकों के अनुसार सावधानीपूर्वक चुना और सत्यापित किया जाता है। हम प्रमाणित रत्न भी प्रदान करते हैं जो आपके रत्न की वास्तविक गुणवत्ता और प्रामाणिकता की पुष्टि करने के लिए एक स्वतंत्र लैब प्रमाणपत्र के साथ आते हैं। इनका उपयोग आमतौर पर वैदिक ज्योतिष में ग्रहों की शक्तियों को सुधारने के उपाय के रूप में किया जाता है।`
               : `Every gemstone in our collection is carefully chosen and verified as per gemstone norms. We also provide certified gemstones that carry an independent lab certificate to confirm the true quality and authenticity of your gemstone, which are commonly used in Vedic Astrology as remedies to improve planetary powers.`
             }
           </p>
           <div className="grid md:grid-cols-2 gap-6 mt-8">
-            <div className="glass-strong p-6 rounded-xl shadow-xl">
+            <div className={`p-6 rounded-xl shadow-xl border ${isDark ? 'glass-strong border-white/5' : 'bg-white border-emerald-100'}`}>
               <h3 className="font-bold text-lg mb-3 text-amber-600">{lang === 'hi' ? 'लोकप्रिय रत्न' : 'Popular Gemstones'}</h3>
-              <ul className="space-y-2 text-slate-300">
-                <li>• <strong className="text-amber-400">{lang === 'hi' ? 'पुखराज (Yellow Sapphire)' : 'Yellow Sapphire'}</strong> - {lang === 'hi' ? 'ज्ञान और समृद्धि' : 'Wisdom & Prosperity'}</li>
-                <li>• <strong className="text-amber-400">{lang === 'hi' ? 'नीलम (Blue Sapphire)' : 'Blue Sapphire'}</strong> - {lang === 'hi' ? 'स्थिरता और प्रगति' : 'Stability & Progress'}</li>
-                <li>• <strong className="text-amber-400">{lang === 'hi' ? 'माणिक्य (Ruby)' : 'Ruby'}</strong> - {lang === 'hi' ? 'आत्मविश्वास और नेतृत्व' : 'Confidence & Leadership'}</li>
-                <li>• <strong className="text-amber-400">{lang === 'hi' ? 'पन्ना (Emerald)' : 'Emerald'}</strong> - {lang === 'hi' ? 'बुद्धि और विकास' : 'Intelligence & Growth'}</li>
+              <ul className={`space-y-2 ${isDark ? 'text-slate-300' : 'text-emerald-950'}`}>
+                <li>• <strong className={`${isDark ? 'text-amber-400' : 'text-emerald-900'}`}>{lang === 'hi' ? 'पुखराज (Yellow Sapphire)' : 'Yellow Sapphire'}</strong> - {lang === 'hi' ? 'ज्ञान और समृद्धि' : 'Wisdom & Prosperity'}</li>
+                <li>• <strong className={`${isDark ? 'text-amber-400' : 'text-emerald-900'}`}>{lang === 'hi' ? 'नीलम (Blue Sapphire)' : 'Blue Sapphire'}</strong> - {lang === 'hi' ? 'स्थिरता और प्रगति' : 'Stability & Progress'}</li>
+                <li>• <strong className={`${isDark ? 'text-amber-400' : 'text-emerald-900'}`}>{lang === 'hi' ? 'माणिक्य (Ruby)' : 'Ruby'}</strong> - {lang === 'hi' ? 'आत्मविश्वास और नेतृत्व' : 'Confidence & Leadership'}</li>
+                <li>• <strong className={`${isDark ? 'text-amber-400' : 'text-emerald-900'}`}>{lang === 'hi' ? 'पन्ना (Emerald)' : 'Emerald'}</strong> - {lang === 'hi' ? 'बुद्धि और विकास' : 'Intelligence & Growth'}</li>
               </ul>
             </div>
-            <div className="glass-strong p-6 rounded-xl shadow-xl">
+            <div className={`p-6 rounded-xl shadow-xl border ${isDark ? 'glass-strong border-white/5' : 'bg-white border-emerald-100'}`}>
               <h3 className="font-bold text-lg mb-3 text-amber-600">{lang === 'hi' ? 'हमें क्यों चुनें' : 'Why Choose Us'}</h3>
-              <ul className="space-y-2 text-slate-300">
+              <ul className={`space-y-2 ${isDark ? 'text-slate-300' : 'text-emerald-950'}`}>
                 <li>• {lang === 'hi' ? 'प्राकृतिक एवं प्रमाणित रत्न' : 'Natural & Certified Gemstones'}</li>
                 <li>• {lang === 'hi' ? 'ज्योतिष आधारित मार्गदर्शन' : 'Astrology-Based Guidance'}</li>
                 <li>• {lang === 'hi' ? 'विस्तृत रत्न संग्रह उपलब्ध' : 'Wide Collection Available'}</li>
@@ -998,12 +1001,24 @@ function Footer() {
   const astroLinks = [
     { label: lang === 'hi' ? 'मुफ़्त कुंडली' : 'Free Kundli', action: () => (window as any).__freeKundli?.() },
     { label: lang === 'hi' ? 'कुंडली मिलान' : 'Kundli Matching', action: () => (window as any).__kundliMatching?.() },
-    { label: lang === 'hi' ? 'राशिफल' : 'Horoscopes', action: () => (window as any).__horoscopes?.() },
+    {
+      label: lang === 'hi' ? 'राशिफल' : 'Horoscopes',
+      dropdown: [
+        { label: lang === 'hi' ? 'राशिफल' : 'Horoscope', action: () => (window as any).__horoscopesToday?.() },
+        { label: lang === 'hi' ? 'आज का राशिफल' : 'Today\'s Horoscope', action: () => (window as any).__horoscopesToday?.() },
+        { label: lang === 'hi' ? 'दैनिक राशिफल' : 'Daily Horoscope', action: () => (window as any).__horoscopesDaily?.() },
+        { label: lang === 'hi' ? 'कल का राशिफल' : 'Yesterday\'s Horoscope', action: () => (window as any).__horoscopesYesterday?.() },
+        { label: lang === 'hi' ? 'अटूर का राशिफल' : 'Tomorrow\'s Horoscope', action: () => (window as any).__horoscopesTomorrow?.() },
+        { label: lang === 'hi' ? 'साप्ताहिक राशिफल' : 'Weekly Horoscope', action: () => (window as any).__horoscopesWeekly?.() },
+        { label: lang === 'hi' ? 'मासिक राशिफल' : 'Monthly Horoscope', action: () => (window as any).__horoscopesMonthly?.() },
+        { label: lang === 'hi' ? 'वार्षिक राशिफल' : 'Yearly Horoscope', action: () => (window as any).__horoscopesYearly?.() },
+      ]
+    },
     { label: lang === 'hi' ? 'ज्योतिषी से बात करें' : 'Talk to Astrologer', action: () => (window as any).__talk?.() },
   ];
 
   return (
-    <footer className={`${isDark ? 'bg-gradient-to-b from-gray-800 via-gray-900 to-gray-900 text-white border-t border-amber-600/20' : 'glass-strong text-[#083f1d] border-t border-[#083f1d]/15'} pt-20 pb-8`}>
+    <footer className={`${isDark ? 'bg-linear-to-b from-gray-800 via-gray-900 to-gray-900 text-white border-t border-amber-600/20' : 'glass-strong text-[#083f1d] border-t border-[#083f1d]/15'} pt-20 pb-8`}>
       <div className="container mx-auto px-4">
         {/* Main Footer Grid */}
         <div className="grid md:grid-cols-5 gap-8 mb-16">
@@ -1073,18 +1088,40 @@ function Footer() {
           </div>
 
           {/* Astrology Links */}
-          <div>
-            <h4 className={`font-black text-lg mb-6 uppercase tracking-wide ${isDark ? 'text-amber-400' : 'text-[#083f1d]'}`}>{lang === 'hi' ? 'ज्योतिष' : 'Astrology'}</h4>
-            <ul className="space-y-3">
-              {astroLinks.map((item) => (
-                <li key={item.label}>
-                  <button onClick={item.action} className={`${isDark ? 'text-slate-400 hover:text-amber-400' : 'text-[#0a5c2a] hover:text-[#083f1d]'} transition-colors text-sm font-medium hover:translate-x-1 transform duration-300`}>
-                    → {item.label}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
+           <div>
+             <h4 className={`font-black text-lg mb-6 uppercase tracking-wide ${isDark ? 'text-amber-400' : 'text-[#083f1d]'}`}>{lang === 'hi' ? 'ज्योतिष' : 'Astrology'}</h4>
+             <ul className="space-y-3">
+               {astroLinks.map((item) => (
+                 item.dropdown ? (
+                   <li key={item.label} className="relative group">
+                     <button className={`w-full text-left font-medium text-sm transition-all duration-300 hover:translate-x-1 transform flex items-center justify-between ${isDark ? 'text-slate-400 hover:text-amber-400' : 'text-[#0a5c2a] hover:text-[#083f1d]'}`}>
+                       <span>→ {item.label}</span>
+                       <svg className="w-3 h-3 transition-transform group-hover:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                         <path d="M19 9l-7 7-7-7" strokeLinecap="round" strokeLinejoin="round"/>
+                       </svg>
+                     </button>
+                     <div className={`absolute left-0 top-full mt-2 w-56 backdrop-blur-md border rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 ${isDark ? 'bg-gray-800/95 border-amber-600/30' : 'bg-white/95 border-gray-200'}`}>
+                       {item.dropdown.map((dropdownItem, dropdownIndex) => (
+                         <button
+                           key={dropdownIndex}
+                           onClick={dropdownItem.action}
+                           className={`w-full text-left px-4 py-3 text-sm transition-all duration-200 first:rounded-t-xl last:rounded-b-xl ${isDark ? 'text-slate-300 hover:text-amber-400 hover:bg-amber-700/10' : 'text-gray-700 hover:text-amber-600 hover:bg-amber-50'}`}
+                         >
+                           {dropdownItem.label}
+                         </button>
+                       ))}
+                     </div>
+                   </li>
+                 ) : (
+                   <li key={item.label}>
+                     <button onClick={item.action} className={`${isDark ? 'text-slate-400 hover:text-amber-400' : 'text-[#0a5c2a] hover:text-[#083f1d]'} transition-colors text-sm font-medium hover:translate-x-1 transform duration-300`}>
+                       → {item.label}
+                     </button>
+                   </li>
+                 )
+               ))}
+             </ul>
+           </div>
 
           {/* Newsletter */}
           <div>
@@ -1099,7 +1136,7 @@ function Footer() {
                 className={`w-full px-4 py-3 rounded-lg focus:outline-none transition-all duration-300 text-sm ${isDark ? 'bg-gray-700/50 border border-amber-600/30 focus:border-amber-600 text-gray-200 placeholder-slate-600' : 'glass border border-[#083f1d]/20 focus:border-[#083f1d] text-[#083f1d] placeholder-[#0a5c2a]/50'}`}
               />
               <button className="w-full btn-cyan py-3 rounded-lg font-bold text-sm uppercase tracking-wider transition-all duration-300 hover:scale-105 active:scale-95">
-                {lang === 'hi' ? 'Subscribe' : 'Subscribe'}
+                <span className="text-pure-white">{lang === 'hi' ? 'सब्सक्राइब करें' : 'Subscribe'}</span>
               </button>
             </div>
           </div>
@@ -1151,6 +1188,30 @@ function App() {
       localStorage.setItem('theme', 'light');
     }
   }, [isDark]);
+
+  // Global Error Handling & Resource Guard
+  useEffect(() => {
+    const handleError = (error: ErrorEvent) => {
+      console.warn('Caught runtime exception:', error.message);
+      // Prevent infinite loops or multiple alerts if needed
+    };
+
+    const handleResourceError = (event: ErrorEvent) => {
+      const target = event.target as HTMLElement;
+      if (target && (target.tagName === 'IMG' || target.tagName === 'VIDEO')) {
+        console.warn(`Resource failed to load: ${(target as any).src}`);
+        // Optionally prevent default browser retry behavior
+      }
+    };
+
+    window.addEventListener('error', handleError);
+    window.addEventListener('error', handleResourceError, true);
+
+    return () => {
+      window.removeEventListener('error', handleError);
+      window.removeEventListener('error', handleResourceError, true);
+    };
+  }, []);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
 

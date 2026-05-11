@@ -64,7 +64,7 @@ function StoreContent() {
                 alt={product.name}
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
               />
-              <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${isDark ? 'bg-gradient-to-t from-gray-800 via-transparent to-transparent' : 'bg-gradient-to-t from-black/20 via-transparent to-transparent'}`}></div>
+              <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${isDark ? 'bg-linear-to-t from-gray-800 via-transparent to-transparent' : 'bg-linear-to-t from-black/20 via-transparent to-transparent'}`}></div>
             </div>
 
             {/* Product Info */}
@@ -124,6 +124,165 @@ function StoreContent() {
           <h4 className="font-bold text-amber-500 mb-2">{lang === 'hi' ? 'आसान रिटर्न' : 'Easy Returns'}</h4>
           <p className={`text-sm ${isDark ? 'text-slate-400' : 'text-gray-600'}`}>{lang === 'hi' ? '15 दिनों के भीतर बिना सवाल के' : '15 days no questions asked'}</p>
         </div>
+      </div>
+    </div>
+  );
+}
+
+
+// Blog Content Component
+function BlogContent() {
+  const { lang } = useContext(LanguageContext);
+  const { isDark } = useContext(ThemeContext);
+
+  const blogPosts = [
+    {
+      id: 1,
+      title: lang === 'hi' ? 'रत्नों की शक्ति: आपके जीवन को कैसे बदल सकते हैं' : 'The Power of Gemstones: How They Can Transform Your Life',
+      category: lang === 'hi' ? 'रत्न' : 'Gemstones',
+      image: '/blog/stone.jpg',
+      height: 'aspect-[4/5]',
+      date: 'May 10, 2026',
+      readTime: '5 min'
+    },
+    {
+      id: 2,
+      title: lang === 'hi' ? 'आधुनिक समय में वैदिक ज्योतिष का महत्व' : 'Importance of Vedic Astrology in Modern Times',
+      category: lang === 'hi' ? 'ज्योतिष' : 'Astrology',
+      image: '/blog/Vedic.jpg',
+      height: 'aspect-[3/4]',
+      date: 'May 08, 2026',
+      readTime: '8 min'
+    },
+    {
+      id: 3,
+      title: lang === 'hi' ? 'अपनी सूर्य राशि को गहराई से समझें' : 'Understand Your Sun Sign in Depth',
+      category: lang === 'hi' ? 'राशिफल' : 'Horoscopes',
+      image: '/blog/Sun.jpg',
+      height: 'aspect-square',
+      date: 'May 05, 2026',
+      readTime: '6 min'
+    },
+    {
+      id: 4,
+      title: lang === 'hi' ? 'आंतरिक शांति के लिए ध्यान के सरल तरीके' : 'Simple Ways to Meditate for Inner Peace',
+      category: lang === 'hi' ? 'आध्यात्मिकता' : 'Spirituality',
+      image: '/blog/depth.jpg',
+      height: 'aspect-[16/9]',
+      date: 'May 02, 2026',
+      readTime: '4 min'
+    },
+    {
+      id: 5,
+      title: lang === 'hi' ? 'रुद्राक्ष: दिव्य बीज के रहस्य' : 'Rudraksha: Secrets of the Divine Seed',
+      category: lang === 'hi' ? 'रुद्राक्ष' : 'Rudraksha',
+      image: '/blog/rudraksha.jpg',
+      height: 'aspect-[4/5]',
+      date: 'Apr 28, 2026',
+      readTime: '7 min'
+    },
+    {
+      id: 6,
+      title: lang === 'hi' ? 'वास्तु शास्त्र: अपने घर में खुशहाली लाएं' : 'Vastu Shastra: Bringing Prosperity to Your Home',
+      category: lang === 'hi' ? 'वास्तु' : 'Vastu',
+      image: '/blog/vastu.png',
+      height: 'aspect-[3/4]',
+      date: 'Apr 25, 2026',
+      readTime: '10 min'
+    }
+  ];
+
+  return (
+    <div className="space-y-12 pb-20">
+      {/* Section Indicator */}
+      <div className="flex items-start gap-6 animate-fadeIn">
+        <div className="flex flex-col items-center">
+          <span className={`text-xs font-black tracking-tighter mb-2 ${isDark ? 'text-amber-500/50' : 'text-[#083f1d]/50'}`}></span>
+          <div className={`w-px h-24 ${isDark ? 'bg-linear-to-b from-amber-500 to-transparent' : 'bg-linear-to-b from-[#083f1d] to-transparent'}`}></div>
+        </div>
+        <div className="pt-2">
+          <h2 className={`text-3xl md:text-5xl font-black tracking-tighter uppercase mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+            {lang === 'hi' ? 'हमारे लेख' : 'Our Insights'}
+          </h2>
+          <p className={`text-sm md:text-base max-w-xl ${isDark ? 'text-slate-400' : 'text-gray-600'}`}>
+            {lang === 'hi' 
+              ? 'ज्योतिष, अध्यात्म और जीवन शैली पर हमारे विशेषज्ञों के गहन विचार और लेख।' 
+              : 'Deep thoughts and articles by our experts on astrology, spirituality and lifestyle.'}
+          </p>
+        </div>
+      </div>
+
+      {/* Masonry Grid */}
+      <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+        {blogPosts.map((post) => (
+          <div
+            key={post.id}
+            className={`break-inside-avoid relative group rounded-3xl overflow-hidden cursor-pointer transition-all duration-500 hover-3d ${isDark ? 'bg-gray-800 border border-white/5' : 'bg-white border border-gray-200 shadow-xl'}`}
+          >
+            {/* Featured Image */}
+            <div className={`relative overflow-hidden ${post.height}`}>
+              <img
+                src={post.image}
+                alt={post.title}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              {/* Overlay Gradient */}
+              <div className={`absolute inset-0 opacity-40 group-hover:opacity-60 transition-opacity duration-500 ${isDark ? 'bg-linear-to-t from-gray-900 via-transparent to-transparent' : 'bg-linear-to-t from-black/40 via-transparent to-transparent'}`}></div>
+              
+              {/* Caption Tag (Style from sample) */}
+              <div className="absolute bottom-4 right-4">
+                <span className="bg-black/40 backdrop-blur-md text-[10px] text-white px-3 py-1 rounded-lg border border-white/10 font-bold tracking-widest uppercase">
+                  {post.category}
+                </span>
+              </div>
+            </div>
+
+            {/* Post Details */}
+            <div className="p-6">
+              <div className="flex items-center gap-3 mb-3">
+                <span className={`text-[10px] font-bold uppercase tracking-widest ${isDark ? 'text-amber-500' : 'text-amber-600'}`}>
+                  {post.date}
+                </span>
+                <span className={`w-1 h-1 rounded-full ${isDark ? 'bg-slate-700' : 'bg-gray-300'}`}></span>
+                <span className={`text-[10px] font-bold uppercase tracking-widest ${isDark ? 'text-slate-500' : 'text-gray-400'}`}>
+                  {post.readTime} read
+                </span>
+              </div>
+              <h3 className={`text-xl font-black leading-tight mb-4 group-hover:text-amber-500 transition-colors ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                {post.title}
+              </h3>
+              
+              {/* Action Button (Style from sample) */}
+              <button className={`flex items-center gap-2 text-[10px] font-black uppercase tracking-widest transition-all duration-300 group/btn ${isDark ? 'text-slate-400 hover:text-white' : 'text-gray-500 hover:text-gray-900'}`}>
+                <span>{lang === 'hi' ? 'लेख पढ़ें' : 'Read Article'}</span>
+                <span className="w-8 h-px bg-current transition-all duration-300 group-hover/btn:w-12"></span>
+              </button>
+            </div>
+
+            {/* Glow Effect on Hover */}
+            <div className="absolute inset-0 pointer-events-none transition-opacity duration-500 opacity-0 group-hover:opacity-100 bg-linear-to-br from-amber-500/10 to-transparent"></div>
+          </div>
+        ))}
+      </div>
+
+      {/* Call to Action Footer (Style from sample) */}
+      <div className={`mt-20 p-10 rounded-[3rem] text-center relative overflow-hidden group ${isDark ? 'bg-gray-800/80 border border-white/5' : 'bg-gray-50 border border-gray-200'}`}>
+        <div className="relative z-10">
+          <h3 className={`text-2xl md:text-4xl font-black tracking-tight mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+            {lang === 'hi' ? 'कुछ नया सीखना चाहते हैं?' : 'Want to discover more?'}
+          </h3>
+          <p className={`text-sm md:text-base mb-8 max-w-xl mx-auto ${isDark ? 'text-slate-400' : 'text-gray-600'}`}>
+            {lang === 'hi' 
+              ? 'हमारे न्यूज़लेटर को सब्सक्राइब करें और हर हफ्ते नए लेख और भविष्यवाणियां प्राप्त करें।' 
+              : 'Subscribe to our newsletter and receive new articles and predictions every week.'}
+          </p>
+          <button className="btn-cyan px-10 py-4 rounded-2xl font-black text-xs uppercase tracking-widest shadow-2xl hover:scale-105 active:scale-95 transition-all">
+            {lang === 'hi' ? 'न्यूज़लेटर सब्सक्राइब करें' : 'Subscribe to Newsletter'}
+          </button>
+        </div>
+        {/* Background Accents */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/5 blur-[120px] rounded-full group-hover:bg-amber-500/10 transition-all duration-500"></div>
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-cyan-500/5 blur-[120px] rounded-full group-hover:bg-cyan-500/10 transition-all duration-500"></div>
       </div>
     </div>
   );
@@ -262,7 +421,7 @@ export default function InformationPage({
   const current = pageContent[page];
 
   return (
-    <div className={`fixed inset-0 z-[64] overflow-y-auto ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
+    <div className={`fixed inset-0 z-64 overflow-y-auto ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
       <button
         onClick={onClose}
         className={`fixed top-6 right-6 z-30 w-12 h-12 backdrop-blur-md border rounded-full flex items-center justify-center transition-all shadow-xl hover:scale-110 active:scale-95 ${isDark ? 'bg-gray-800/80 border-white/10 text-white hover:bg-gray-700' : 'bg-white/80 border-gray-200 text-gray-900 hover:bg-gray-100'}`}
@@ -274,7 +433,7 @@ export default function InformationPage({
 
       <div className="relative h-[32vh] md:h-[40vh] overflow-hidden">
         <div className="absolute inset-0 bg-[url('/astro/g.jpeg')] bg-cover bg-center">
-          <div className={`absolute inset-0 ${isDark ? 'bg-gradient-to-b from-gray-800/60 via-gray-950/40 to-gray-900' : 'bg-gradient-to-b from-white/60 via-white/40 to-white'}`}></div>
+          <div className={`absolute inset-0 ${isDark ? 'bg-linear-to-b from-gray-800/60 via-gray-950/40 to-gray-900' : 'bg-linear-to-b from-white/60 via-white/40 to-white'}`}></div>
         </div>
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
           <span className="text-5xl md:text-7xl mb-4 animate-float">{current.icon}</span>
@@ -338,7 +497,7 @@ export default function InformationPage({
                 <input className={`w-full border rounded-xl px-4 py-3 focus:outline-none focus:border-amber-500/50 ${isDark ? 'bg-gray-700 border-white/10 text-white placeholder-stone-500' : 'bg-white border-gray-200 text-gray-900 placeholder-gray-400'}`} placeholder={lang === 'hi' ? 'आपका नाम' : 'Your Name'} />
                 <input className={`w-full border rounded-xl px-4 py-3 focus:outline-none focus:border-amber-500/50 ${isDark ? 'bg-gray-700 border-white/10 text-white placeholder-stone-500' : 'bg-white border-gray-200 text-gray-900 placeholder-gray-400'}`} placeholder={lang === 'hi' ? 'आपका ईमेल' : 'Your Email'} />
                 <textarea rows={5} className={`w-full border rounded-xl px-4 py-3 focus:outline-none focus:border-amber-500/50 resize-none ${isDark ? 'bg-gray-700 border-white/10 text-white placeholder-stone-500' : 'bg-white border-gray-200 text-gray-900 placeholder-gray-400'}`} placeholder={lang === 'hi' ? 'आपका संदेश...' : 'Your message...'} />
-                <button className="w-full bg-gradient-to-r from-amber-500 to-amber-600-500 hover:from-amber-600 hover:to-amber-600-600 text-gray-800 font-black py-3.5 rounded-xl transition-all shadow-lg active:scale-95">
+                <button className="w-full bg-linear-to-r from-amber-500 to-amber-600-500 hover:from-amber-600 hover:to-amber-600-600 text-gray-800 font-black py-3.5 rounded-xl transition-all shadow-lg active:scale-95">
                   {lang === 'hi' ? 'मैसेज भेजें' : 'Send Message'}
                 </button>
               </div>
@@ -404,14 +563,16 @@ export default function InformationPage({
             </div>
           </div>
         )}
-
-        {(page === 'pooja' || page === 'blogs') && (
+        {page === 'pooja' && (
           <div className={`backdrop-blur-md rounded-2xl border p-8 text-center ${isDark ? 'bg-gray-800/80 border-white/10' : 'bg-gray-50 border-gray-200 shadow-lg'}`}>
             <div className="text-6xl mb-6 text-amber-500"><i className="fa-solid fa-person-digging"></i></div>
             <h3 className={`font-black text-2xl mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>{current.title}</h3>
             <p className={`text-lg mb-6 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>Content coming soon...</p>
             <p className={isDark ? 'text-gray-400' : 'text-gray-500'}>{lang === 'hi' ? 'हम इस पेज पर काम कर रहे हैं। जल्द ही यह उपलब्ध होगा।' : 'We are working on this page. It will be available soon.'}</p>
           </div>
+        )}
+        {page === 'blogs' && (
+          <BlogContent />
         )}
 
         {page === 'terms' && (

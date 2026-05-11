@@ -60,10 +60,10 @@ export function TestimonialsSlider() {
   const { isDark } = useContext(ThemeContext);
   const [current, setCurrent] = useState(0);
   const testimonials = [
-    { name: 'Priya Sharma', location: 'Delhi', rating: 5, text: 'I bought the Yellow Sapphire and my career took off within months! The quality is exceptional and the certification gave me confidence. Highly recommend!', image: '/astro/L1.jpg' },
-    { name: 'Rajesh Kumar', location: 'Mumbai', rating: 5, text: 'The 7 Mukhi Rudraksha changed my life. My business has grown 3x since I started wearing it. The energization process was done properly. Amazing service!', image: '/astro/L2.jpg' },
-    { name: 'Anjali Patel', location: 'Ahmedabad', rating: 5, text: 'Beautiful gemstone bracelet! The amethyst quality is top-notch. Fast delivery and excellent packaging. Will definitely shop again!', image: '/astro/L3.jpg' },
-    { name: 'Vikram Singh', location: 'Jaipur', rating: 5, text: 'The AI astrologer is incredibly accurate! It recommended the perfect gemstone for my zodiac. The consultation was free and very helpful!', image: '/astro/L4.jpg' },
+    { name: 'Priya Sharma', location: 'Delhi', rating: 5, text: 'I bought the Yellow Sapphire and my career took off within months! The quality is exceptional and the certification gave me confidence. Highly recommend!', image: '/astro/L1.png' },
+    { name: 'Rajesh Kumar', location: 'Mumbai', rating: 5, text: 'The 7 Mukhi Rudraksha changed my life. My business has grown 3x since I started wearing it. The energization process was done properly. Amazing service!', image: '/astro/L2.png' },
+    { name: 'Anjali Patel', location: 'Ahmedabad', rating: 5, text: 'Beautiful gemstone bracelet! The amethyst quality is top-notch. Fast delivery and excellent packaging. Will definitely shop again!', image: '/astro/L3.png' },
+    { name: 'Vikram Singh', location: 'Jaipur', rating: 5, text: 'The AI astrologer is incredibly accurate! It recommended the perfect gemstone for my zodiac. The consultation was free and very helpful!', image: '/astro/L4.png' },
   ];
 
   useEffect(() => {
@@ -74,7 +74,7 @@ export function TestimonialsSlider() {
   }, [testimonials.length]);
 
   return (
-    <section className={`py-20 overflow-hidden ${isDark ? 'bg-gradient-to-b from-gray-800 to-gray-800' : 'glass-strong border-t border-[#083f1d]/15'}`}>
+    <section className={`py-20 overflow-hidden ${isDark ? 'bg-linear-to-b from-gray-800 to-gray-800' : 'glass-strong border-t border-[#083f1d]/15'}`}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <span className="text-amber-500 text-xs font-bold tracking-[0.3em] uppercase">Testimonials</span>
@@ -89,7 +89,7 @@ export function TestimonialsSlider() {
               className={`absolute inset-0 transition-all duration-700 ${i === current ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'}`}
               style={{ position: i === current ? 'relative' : 'absolute' }}
             >
-              <div className={`${isDark ? 'bg-gradient-to-br from-gray-800/80 to-gray-800/80 border-white/10' : 'glass border-[#083f1d]/10'} backdrop-blur-md rounded-3xl p-8 md:p-12 shadow-2xl`}>
+              <div className={`${isDark ? 'bg-linear-to-br from-gray-800/80 to-gray-800/80 border-white/10' : 'glass border-[#083f1d]/10'} backdrop-blur-md rounded-3xl p-8 md:p-12 shadow-2xl`}>
                 <div className="flex items-center gap-4 mb-6">
                   <img src={t.image} alt={t.name} className="w-16 h-16 rounded-full object-cover border-2 border-amber-500/50" />
                   <div>
@@ -200,7 +200,7 @@ export function FeaturedCarousel() {
   };
 
   return (
-    <section className="py-16 bg-gradient-to-b from-gray-800 to-gray-900 overflow-hidden">
+    <section className="py-16 bg-linear-to-b from-gray-800 to-gray-900 overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center mb-10">
           <span className="text-amber-600 text-xs font-bold tracking-[0.3em] uppercase animate-pulse">Featured Products</span>
@@ -211,14 +211,14 @@ export function FeaturedCarousel() {
           <div className="flex gap-6 animate-carousel">
             {/* Duplicate products multiple times for seamless loop */}
             {[...products, ...products, ...products, ...products].map((p, i) => (
-              <div key={i} className="flex-shrink-0 w-[280px] group">
+              <div key={i} className="shrink-0 w-[280px] group">
                 <div className="relative rounded-2xl overflow-hidden glass-strong border border-amber-600/20 hover:border-amber-600/40 transition-all duration-500 hover:shadow-xl hover:shadow-amber-600-500/20 hover-3d">
                   <div className="relative h-72 overflow-hidden">
                     <img src={p.image} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-gray-800/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 bg-linear-to-t from-gray-800/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <span className="absolute top-3 left-3 bg-amber-700 text-gray-800 text-[10px] font-black px-3 py-1 rounded-full uppercase shadow-lg">{p.tag}</span>
                   </div>
-                  <div className="p-4 bg-gradient-to-b from-transparent to-gray-800/50 relative">
+                  <div className="p-4 bg-linear-to-b from-transparent to-gray-800/50 relative">
                     <h3 className="text-gray-200 font-bold group-hover:text-amber-600 transition-colors line-clamp-2">{p.name}</h3>
 
                     {/* Add to Cart Button */}
@@ -295,7 +295,7 @@ export function MarqueeBanner() {
   const items = ['✦ Free Shipping on orders above ₹999', '✦ 100% Certified Gemstones', '✦ Cash on Delivery Available', '✦ Lab Tested & Verified', '✦ Energized by Vedic Rituals', '✦ 7 Days Easy Return'];
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-60 bg-gradient-to-r from-gray-800 via-amber-500-900/30 to-gray-900 py-3 overflow-hidden border-b border-amber-600/20">
+    <div className="fixed top-0 left-0 right-0 z-60 bg-linear-to-r from-gray-800 via-amber-500-900/30 to-gray-900 py-3 overflow-hidden border-b border-amber-600/20">
       <div className="animate-marquee whitespace-nowrap flex">
         {[...items, ...items].map((item, i) => (
           <span key={i} className="text-amber-200 font-bold text-sm mx-8">{item}</span>
@@ -309,7 +309,7 @@ export function MarqueeBanner() {
 export function GlowCard({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   return (
     <div className={`relative group ${className}`}>
-      <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-500 via-amber-500-500 to-amber-500 rounded-2xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-500"></div>
+      <div className="absolute -inset-0.5 bg-linear-to-r from-amber-500 via-amber-500-500 to-amber-500 rounded-2xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-500"></div>
       <div className="relative bg-white rounded-2xl shadow-lg group-hover:shadow-xl transition-shadow duration-300">
         {children}
       </div>

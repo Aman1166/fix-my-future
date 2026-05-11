@@ -37,10 +37,10 @@ export default function CartDrawer() {
 
   return (
     <>
-      <div className={`fixed inset-0 backdrop-blur-sm z-[55] ${isDark ? 'bg-gray-800/60' : 'bg-white/60'}`} onClick={() => { setIsCartOpen(false); setStep('cart'); }}></div>
-      <div className={`fixed top-0 right-0 h-full w-full max-w-md z-[56] shadow-2xl flex flex-col animate-slideInRight ${isDark ? 'bg-gray-800 border-l border-white/10' : 'bg-white border-l border-gray-200'}`}>
+      <div className={`fixed inset-0 backdrop-blur-sm z-55 ${isDark ? 'bg-gray-800/60' : 'bg-white/60'}`} onClick={() => { setIsCartOpen(false); setStep('cart'); }}></div>
+      <div className={`fixed top-0 right-0 h-full w-full max-w-md z-56 shadow-2xl flex flex-col animate-slideInRight ${isDark ? 'bg-gray-800 border-l border-white/10' : 'bg-white border-l border-gray-200'}`}>
         {/* Header */}
-        <div className={`p-5 flex items-center justify-between border-b ${isDark ? 'bg-gradient-to-r from-gray-800 to-gray-900 border-white/10' : 'bg-gradient-to-r from-white to-gray-50 border-gray-200'}`}>
+        <div className={`p-5 flex items-center justify-between border-b ${isDark ? 'bg-linear-to-r from-gray-800 to-gray-900 border-white/10' : 'bg-linear-to-r from-white to-gray-50 border-gray-200'}`}>
           <div className="flex items-center space-x-3">
             {step === 'checkout' && (
               <button onClick={() => setStep('cart')} className={`mr-2 ${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-500 hover:text-gray-900'}`}>
@@ -114,7 +114,7 @@ export default function CartDrawer() {
                   <div className={`flex justify-between font-black text-base pt-2 border-t ${isDark ? 'text-white border-white/5' : 'text-gray-900 border-gray-200'}`}><span>Total</span><span className="text-amber-500">₹{grandTotal}</span></div>
                 </div>
                 {shipping === 0 && <p className="text-[10px] text-green-400 font-bold text-center">🎉 Free shipping on orders above ₹999!</p>}
-                <button onClick={() => setStep('checkout')} className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-black py-3.5 rounded-xl shadow-xl text-sm tracking-wider uppercase active:scale-[0.98] transition-all">
+                <button onClick={() => setStep('checkout')} className="w-full bg-linear-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-black py-3.5 rounded-xl shadow-xl text-sm tracking-wider uppercase active:scale-[0.98] transition-all">
                   Proceed to Checkout →
                 </button>
               </div>
@@ -160,7 +160,7 @@ export default function CartDrawer() {
               {cart.map(item => (
                 <div key={item.id} className={`flex justify-between text-xs ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
                   <span className="truncate mr-2">{item.name} × {item.quantity}</span>
-                  <span className={`font-bold flex-shrink-0 ${isDark ? 'text-white' : 'text-gray-900'}`}>₹{item.priceNum * item.quantity}</span>
+                  <span className={`font-bold shrink-0 ${isDark ? 'text-white' : 'text-gray-900'}`}>₹{item.priceNum * item.quantity}</span>
                 </div>
               ))}
               <div className={`border-t pt-2 mt-2 space-y-1 text-xs ${isDark ? 'border-white/5' : 'border-gray-200'}`}>
@@ -174,7 +174,7 @@ export default function CartDrawer() {
             <button
               onClick={handleCheckout}
               disabled={!paymentMethod}
-              className={`w-full font-black py-4 rounded-xl shadow-xl text-sm tracking-wider uppercase active:scale-[0.98] transition-all ${paymentMethod ? 'bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white shadow-green-500/10' : isDark ? 'bg-gray-700 text-stone-500 cursor-not-allowed' : 'bg-gray-200 text-gray-400 cursor-not-allowed'}`}
+              className={`w-full font-black py-4 rounded-xl shadow-xl text-sm tracking-wider uppercase active:scale-[0.98] transition-all ${paymentMethod ? 'bg-linear-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white shadow-green-500/10' : isDark ? 'bg-gray-700 text-stone-500 cursor-not-allowed' : 'bg-gray-200 text-gray-400 cursor-not-allowed'}`}
             >
               {paymentMethod ? `💰 Pay ₹${grandTotal}` : 'Select Payment Method'}
             </button>

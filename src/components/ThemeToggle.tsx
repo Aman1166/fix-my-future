@@ -1,11 +1,18 @@
-import { useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { ThemeContext } from '../contexts/ThemeContext';
 
 export default function ThemeToggle() {
   const { isDark, setIsDark } = useContext(ThemeContext);
 
+  const lastTheme = React.useRef(isDark);
+
   useEffect(() => {
-    console.log('Theme changed:', isDark ? 'Dark' : 'Light');
+    // Only log if the theme has actually changed since mount/last update
+    // This prevents double-logging in React StrictMode
+    if (lastTheme.current !== isDark) {
+      console.log('Theme changed:', isDark ? 'Dark' : 'Light');
+      lastTheme.current = isDark;
+    }
   }, [isDark]);
 
   return (

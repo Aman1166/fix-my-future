@@ -98,7 +98,7 @@ export default function AIChat() {
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 z-50 w-16 h-16 bg-gradient-to-br from-purple-600 to-gray-600 rounded-full shadow-2xl shadow-purple-500/30 flex items-center justify-center hover:scale-110 transition-transform group animate-float"
+        className="fixed bottom-6 right-6 z-50 w-16 h-16 bg-linear-to-br from-purple-600 to-gray-600 rounded-full shadow-2xl shadow-purple-500/30 flex items-center justify-center hover:scale-110 transition-transform group animate-float"
       >
         <span className="text-3xl group-hover:rotate-12 transition-transform text-white"><i className="fa-solid fa-robot"></i></span>
         <span className="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
@@ -114,9 +114,9 @@ export default function AIChat() {
   return (
     <div className="fixed bottom-6 right-6 z-50 w-[380px] max-w-[calc(100vw-2rem)] h-[550px] max-h-[calc(100vh-4rem)] bg-gray-800 rounded-2xl shadow-2xl border border-purple-500/20 flex flex-col overflow-hidden animate-fadeIn">
       {/* Header */}
-      <div className="bg-gradient-to-r from-purple-900 via-gray-900 to-purple-900 p-4 flex items-center justify-between border-b border-purple-500/20">
+      <div className="bg-linear-to-r from-purple-900 via-gray-900 to-purple-900 p-4 flex items-center justify-between border-b border-purple-500/20">
         <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-gray-500 rounded-full flex items-center justify-center text-xl shadow-lg text-white">
+          <div className="w-10 h-10 bg-linear-to-br from-purple-500 to-gray-500 rounded-full flex items-center justify-center text-xl shadow-lg text-white">
             <i className="fa-solid fa-robot"></i>
           </div>
           <div>
@@ -134,7 +134,7 @@ export default function AIChat() {
       <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-800/80">
         {messages.map((msg) => (
           <div key={msg.id} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-            <div className={`max-w-[85%] rounded-2xl px-4 py-3 ${msg.sender === 'user' ? 'bg-gradient-to-r from-purple-600 to-gray-600 text-white rounded-br-md' : 'bg-gray-700/80 text-stone-200 rounded-bl-md border border-white/5'}`}>
+            <div className={`max-w-[85%] rounded-2xl px-4 py-3 ${msg.sender === 'user' ? 'bg-linear-to-r from-purple-600 to-gray-600 text-white rounded-br-md' : 'bg-gray-700/80 text-stone-200 rounded-bl-md border border-white/5'}`}>
               <p className="text-sm leading-relaxed">{msg.text}</p>
               <p className={`text-[9px] mt-1.5 ${msg.sender === 'user' ? 'text-white/50' : 'text-stone-500'}`}>{msg.time}</p>
             </div>
@@ -160,7 +160,7 @@ export default function AIChat() {
           <button
             key={q}
             onClick={() => { setInput(q); }}
-            className="flex-shrink-0 text-[10px] font-bold px-3 py-1.5 rounded-full bg-purple-500/10 text-purple-300 border border-purple-500/20 hover:bg-purple-500/20 transition-colors"
+            className="shrink-0 text-[10px] font-bold px-3 py-1.5 rounded-full bg-purple-500/10 text-purple-300 border border-purple-500/20 hover:bg-purple-500/20 transition-colors"
           >
             {q}
           </button>
@@ -180,7 +180,7 @@ export default function AIChat() {
           />
           <button
             onClick={sendMessage}
-            className="w-10 h-10 bg-gradient-to-r from-purple-500 to-gray-500 rounded-xl flex items-center justify-center hover:from-purple-600 hover:to-gray-600 transition-all shadow-lg active:scale-90"
+            className="w-10 h-10 bg-linear-to-r from-purple-500 to-gray-500 rounded-xl flex items-center justify-center hover:from-purple-600 hover:to-gray-600 transition-all shadow-lg active:scale-90"
           >
             <svg className="w-5 h-5 text-white fill-current" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
           </button>

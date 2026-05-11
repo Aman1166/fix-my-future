@@ -6,11 +6,12 @@ import { ThemeContext } from "../contexts/ThemeContext";
 
 // Background Image Component
 function ImageBackground() {
+  const { isDark } = useContext(ThemeContext);
   return (
     <img
-      src="/astro/g.jpeg"
+      src={isDark ? "/astro/g.jpeg" : "/astro/light/bg 2.png"}
       alt="cosmic background"
-      className="absolute top-0 left-0 w-full h-full object-cover"
+      className="absolute top-0 left-0 w-full h-full object-cover "
     />
   );
 }
@@ -75,20 +76,28 @@ function createRoundedPlane(width: number, height: number, radius: number) {
 
 // Orbiting Cards Component
 function CardsOrbit() {
+  const { isDark } = useContext(ThemeContext);
   const groupRef = useRef<THREE.Group>(null);
   const cardRefs = useRef<(THREE.Mesh | null)[]>([]);
   const [open, setOpen] = useState(false);
 
   const images = useMemo(
-    () => [
+    () => isDark ? [
       "/astro/CARD 1.jpg.jpeg",
       "/astro/CARD 2.jpg.jpeg",
       "/astro/CARD 3.jpg.jpeg",
       "/astro/CARD 4.jpg.jpeg",
       "/astro/CARD 5.jpg.jpeg",
       "/astro/CARD 6.jpg.jpeg",
+    ] : [
+      "/astro/light/CARD1.jpeg",
+      "/astro/light/CARD2.jpeg",
+      "/astro/light/CARD3.jpeg",
+      "/astro/light/CARD4.jpeg",
+      "/astro/light/CARD5.jpeg",
+      "/astro/light/CARD6.jpeg",
     ],
-    []
+    [isDark]
   );
 
   const textures = useLoader(TextureLoader, images);
@@ -180,11 +189,11 @@ export default function HeroSection({ onShopNow }: { onShopNow?: () => void }) {
       <ImageBackground />
 
       {/* Gradient Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-bg-secondary/60 via-transparent to-bg-primary z-[5]"></div>
-      <div className="absolute inset-0 bg-gradient-to-r from-bg-secondary/80 via-transparent to-bg-primary/80 z-[5]"></div>
+      <div className="absolute inset-0 bg-linear-to-b from-bg-secondary/60 via-transparent to-bg-primary z-5"></div>
+      <div className="absolute inset-0 bg-linear-to-r from-bg-secondary/80 via-transparent to-bg-primary/80 z-5"></div>
 
       {/* 3D Canvas Layer */}
-      <div className="absolute inset-0 z-[6]">
+      <div className="absolute inset-0 z-6">
         <Canvas camera={{ position: [0, 0, 9], fov: 45 }}>
           <ambientLight intensity={0.6} />
           <pointLight position={[5, 5, 5]} intensity={1.2} color="#edbc7d" />
@@ -197,7 +206,7 @@ export default function HeroSection({ onShopNow }: { onShopNow?: () => void }) {
       </div>
 
       {/* Text Overlay */}
-      <div className="absolute inset-0 z-[10] flex flex-col items-center justify-center text-center px-4 pointer-events-none">
+      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-4 pointer-events-none">
 <span className="text-amber-600 font-extrabold text-xs md:text-sm tracking-[0.3em] uppercase mb-4 animate-fadeIn drop-shadow-lg neon-glow">
             
         </span>
@@ -213,8 +222,8 @@ export default function HeroSection({ onShopNow }: { onShopNow?: () => void }) {
           Click on cards to expand ✦
         </p>
         <div className="pointer-events-auto mt-116">
-          <button onClick={onShopNow} className="group relative btn-cyan px-6 py-2 rounded-full overflow-hidden transition-all duration-300 transform hover:scale-105 shadow-2xl shadow-amber-600-500/30 active:scale-95">
-            <span className={`relative z-10 font-extrabold text-sm tracking-wider uppercase flex items-center justify-center space-x-2 ${isDark ? 'text-white' : 'text-gray-800'}`}>
+          <button onClick={onShopNow} className="group relative bg-amber-50 outline-4 outline-green-800 px-6 py-2 rounded-full overflow-hidden transition-all duration-300 transform hover:scale-105 shadow-2xl shadow-amber-600-500/30 active:scale-95">
+            <span className={`relative z-10 font-extrabold text-sm tracking-wider uppercase flex items-center justify-center space-x-2 text-white`}>
               <span>Shop Now</span>
               <svg className="w-4 h-4 stroke-current fill-none group-hover:translate-x-1.5 transition-transform" viewBox="0 0 24 24">
                 <path d="M5 12h14M12 5l7 7-7 7" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>

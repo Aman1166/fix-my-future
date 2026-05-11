@@ -35,13 +35,13 @@ export default function SearchOverlay({ isOpen, onClose, allProducts }: { isOpen
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[60]">
+    <div className="fixed inset-0 z-60">
       <div className={`fixed inset-0 backdrop-blur-md ${isDark ? 'bg-gray-800/90' : 'bg-white/90'}`} onClick={onClose}></div>
       <div className="relative z-10 max-w-2xl mx-auto mt-20 px-4 animate-fadeIn">
         {/* Search Box */}
         <div className={`rounded-2xl shadow-2xl border overflow-hidden ${isDark ? 'bg-gray-800 border-white/10' : 'bg-white border-gray-200'}`}>
           <div className={`flex items-center p-4 border-b ${isDark ? 'border-white/10' : 'border-gray-200'}`}>
-            <svg className="w-6 h-6 text-amber-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-6 h-6 text-amber-500 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
             <input
@@ -79,7 +79,7 @@ export default function SearchOverlay({ isOpen, onClose, allProducts }: { isOpen
                         <h4 className={`font-bold text-sm truncate transition-colors ${isDark ? 'text-white group-hover:text-amber-500' : 'text-gray-900 group-hover:text-amber-600'}`}>{product.name}</h4>
                         <p className={`text-xs mt-0.5 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{product.category || 'Gemstone'}{product.carat ? ` • ${product.carat}` : ''}</p>
                       </div>
-                      <span className="font-black text-amber-500 text-sm flex-shrink-0">{product.price}</span>
+                      <span className="font-black text-amber-500 text-sm shrink-0">{product.price}</span>
                     </a>
                   ))}
                 </div>

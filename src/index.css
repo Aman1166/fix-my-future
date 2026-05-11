@@ -1,4 +1,4 @@
-@import url('https://fonts.cdnfonts.com/css/the-seasons');
+/* Core Styles */
 @import "tailwindcss";
 
 
@@ -721,6 +721,21 @@ html:not(.dark) .text-amber-600 { color: #083d1b !important; }
 html:not(.dark) .border-amber-600\/20 { border-color: rgba(10,79,35,0.2) !important; }
 html:not(.dark) .border-amber-600\/50 { border-color: rgba(10,79,35,0.5) !important; }
 html:not(.dark) .hover\:text-amber-400:hover { color: #159c58 !important; }
+html:not(.dark) .btn-cyan { 
+  background: #041f0e !important; 
+  color: #ffffff !important; 
+  border-color: rgba(255,255,255,0.1) !important;
+}
+html:not(.dark) .btn-cyan:hover {
+  background: #062e15 !important;
+  box-shadow: 0 8px 25px rgba(4, 31, 14, 0.4) !important;
+}
+
+.text-pure-white,
+footer .btn-cyan,
+footer .btn-cyan * {
+  color: #ffffff !important;
+}
 
 /* ==================================================== */
 /* PREMIUM LIGHT MODE - NAVBAR & ADDITIONAL UI          */

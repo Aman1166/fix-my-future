@@ -135,7 +135,7 @@ export default function ChatWithAstrologer({
   if (!isOpen) return null;
 
   return (
-    <div className={`fixed inset-0 z-[64] overflow-y-auto ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
+    <div className={`fixed inset-0 z-64 overflow-y-auto ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
       <button
         onClick={onClose}
         className="fixed top-6 right-6 z-30 w-12 h-12 bg-gray-800/80 backdrop-blur-md border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-gray-700 transition-all shadow-xl hover:scale-110 active:scale-95"
@@ -151,7 +151,7 @@ export default function ChatWithAstrologer({
         <>
           <div className="relative h-[32vh] md:h-[40vh] overflow-hidden">
             <div className="absolute inset-0 bg-[url('/astro/g.jpeg')] bg-cover bg-center">
-              <div className="absolute inset-0 bg-gradient-to-b from-gray-800/60 via-gray-950/40 to-gray-900"></div>
+              <div className="absolute inset-0 bg-linear-to-b from-gray-800/60 via-gray-950/40 to-gray-900"></div>
             </div>
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
               <span className="text-5xl md:text-7xl mb-4 animate-float">💬</span>
@@ -209,7 +209,7 @@ export default function ChatWithAstrologer({
                     <img
                       src={astrologer.image}
                       alt={astrologer.name}
-                      className="w-20 h-20 rounded-full border-2 border-white/20 flex-shrink-0"
+                      className="w-20 h-20 rounded-full border-2 border-white/20 shrink-0"
                     />
                     <div className="flex-1">
                       <div className="flex items-start justify-between mb-2">
@@ -267,7 +267,7 @@ export default function ChatWithAstrologer({
                       <div className="flex justify-end">
                         <button
                           onClick={() => handleChat(astrologer)}
-                          className="bg-gradient-to-r from-blue-500 to-amber-600-500 hover:from-blue-600 hover:to-amber-600-600 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-xl hover:shadow-blue-500/30 flex items-center space-x-2"
+                          className="bg-linear-to-r from-blue-500 to-amber-600-500 hover:from-blue-600 hover:to-amber-600-600 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-xl hover:shadow-blue-500/30 flex items-center space-x-2"
                         >
                           <span>💬</span>
                           <span>{lang === 'hi' ? 'चैट करें' : 'Chat Now'}</span>
