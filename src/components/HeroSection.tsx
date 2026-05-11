@@ -243,8 +243,8 @@ export default function HeroSection({ onShopNow }: { onShopNow?: () => void }) {
           Click on cards to explore ✦
         </p>
         <div className="pointer-events-auto mt-116">
-          <button onClick={onShopNow} className="group relative bg-amber-50 outline-4 outline-green-800 px-6 py-2 rounded-full overflow-hidden transition-all duration-300 transform hover:scale-105 shadow-2xl shadow-amber-600-500/30 active:scale-95">
-            <span className={`relative z-10 font-extrabold text-sm tracking-wider uppercase flex items-center justify-center space-x-2 text-white`}>
+          <button onClick={onShopNow} className={`group relative bg-amber-50 px-6 py-2 rounded-full overflow-hidden transition-all duration-300 transform hover:scale-105 shadow-2xl shadow-amber-600-500/30 active:scale-95 ${isDark ? ' outline-4 outline-cyan-400' : 'outline-green-800'}`}>
+            <span className={`relative z-10 font-extrabold text-sm tracking-wider uppercase flex items-center justify-center space-x-2 ${isDark ? 'text-cyan-400' : 'text-black'}`}>
               <span>Shop Now</span>
               <svg className="w-4 h-4 stroke-current fill-none group-hover:translate-x-1.5 transition-transform" viewBox="0 0 24 24">
                 <path d="M5 12h14M12 5l7 7-7 7" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>

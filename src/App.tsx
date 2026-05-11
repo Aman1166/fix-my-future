@@ -1002,27 +1002,25 @@ function Footer() {
   const astroLinks = [
     { label: lang === 'hi' ? 'मुफ़्त कुंडली' : 'Free Kundli', action: () => (window as any).__freeKundli?.() },
     { label: lang === 'hi' ? 'कुंडली मिलान' : 'Kundli Matching', action: () => (window as any).__kundliMatching?.() },
-    {
-      label: lang === 'hi' ? 'राशिफल' : 'Horoscopes',
-      dropdown: [
-        { label: lang === 'hi' ? 'राशिफल' : 'Horoscope', action: () => (window as any).__horoscopesToday?.() },
-        { label: lang === 'hi' ? 'आज का राशिफल' : 'Today\'s Horoscope', action: () => (window as any).__horoscopesToday?.() },
-        { label: lang === 'hi' ? 'दैनिक राशिफल' : 'Daily Horoscope', action: () => (window as any).__horoscopesDaily?.() },
-        { label: lang === 'hi' ? 'कल का राशिफल' : 'Yesterday\'s Horoscope', action: () => (window as any).__horoscopesYesterday?.() },
-        { label: lang === 'hi' ? 'अटूर का राशिफल' : 'Tomorrow\'s Horoscope', action: () => (window as any).__horoscopesTomorrow?.() },
-        { label: lang === 'hi' ? 'साप्ताहिक राशिफल' : 'Weekly Horoscope', action: () => (window as any).__horoscopesWeekly?.() },
-        { label: lang === 'hi' ? 'मासिक राशिफल' : 'Monthly Horoscope', action: () => (window as any).__horoscopesMonthly?.() },
-        { label: lang === 'hi' ? 'वार्षिक राशिफल' : 'Yearly Horoscope', action: () => (window as any).__horoscopesYearly?.() },
-      ]
-    },
     { label: lang === 'hi' ? 'ज्योतिषी से बात करें' : 'Talk to Astrologer', action: () => (window as any).__talk?.() },
+  ];
+
+  const horoscopeLinks = [
+    { label: lang === 'hi' ? 'आज का राशिफल' : 'Today\'s Horoscope', action: () => (window as any).__horoscopesToday?.() },
+    { label: lang === 'hi' ? 'दैनिक राशिफल' : 'Daily Horoscope', action: () => (window as any).__horoscopesDaily?.() },
+    { label: lang === 'hi' ? 'कल का राशिफल' : 'Yesterday\'s Horoscope', action: () => (window as any).__horoscopesYesterday?.() },
+    { label: lang === 'hi' ? 'अटूर का राशिफल' : 'Tomorrow\'s Horoscope', action: () => (window as any).__horoscopesTomorrow?.() },
+    { label: lang === 'hi' ? 'साप्ताहिक राशिफल' : 'Weekly Horoscope', action: () => (window as any).__horoscopesWeekly?.() },
+    { label: lang === 'hi' ? 'मासिक राशिफल' : 'Monthly Horoscope', action: () => (window as any).__horoscopesMonthly?.() },
+    { label: lang === 'hi' ? 'वार्षिक राशिफल' : 'Yearly Horoscope', action: () => (window as any).__horoscopesYearly?.() },
+    { label: lang === 'hi' ? 'चीनी राशिफल' : 'Chinese Horoscope', action: () => (window as any).__horoscopesChinese?.() },
   ];
 
   return (
     <footer className={`${isDark ? 'bg-linear-to-b from-gray-800 via-gray-900 to-gray-900 text-white border-t border-amber-600/20' : 'glass-strong text-[#083f1d] border-t border-[#083f1d]/15'} pt-20 pb-8`}>
       <div className="container mx-auto px-4">
         {/* Main Footer Grid */}
-        <div className="grid md:grid-cols-5 gap-8 mb-16">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-16">
           {/* Brand Section */}
           <div className="md:col-span-1">
             <button onClick={() => (window as any).__goHome?.()} className={`text-2xl font-black mb-6 flex items-center transition-colors group ${isDark ? 'hover:text-amber-400' : 'hover:text-[#083f1d]'}`}>
@@ -1089,37 +1087,29 @@ function Footer() {
           </div>
 
           {/* Astrology Links */}
+          <div>
+            <h4 className={`font-black text-lg mb-6 uppercase tracking-wide ${isDark ? 'text-amber-400' : 'text-[#083f1d]'}`}>{lang === 'hi' ? 'ज्योतिष' : 'Astrology'}</h4>
+            <ul className="space-y-3">
+              {astroLinks.map((item) => (
+                <li key={item.label}>
+                  <button onClick={item.action} className={`${isDark ? 'text-slate-400 hover:text-amber-400' : 'text-[#0a5c2a] hover:text-[#083f1d]'} transition-colors text-sm font-medium hover:translate-x-1 transform duration-300`}>
+                    → {item.label}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+ 
+           {/* Horoscope Links */}
            <div>
-             <h4 className={`font-black text-lg mb-6 uppercase tracking-wide ${isDark ? 'text-amber-400' : 'text-[#083f1d]'}`}>{lang === 'hi' ? 'ज्योतिष' : 'Astrology'}</h4>
+             <h4 className={`font-black text-lg mb-6 uppercase tracking-wide ${isDark ? 'text-amber-400' : 'text-[#083f1d]'}`}>{lang === 'hi' ? 'राशिफल' : 'Horoscope'}</h4>
              <ul className="space-y-3">
-               {astroLinks.map((item) => (
-                 item.dropdown ? (
-                   <li key={item.label} className="relative group">
-                     <button className={`w-full text-left font-medium text-sm transition-all duration-300 hover:translate-x-1 transform flex items-center justify-between ${isDark ? 'text-slate-400 hover:text-amber-400' : 'text-[#0a5c2a] hover:text-[#083f1d]'}`}>
-                       <span>→ {item.label}</span>
-                       <svg className="w-3 h-3 transition-transform group-hover:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                         <path d="M19 9l-7 7-7-7" strokeLinecap="round" strokeLinejoin="round"/>
-                       </svg>
-                     </button>
-                     <div className={`absolute left-0 top-full mt-2 w-56 backdrop-blur-md border rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 ${isDark ? 'bg-gray-800/95 border-amber-600/30' : 'bg-white/95 border-gray-200'}`}>
-                       {item.dropdown.map((dropdownItem, dropdownIndex) => (
-                         <button
-                           key={dropdownIndex}
-                           onClick={dropdownItem.action}
-                           className={`w-full text-left px-4 py-3 text-sm transition-all duration-200 first:rounded-t-xl last:rounded-b-xl ${isDark ? 'text-slate-300 hover:text-amber-400 hover:bg-amber-700/10' : 'text-gray-700 hover:text-amber-600 hover:bg-amber-50'}`}
-                         >
-                           {dropdownItem.label}
-                         </button>
-                       ))}
-                     </div>
-                   </li>
-                 ) : (
-                   <li key={item.label}>
-                     <button onClick={item.action} className={`${isDark ? 'text-slate-400 hover:text-amber-400' : 'text-[#0a5c2a] hover:text-[#083f1d]'} transition-colors text-sm font-medium hover:translate-x-1 transform duration-300`}>
-                       → {item.label}
-                     </button>
-                   </li>
-                 )
+               {horoscopeLinks.map((item) => (
+                 <li key={item.label}>
+                   <button onClick={item.action} className={`${isDark ? 'text-slate-400 hover:text-amber-400' : 'text-[#0a5c2a] hover:text-[#083f1d]'} transition-colors text-sm font-medium hover:translate-x-1 transform duration-300`}>
+                     → {item.label}
+                   </button>
+                 </li>
                ))}
              </ul>
            </div>
