@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
-import { useCart } from '../store';
-import { ThemeContext } from '../App';
+import { useCart } from '../../store';
+import { ThemeContext } from '../../contexts/ThemeContext';
+
 
 export default function CartDrawer() {
   const { isDark } = useContext(ThemeContext);
@@ -47,7 +48,7 @@ export default function CartDrawer() {
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
               </button>
             )}
-            <span className="text-2xl"><i className="fa-solid fa-cart-shopping text-amber-500"></i></span>
+            <span className="text-2xl flex items-center justify-center"><span className="material-symbols-outlined text-amber-500">shopping_cart</span></span>
             <div>
               <h2 className={`font-black text-lg ${isDark ? 'text-white' : 'text-gray-900'}`}>{step === 'checkout' ? 'Checkout' : step === 'success' ? 'Order Placed!' : 'Your Cart'}</h2>
               {step === 'cart' && <p className={`text-[10px] font-bold ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{totalItems} items</p>}
@@ -59,7 +60,7 @@ export default function CartDrawer() {
         {/* Success State */}
         {step === 'success' && (
           <div className="flex-1 flex flex-col items-center justify-center p-8 text-center">
-            <div className="w-24 h-24 bg-green-500/20 border border-green-500/30 rounded-full flex items-center justify-center text-5xl mb-6 animate-bounce"><i className="fa-solid fa-check text-green-500"></i></div>
+            <div className="w-24 h-24 bg-green-500/20 border border-green-500/30 rounded-full flex items-center justify-center text-5xl mb-6 animate-bounce"><span className="material-symbols-outlined text-green-500" style={{ fontSize: '48px' }}>check</span></div>
             <h3 className={`text-2xl font-black mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>Order Successful! 🎉</h3>
             <p className={`text-sm mb-4 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Your order has been placed successfully. You will receive a confirmation email shortly.</p>
             <div className={`rounded-xl p-4 border w-full max-w-xs ${isDark ? 'bg-gray-800 border-white/5' : 'bg-gray-50 border-gray-200'}`}>
@@ -75,7 +76,7 @@ export default function CartDrawer() {
             <div className="flex-1 overflow-y-auto p-4 space-y-3">
               {cart.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full text-center">
-                  <div className="text-6xl mb-4 opacity-30"><i className="fa-solid fa-cart-shopping"></i></div>
+                  <div className="text-6xl mb-4 opacity-30"><span className="material-symbols-outlined" style={{ fontSize: '64px' }}>shopping_cart</span></div>
                   <h3 className={`text-lg font-black mb-1 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Your cart is empty</h3>
                   <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Add some gemstones or rudraksha to get started!</p>
                   <button onClick={() => setIsCartOpen(false)} className="mt-6 px-6 py-2.5 bg-amber-500 text-white font-black text-xs rounded-xl uppercase tracking-wider">
@@ -96,7 +97,7 @@ export default function CartDrawer() {
                       </div>
                     </div>
                     <div className="flex flex-col items-end space-y-2">
-                      <button onClick={() => removeFromCart(item.id)} className={`transition-colors text-xs font-bold ${isDark ? 'text-stone-500 hover:text-red-400' : 'text-gray-400 hover:text-red-500'}`}><i className="fa-solid fa-trash-can"></i></button>
+                      <button onClick={() => removeFromCart(item.id)} className={`transition-colors text-xs font-bold ${isDark ? 'text-stone-500 hover:text-red-400' : 'text-gray-400 hover:text-red-500'}`}><span className="material-symbols-outlined text-sm">delete</span></button>
                       <span className={`font-black text-sm ${isDark ? 'text-white' : 'text-gray-900'}`}>₹{item.priceNum * item.quantity}</span>
                     </div>
                   </div>
@@ -127,7 +128,7 @@ export default function CartDrawer() {
           <div className="flex-1 overflow-y-auto p-4 space-y-4">
             {/* Delivery Address */}
             <div className={`rounded-xl p-4 border space-y-3 ${isDark ? 'bg-gray-800/80 border-white/5' : 'bg-gray-50 border-gray-200'}`}>
-              <h3 className={`font-black text-sm flex items-center space-x-2 ${isDark ? 'text-white' : 'text-gray-900'}`}><span><i className="fa-solid fa-location-dot text-amber-500"></i></span><span>Delivery Address</span></h3>
+              <h3 className={`font-black text-sm flex items-center space-x-2 ${isDark ? 'text-white' : 'text-gray-900'}`}><span><span className="material-symbols-outlined text-amber-500 text-base">location_on</span></span><span>Delivery Address</span></h3>
               <input placeholder="Full Name" className={`w-full rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-amber-500/50 ${isDark ? 'bg-gray-700 border border-white/10 text-white placeholder-stone-500' : 'bg-white border border-gray-200 text-gray-900 placeholder-gray-400'}`} />
               <input placeholder="Phone Number" className={`w-full rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-amber-500/50 ${isDark ? 'bg-gray-700 border border-white/10 text-white placeholder-stone-500' : 'bg-white border border-gray-200 text-gray-900 placeholder-gray-400'}`} />
               <textarea placeholder="Full Address (House No, Street, City, Pincode)" rows={2} className={`w-full rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-amber-500/50 resize-none ${isDark ? 'bg-gray-700 border border-white/10 text-white placeholder-stone-500' : 'bg-white border border-gray-200 text-gray-900 placeholder-gray-400'}`} />
@@ -135,12 +136,12 @@ export default function CartDrawer() {
 
             {/* Payment Methods */}
             <div className={`rounded-xl p-4 border space-y-3 ${isDark ? 'bg-gray-800/80 border-white/5' : 'bg-gray-50 border-gray-200'}`}>
-              <h3 className={`font-black text-sm flex items-center space-x-2 ${isDark ? 'text-white' : 'text-gray-900'}`}><span><i className="fa-solid fa-credit-card text-amber-500"></i></span><span>Payment Method</span></h3>
+              <h3 className={`font-black text-sm flex items-center space-x-2 ${isDark ? 'text-white' : 'text-gray-900'}`}><span><span className="material-symbols-outlined text-amber-500 text-base">credit_card</span></span><span>Payment Method</span></h3>
               {[
-                { id: 'upi', label: 'UPI (GPay / PhonePe / Paytm)', icon: <i className="fa-solid fa-mobile-screen"></i> },
-                { id: 'card', label: 'Credit / Debit Card', icon: <i className="fa-solid fa-credit-card"></i> },
-                { id: 'netbanking', label: 'Net Banking', icon: <i className="fa-solid fa-building-columns"></i> },
-                { id: 'cod', label: 'Cash on Delivery', icon: <i className="fa-solid fa-money-bill-wave"></i> },
+                { id: 'upi', label: 'UPI (GPay / PhonePe / Paytm)', icon: <span className="material-symbols-outlined">phone_iphone</span> },
+                { id: 'card', label: 'Credit / Debit Card', icon: <span className="material-symbols-outlined">credit_card</span> },
+                { id: 'netbanking', label: 'Net Banking', icon: <span className="material-symbols-outlined">account_balance</span> },
+                { id: 'cod', label: 'Cash on Delivery', icon: <span className="material-symbols-outlined">payments</span> },
               ].map(method => (
                 <button
                   key={method.id}
@@ -156,7 +157,7 @@ export default function CartDrawer() {
 
             {/* Order Summary */}
             <div className={`rounded-xl p-4 border space-y-2 ${isDark ? 'bg-gray-800/80 border-white/5' : 'bg-gray-50 border-gray-200'}`}>
-              <h3 className={`font-black text-sm flex items-center space-x-2 ${isDark ? 'text-white' : 'text-gray-900'}`}><span><i className="fa-solid fa-list-check text-amber-500"></i></span><span>Order Summary</span></h3>
+              <h3 className={`font-black text-sm flex items-center space-x-2 ${isDark ? 'text-white' : 'text-gray-900'}`}><span><span className="material-symbols-outlined text-amber-500 text-base">checklist</span></span><span>Order Summary</span></h3>
               {cart.map(item => (
                 <div key={item.id} className={`flex justify-between text-xs ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
                   <span className="truncate mr-2">{item.name} × {item.quantity}</span>

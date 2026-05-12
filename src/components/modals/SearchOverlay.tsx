@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useContext } from 'react';
-import { Product, ThemeContext } from '../App';
+import { ThemeContext } from '../../contexts/ThemeContext';
+import { Product } from '../../constants/data';
 
 export default function SearchOverlay({ isOpen, onClose, allProducts }: { isOpen: boolean; onClose: () => void; allProducts: Product[] }) {
   const [query, setQuery] = useState('');
@@ -60,7 +61,7 @@ export default function SearchOverlay({ isOpen, onClose, allProducts }: { isOpen
             <div className="max-h-[60vh] overflow-y-auto">
               {results.length === 0 ? (
                 <div className="p-8 text-center">
-                  <div className="text-4xl mb-3">🔍</div>
+                  <div className="text-4xl mb-3"><span className="material-symbols-outlined" style={{ fontSize: '48px' }}>search</span></div>
                   <p className={`font-medium ${isDark ? 'text-white' : 'text-gray-700'}`}>No products found for "{query}"</p>
                   <p className={`text-sm mt-1 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Try searching for "emerald", "rudraksha", or "bracelet"</p>
                 </div>

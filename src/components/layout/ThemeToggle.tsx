@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { ThemeContext } from '../contexts/ThemeContext';
+import { ThemeContext } from '../../contexts/ThemeContext';
 
 export default function ThemeToggle() {
   const { isDark, setIsDark } = useContext(ThemeContext);
@@ -27,9 +27,9 @@ export default function ThemeToggle() {
       aria-label="Toggle Theme"
     >
       {isDark ? (
-        <i className="fa-solid fa-sun text-lg md:text-xl"></i>
+        <span className="material-symbols-outlined text-lg md:text-xl">light_mode</span>
       ) : (
-        <i className="fa-solid fa-moon text-lg md:text-xl"></i>
+        <span className="material-symbols-outlined text-lg md:text-xl">dark_mode</span>
       )}
     </button>
   );

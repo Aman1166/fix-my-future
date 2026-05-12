@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { LanguageContext, ThemeContext } from '../App';
-import { ScrollReveal } from './Animations';
+import { ScrollReveal } from '../components/Animations';
 
 export default function PanchangPage({
   isOpen,

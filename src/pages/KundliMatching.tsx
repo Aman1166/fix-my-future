@@ -51,7 +51,7 @@ export default function KundliMatching({
   if (!isOpen) return null;
 
   return (
-    <div className={`fixed inset-0 z-[64] overflow-y-auto ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
+    <div className={`fixed inset-0 z-64 overflow-y-auto ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
       <button
         onClick={onClose}
         className={`fixed top-6 right-6 z-30 w-12 h-12 backdrop-blur-md border rounded-full flex items-center justify-center transition-all shadow-xl hover:scale-110 active:scale-95 ${isDark ? 'bg-gray-800/80 border-white/10 text-white hover:bg-gray-700' : 'bg-white/80 border-gray-200 text-gray-900 hover:bg-gray-100'}`}
@@ -63,7 +63,7 @@ export default function KundliMatching({
 
       <div className="relative h-[32vh] md:h-[40vh] overflow-hidden">
         <div className="absolute inset-0 bg-[url('/astro/g.jpeg')] bg-cover bg-center">
-          <div className={`absolute inset-0 ${isDark ? 'bg-gradient-to-b from-gray-800/60 via-gray-950/40 to-gray-900' : 'bg-gradient-to-b from-white/60 via-white/40 to-white'}`}></div>
+          <div className={`absolute inset-0 ${isDark ? 'bg-linear-to-b from-gray-800/60 via-gray-950/40 to-gray-900' : 'bg-linear-to-b from-white/60 via-white/40 to-white'}`}></div>
         </div>
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
           <span className="text-5xl md:text-7xl mb-4 animate-float">💕</span>
@@ -219,7 +219,7 @@ export default function KundliMatching({
               <button
                 type="submit"
                 onClick={handleSubmit}
-                className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-black py-4 px-8 rounded-xl transition-all shadow-xl hover:shadow-amber-500/30 text-lg"
+                className="bg-linear-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-black py-4 px-8 rounded-xl transition-all shadow-xl hover:shadow-amber-500/30 text-lg"
               >
                 {lang === 'hi' ? 'होरोस्कोप मिलान करें' : 'Match Horoscope'}
               </button>
@@ -304,13 +304,13 @@ export default function KundliMatching({
           <div className="grid md:grid-cols-2 gap-4">
             <button
               onClick={handleTalkToAstrologer}
-              className="bg-gradient-to-r from-purple-500 to-gray-500 hover:from-purple-600 hover:to-gray-600 text-white font-bold py-4 px-6 rounded-xl transition-all shadow-xl hover:shadow-purple-500/30"
+              className="bg-linear-to-r from-purple-500 to-gray-500 hover:from-purple-600 hover:to-gray-600 text-white font-bold py-4 px-6 rounded-xl transition-all shadow-xl hover:shadow-purple-500/30"
             >
               {lang === 'hi' ? 'ज्योतिषी से बात करें' : 'Talk to Astrologer'}
             </button>
             <button
               onClick={handleChatWithAstrologer}
-              className="bg-gradient-to-r from-blue-500 to-amber-500 hover:from-blue-600 hover:to-amber-600 text-white font-bold py-4 px-6 rounded-xl transition-all shadow-xl hover:shadow-blue-500/30"
+              className="bg-linear-to-r from-blue-500 to-amber-500 hover:from-blue-600 hover:to-amber-600 text-white font-bold py-4 px-6 rounded-xl transition-all shadow-xl hover:shadow-blue-500/30"
             >
               {lang === 'hi' ? 'ज्योतिषी से चैट करें' : 'Chat with Astrologer'}
             </button>

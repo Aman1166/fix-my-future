@@ -129,9 +129,9 @@ function SectionHeader({ title, subtitle }: { title: string; subtitle?: string }
         </p>
       )}
       <div className="flex items-center justify-center space-x-1 mt-6">
-        <div className="w-12 h-0.5 bg-linear-to-r from-transparent to-amber-600-400 rounded-full"></div>
+        <div className="w-12 h-0.5 bg-linear-to-r from-transparent to-amber-600/40 rounded-full"></div>
         <span className="text-amber-600 text-[8px] transform rotate-45">◆</span>
-        <div className="w-12 h-0.5 bg-linear-to-l from-transparent to-amber-600-400 rounded-full"></div>
+        <div className="w-12 h-0.5 bg-linear-to-l from-transparent to-amber-600/40 rounded-full"></div>
       </div>
     </div>
   );

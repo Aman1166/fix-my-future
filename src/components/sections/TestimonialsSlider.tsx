@@ -23,7 +23,7 @@ const TestimonialsSlider = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-r from-gray-800 to-gray-800">
+    <section className="py-20 bg-linear-to-r from-gray-800 to-gray-800">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-100 mb-4 gradient-text-strong">
@@ -39,7 +39,7 @@ const TestimonialsSlider = () => {
               <div className="glass-strong rounded-2xl p-8 max-w-md mx-auto text-center hover:scale-105 transition-all">
                 <div className="flex text-yellow-400 text-2xl mb-4 justify-center">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <span key={i}>★</span>
+                    <span key={i} className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
                   ))}
                 </div>
                 <p className="text-slate-300 mb-6 italic leading-relaxed">

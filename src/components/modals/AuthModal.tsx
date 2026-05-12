@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { ThemeContext } from '../App';
+import { ThemeContext } from '../../contexts/ThemeContext';
 
 export default function AuthModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const { isDark } = useContext(ThemeContext);
@@ -26,20 +26,22 @@ export default function AuthModal({ isOpen, onClose }: { isOpen: boolean; onClos
   };
 
   return (
-    <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-60 flex items-center justify-center p-4">
       <div className={`fixed inset-0 backdrop-blur-sm ${isDark ? 'bg-gray-800/80' : 'bg-white/80'}`} onClick={onClose}></div>
       <div className={`relative w-full max-w-md rounded-2xl shadow-2xl overflow-hidden animate-fadeIn ${isDark ? 'bg-gray-800 border border-white/10' : 'bg-white border border-gray-200'}`}>
         {/* Header */}
-        <div className="bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600 p-5 text-center relative">
+        <div className="bg-linear-to-r from-amber-600 via-amber-500 to-amber-600 p-5 text-center relative">
           <button onClick={onClose} className="absolute right-4 top-4 text-white/80 hover:text-white text-xl font-bold">✕</button>
-          <div className="text-3xl mb-1">✨</div>
+          <div className="text-3xl mb-1 flex justify-center"><span className="material-symbols-outlined text-white" style={{ fontSize: '32px' }}>auto_awesome</span></div>
           <h2 className="text-xl font-black text-white">{isLogin ? 'Welcome Back!' : 'Create Account'}</h2>
           <p className="text-xs text-white/80 mt-1">{isLogin ? 'Login to your Fix My Future account' : 'Join Fix My Future for exclusive benefits'}</p>
         </div>
 
         {success ? (
           <div className="p-8 text-center">
-            <div className="w-16 h-16 bg-green-500/20 text-green-400 border border-green-500/30 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl animate-bounce">✓</div>
+            <div className="w-16 h-16 bg-green-500/20 text-green-400 border border-green-500/30 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce">
+              <span className="material-symbols-outlined" style={{ fontSize: '32px' }}>check</span>
+            </div>
             <h3 className={`text-lg font-black mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>{isLogin ? 'Login Successful!' : 'Account Created!'}</h3>
             <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Welcome to Fix My Future! 🎉</p>
           </div>
@@ -72,8 +74,9 @@ export default function AuthModal({ isOpen, onClose }: { isOpen: boolean; onClos
               </div>
             )}
 
-            <button type="submit" className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-black py-3.5 rounded-xl shadow-xl shadow-amber-500/10 active:scale-[0.98] transition-all text-sm tracking-wider uppercase">
-              {isLogin ? '🔐 Login' : '🚀 Create Account'}
+            <button type="submit" className="w-full bg-linear-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-black py-3.5 rounded-xl shadow-xl shadow-amber-500/10 active:scale-[0.98] transition-all text-sm tracking-wider uppercase flex items-center justify-center gap-2">
+              <span className="material-symbols-outlined text-sm">{isLogin ? 'lock' : 'rocket_launch'}</span>
+              <span>{isLogin ? 'Login' : 'Create Account'}</span>
             </button>
 
             <div className="flex items-center space-x-3 my-2">
@@ -88,7 +91,7 @@ export default function AuthModal({ isOpen, onClose }: { isOpen: boolean; onClos
                 <span className={`text-xs font-bold ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>Google</span>
               </button>
               <button type="button" className={`flex items-center justify-center space-x-2 rounded-xl py-2.5 transition-colors ${isDark ? 'bg-gray-700 border border-white/10 hover:bg-slate-700' : 'bg-gray-50 border border-gray-200 hover:bg-gray-100'}`}>
-                <span className="text-lg">📱</span>
+                <span className="material-symbols-outlined text-sm">phone_iphone</span>
                 <span className={`text-xs font-bold ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>OTP Login</span>
               </button>
             </div>

@@ -100,12 +100,12 @@ export default function AIChat() {
         onClick={() => setIsOpen(true)}
         className="fixed bottom-6 right-6 z-50 w-16 h-16 bg-linear-to-br from-purple-600 to-gray-600 rounded-full shadow-2xl shadow-purple-500/30 flex items-center justify-center hover:scale-110 transition-transform group animate-float"
       >
-        <span className="text-3xl group-hover:rotate-12 transition-transform text-white"><i className="fa-solid fa-robot"></i></span>
+        <span className="text-3xl group-hover:rotate-12 transition-transform text-white flex items-center justify-center"><span className="material-symbols-outlined" style={{ fontSize: '32px' }}>smart_toy</span></span>
         <span className="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
           <span className="w-2 h-2 bg-white rounded-full animate-ping"></span>
         </span>
-        <span className="absolute -top-10 right-0 bg-gray-800 text-white text-xs font-bold px-3 py-1.5 rounded-lg whitespace-nowrap shadow-xl opacity-0 group-hover:opacity-100 transition-opacity border border-purple-500/30">
-          Free AI Astrologer <i className="fa-solid fa-sparkles text-amber-500"></i>
+        <span className="absolute -top-10 right-0 bg-gray-800 text-white text-xs font-bold px-3 py-1.5 rounded-lg whitespace-nowrap shadow-xl opacity-0 group-hover:opacity-100 transition-opacity border border-purple-500/30 flex items-center gap-1">
+          Free AI Astrologer <span className="material-symbols-outlined text-amber-500 text-sm">auto_awesome</span>
         </span>
       </button>
     );
@@ -117,7 +117,7 @@ export default function AIChat() {
       <div className="bg-linear-to-r from-purple-900 via-gray-900 to-purple-900 p-4 flex items-center justify-between border-b border-purple-500/20">
         <div className="flex items-center space-x-3">
           <div className="w-10 h-10 bg-linear-to-br from-purple-500 to-gray-500 rounded-full flex items-center justify-center text-xl shadow-lg text-white">
-            <i className="fa-solid fa-robot"></i>
+            <span className="material-symbols-outlined">smart_toy</span>
           </div>
           <div>
             <h3 className="font-black text-white text-sm">AI Astrologer</h3>

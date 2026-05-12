@@ -88,20 +88,20 @@ function StoreContent() {
                     : 'bg-amber-700/20 text-amber-400 border border-amber-600/50 hover:bg-amber-700/40 hover:text-amber-200 hover:scale-105'
                 }`}
               >
-                {addedItems.has(product.id) ? `✓ ${lang === 'hi' ? 'जोड़ा गया' : 'Added'}` : <span><i className="fa-solid fa-cart-shopping"></i> {lang === 'hi' ? 'कार्ट में जोड़ें' : 'Add to Cart'}</span>}
+                {addedItems.has(product.id) ? `✓ ${lang === 'hi' ? 'जोड़ा गया' : 'Added'}` : <span><span className="material-symbols-outlined text-sm align-middle mr-1">shopping_cart</span> {lang === 'hi' ? 'कार्ट में जोड़ें' : 'Add to Cart'}</span>}
               </button>
 
               {/* Rating */}
               <div className="flex items-center justify-center gap-1 mt-3">
                 {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-lg text-yellow-400"><i className="fa-solid fa-star"></i></span>
+                  <span key={i} className="text-lg text-yellow-400"><span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>star</span></span>
                 ))}
               </div>
             </div>
 
             {/* Quick view badge */}
             <div className="absolute top-3 right-3 bg-amber-700/80 text-white px-3 py-1 rounded-full text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity">
-              <i className="fa-solid fa-bolt text-amber-500"></i> {lang === 'hi' ? 'लोकप्रिय' : 'Popular'}
+              <span className="material-symbols-outlined text-amber-500 text-sm align-middle">bolt</span> {lang === 'hi' ? 'लोकप्रिय' : 'Popular'}
             </div>
           </div>
         ))}
@@ -110,17 +110,17 @@ function StoreContent() {
       {/* Store Features */}
       <div className={`grid md:grid-cols-3 gap-6 mt-12 pt-8 border-t ${isDark ? 'border-amber-600/20' : 'border-gray-200'}`}>
         <div className="text-center">
-          <div className="text-4xl mb-3"><i className="fa-solid fa-truck-fast text-amber-500"></i></div>
+          <div className="text-4xl mb-3"><span className="material-symbols-outlined text-amber-500" style={{ fontSize: '40px' }}>local_shipping</span></div>
           <h4 className="font-bold text-amber-500 mb-2">{lang === 'hi' ? 'तेज़ डिलीवरी' : 'Fast Delivery'}</h4>
           <p className={`text-sm ${isDark ? 'text-slate-400' : 'text-gray-600'}`}>{lang === 'hi' ? '3-5 दिनों में पूरे भारत में डिलीवरी' : 'Delivery across India in 3-5 days'}</p>
         </div>
         <div className="text-center">
-          <div className="text-4xl mb-3"><i className="fa-solid fa-certificate text-amber-500"></i></div>
+          <div className="text-4xl mb-3"><span className="material-symbols-outlined text-amber-500" style={{ fontSize: '40px' }}>verified</span></div>
           <h4 className="font-bold text-amber-500 mb-2">{lang === 'hi' ? 'प्रमाणित उत्पाद' : 'Certified Products'}</h4>
           <p className={`text-sm ${isDark ? 'text-slate-400' : 'text-gray-600'}`}>{lang === 'hi' ? 'सभी उत्पाद प्रमाणित और परीक्षित' : 'All products certified & tested'}</p>
         </div>
         <div className="text-center">
-          <div className="text-4xl mb-3"><i className="fa-solid fa-rotate-left text-amber-500"></i></div>
+          <div className="text-4xl mb-3"><span className="material-symbols-outlined text-amber-500" style={{ fontSize: '40px' }}>replay</span></div>
           <h4 className="font-bold text-amber-500 mb-2">{lang === 'hi' ? 'आसान रिटर्न' : 'Easy Returns'}</h4>
           <p className={`text-sm ${isDark ? 'text-slate-400' : 'text-gray-600'}`}>{lang === 'hi' ? '15 दिनों के भीतर बिना सवाल के' : '15 days no questions asked'}</p>
         </div>
@@ -305,7 +305,7 @@ export default function InformationPage({
 
   const pageContent = {
     about: {
-      icon: <i className="fa-solid fa-sparkles"></i>,
+      icon: <span className="material-symbols-outlined">auto_awesome</span>,
       title: lang === 'hi' ? 'हमारे बारे में' : 'About Us',
       subtitle:
         lang === 'hi'
@@ -313,7 +313,7 @@ export default function InformationPage({
           : 'Fix My Future — Your trusted astrology and gemstone platform',
     },
     contact: {
-      icon: <i className="fa-solid fa-phone"></i>,
+      icon: <span className="material-symbols-outlined">call</span>,
       title: lang === 'hi' ? 'संपर्क करें' : 'Contact Us',
       subtitle:
         lang === 'hi'
@@ -321,7 +321,7 @@ export default function InformationPage({
           : 'Our team is always ready to help you',
     },
     faq: {
-      icon: <i className="fa-solid fa-circle-question"></i>,
+      icon: <span className="material-symbols-outlined">help</span>,
       title: lang === 'hi' ? 'अक्सर पूछे जाने वाले सवाल' : 'Frequently Asked Questions',
       subtitle:
         lang === 'hi'
@@ -329,7 +329,7 @@ export default function InformationPage({
           : 'Answers to your most common questions',
     },
     shipping: {
-      icon: <i className="fa-solid fa-truck-fast"></i>,
+      icon: <span className="material-symbols-outlined">local_shipping</span>,
       title: lang === 'hi' ? 'शिपिंग पॉलिसी' : 'Shipping Policy',
       subtitle:
         lang === 'hi'
@@ -337,7 +337,7 @@ export default function InformationPage({
           : 'Complete delivery and shipping information',
     },
     returns: {
-      icon: <i className="fa-solid fa-rotate-left"></i>,
+      icon: <span className="material-symbols-outlined">replay</span>,
       title: lang === 'hi' ? 'रिटर्न पॉलिसी' : 'Returns Policy',
       subtitle:
         lang === 'hi'
@@ -345,7 +345,7 @@ export default function InformationPage({
           : 'Return and refund details',
     },
     pooja: {
-      icon: <i className="fa-solid fa-om"></i>,
+      icon: <span className="material-symbols-outlined">self_improvement</span>,
       title: lang === 'hi' ? 'पूजा बुक करें' : 'Book A Pooja',
       subtitle:
         lang === 'hi'
@@ -353,7 +353,7 @@ export default function InformationPage({
           : 'Book pooja from home',
     },
     store: {
-      icon: <i className="fa-solid fa-cart-shopping"></i>,
+      icon: <span className="material-symbols-outlined">shopping_cart</span>,
       title: lang === 'hi' ? 'एस्ट्रोटॉक स्टोर' : 'Astrotalk Store',
       subtitle:
         lang === 'hi'
@@ -361,7 +361,7 @@ export default function InformationPage({
           : 'Astrology related products',
     },
     blogs: {
-      icon: <i className="fa-solid fa-file-contract"></i>,
+      icon: <span className="material-symbols-outlined">description</span>,
       title: lang === 'hi' ? 'ब्लॉग' : 'Blogs',
       subtitle:
         lang === 'hi'
@@ -369,7 +369,7 @@ export default function InformationPage({
           : 'Articles on astrology and spirituality',
     },
     terms: {
-      icon: <i className="fa-solid fa-scale-balanced"></i>,
+      icon: <span className="material-symbols-outlined">balance</span>,
       title: lang === 'hi' ? 'सेवा की शर्तें' : 'Terms of Service',
       subtitle:
         lang === 'hi'
@@ -377,7 +377,7 @@ export default function InformationPage({
           : 'Terms and conditions for using Fix My Future',
     },
     policy: {
-      icon: <i className="fa-solid fa-shield-halved"></i>,
+      icon: <span className="material-symbols-outlined">security</span>,
       title: lang === 'hi' ? 'गोपनीयता नीति' : 'Privacy Policy',
       subtitle:
         lang === 'hi'
@@ -485,9 +485,9 @@ export default function InformationPage({
               <div>
                 <h3 className={`font-black text-2xl mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>{lang === 'hi' ? 'संपर्क विवरण' : 'Contact Details'}</h3>
                 <div className={`space-y-4 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-                  <div className="flex items-start gap-3"><span><i className="fa-solid fa-phone text-amber-500"></i></span><div><div className={`font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>+91 98765 43210</div><div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{lang === 'hi' ? 'सुबह 9 बजे - रात 9 बजे' : '9 AM - 9 PM'}</div></div></div>
-                  <div className="flex items-start gap-3"><span><i className="fa-solid fa-envelope text-amber-500"></i></span><div><div className={`font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>support@fixmyfuture.com</div><div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{lang === 'hi' ? '24 घंटे ईमेल सपोर्ट' : '24/7 email support'}</div></div></div>
-                  <div className="flex items-start gap-3"><span><i className="fa-solid fa-location-dot text-amber-500"></i></span><div><div className={`font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>New Delhi, India</div><div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{lang === 'hi' ? 'हेडक्वार्टर ऑफिस' : 'Headquarters Office'}</div></div></div>
+                  <div className="flex items-start gap-3"><span><span className="material-symbols-outlined text-amber-500">call</span></span><div><div className={`font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>+91 98765 43210</div><div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{lang === 'hi' ? 'सुबह 9 बजे - रात 9 बजे' : '9 AM - 9 PM'}</div></div></div>
+                  <div className="flex items-start gap-3"><span><span className="material-symbols-outlined text-amber-500">mail</span></span><div><div className={`font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>support@fixmyfuture.com</div><div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{lang === 'hi' ? '24 घंटे ईमेल सपोर्ट' : '24/7 email support'}</div></div></div>
+                  <div className="flex items-start gap-3"><span><span className="material-symbols-outlined text-amber-500">location_on</span></span><div><div className={`font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>New Delhi, India</div><div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{lang === 'hi' ? 'हेडक्वार्टर ऑफिस' : 'Headquarters Office'}</div></div></div>
                 </div>
               </div>
             </div>
@@ -530,17 +530,17 @@ export default function InformationPage({
               {
                 title: lang === 'hi' ? 'स्टैंडर्ड डिलीवरी' : 'Standard Delivery',
                 text: lang === 'hi' ? '3-5 business days' : '3-5 business days',
-                icon: <i className="fa-solid fa-truck-fast"></i>,
+                icon: <span className="material-symbols-outlined">local_shipping</span>,
               },
               {
                 title: lang === 'hi' ? 'फ्री शिपिंग' : 'Free Shipping',
                 text: lang === 'hi' ? '₹999 से ऊपर के ऑर्डर पर' : 'On orders above ₹999',
-                icon: <i className="fa-solid fa-gift"></i>,
+                icon: <span className="material-symbols-outlined">redeem</span>,
               },
               {
                 title: lang === 'hi' ? 'एक्सप्रेस डिलीवरी' : 'Express Delivery',
                 text: lang === 'hi' ? 'Metro cities में उपलब्ध' : 'Available in metro cities',
-                icon: <i className="fa-solid fa-bolt"></i>,
+                icon: <span className="material-symbols-outlined">bolt</span>,
               },
             ].map((item) => (
               <div key={item.title} className={`backdrop-blur-md rounded-2xl border p-6 text-center ${isDark ? 'bg-gray-800/80 border-white/10' : 'bg-gray-50 border-gray-200 shadow-lg'}`}>
@@ -565,7 +565,7 @@ export default function InformationPage({
         )}
         {page === 'pooja' && (
           <div className={`backdrop-blur-md rounded-2xl border p-8 text-center ${isDark ? 'bg-gray-800/80 border-white/10' : 'bg-gray-50 border-gray-200 shadow-lg'}`}>
-            <div className="text-6xl mb-6 text-amber-500"><i className="fa-solid fa-person-digging"></i></div>
+            <div className="text-6xl mb-6 text-amber-500"><span className="material-symbols-outlined" style={{ fontSize: '64px' }}>construction</span></div>
             <h3 className={`font-black text-2xl mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>{current.title}</h3>
             <p className={`text-lg mb-6 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>Content coming soon...</p>
             <p className={isDark ? 'text-gray-400' : 'text-gray-500'}>{lang === 'hi' ? 'हम इस पेज पर काम कर रहे हैं। जल्द ही यह उपलब्ध होगा।' : 'We are working on this page. It will be available soon.'}</p>

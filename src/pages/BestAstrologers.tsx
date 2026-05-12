@@ -159,7 +159,7 @@ export default function BestAstrologers({
           <div className="absolute inset-0 bg-linear-to-b from-gray-800/60 via-gray-950/40 to-gray-900"></div>
         </div>
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
-          <span className="text-5xl md:text-7xl mb-4 animate-float text-amber-500"><i className="fa-solid fa-wand-magic-sparkles"></i></span>
+          <span className="text-5xl md:text-7xl mb-4 animate-float text-amber-500"><span className="material-symbols-outlined" style={{ fontSize: '64px' }}>magic_exchange</span></span>
           <h1 className="text-4xl md:text-6xl font-black text-white mb-3 tracking-tight drop-shadow-xl animate-slideInUp">
             {lang === 'hi' ? 'अलवर में सर्वश्रेष्ठ ज्योतिषी' : 'Best Astrologer in Alwar'}
           </h1>
@@ -270,13 +270,13 @@ export default function BestAstrologers({
                     <div className="flex text-yellow-400">
                       {[...Array(5)].map((_, i) => (
                         <span key={i} className={i < Math.floor(astrologer.rating) ? 'text-yellow-400' : 'text-stone-600'}>
-                          <i className="fa-solid fa-star"></i>
+                          <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
                         </span>
                       ))}
                     </div>
                     <span>({astrologer.rating})</span>
                     <span>•</span>
-                    <span>{astrologer.orders} orders</span>
+                    <span>{astrologer.orders} {lang === 'hi' ? 'ऑर्डर' : 'orders'}</span>
                   </div>
                   <div className="text-gray-400 text-xs mb-2">
                     {astrologer.waitTime}
@@ -311,7 +311,7 @@ export default function BestAstrologers({
                 onClick={() => handleCall(astrologer)}
                 className="w-full bg-linear-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-xl hover:shadow-green-500/30 flex items-center justify-center space-x-2"
               >
-                <span><i className="fa-solid fa-phone"></i></span>
+                <span><span className="material-symbols-outlined">call</span></span>
                 <span>{lang === 'hi' ? 'कॉल करें' : 'Call Now'}</span>
               </button>
             </div>

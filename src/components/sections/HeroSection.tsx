@@ -1,15 +1,16 @@
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three";
-import { useRef, useMemo, useState, useContext } from "react";
+import { useRef, useMemo, useState, useContext, useEffect } from "react";
 import * as THREE from "three";
-import { ThemeContext } from "../contexts/ThemeContext";
+import { ThemeContext } from "../../contexts/ThemeContext";
+import { useNavigate } from "react-router-dom";
 
 // Background Image Component
 function ImageBackground() {
   const { isDark } = useContext(ThemeContext);
   return (
     <img
-      src={isDark ? "/astro/g.jpeg" : "/astro/light/bg 2.png"}
+      src={isDark ? "/astro/g.jpeg" : "/astro/light/hero_bg.jpg"}
       alt="cosmic background"
       className="absolute top-0 left-0 w-full h-full object-cover "
     />
@@ -18,7 +19,8 @@ function ImageBackground() {
 
 // Rotating Earth Sphere
 function Earth() {
-  const texture = useLoader(TextureLoader, "/astro/ea.jpg");
+  const { isDark } = useContext(ThemeContext);
+  const texture = useLoader(TextureLoader, isDark ? "/astro/ea.png" : "/astro/ea.png");
   const earthRef = useRef<THREE.Mesh>(null);
 
   useFrame(() => {
@@ -80,22 +82,23 @@ function CardsOrbit() {
   const groupRef = useRef<THREE.Group>(null);
   const cardRefs = useRef<(THREE.Mesh | null)[]>([]);
   const [hovered, setHovered] = useState<number | null>(null);
+  const navigate = useNavigate();
 
   const images = useMemo(
     () => isDark ? [
-      "/astro/CARD 2.jpg.jpeg", // Free Kundli
-      "/astro/CARD 4.jpg.jpeg", // Kundli Matching
-      "/astro/CARD 3.jpg.jpeg", // Compatibility
       "/astro/CARD 1.jpg.jpeg", // Daily Horoscope
+      "/astro/CARD 2.jpg.jpeg", // Free Kundli
+      "/astro/CARD 3.jpg.jpeg", // Compatibility
+      "/astro/CARD 4.jpg.jpeg", // Kundli Matching
       "/astro/CARD 5.jpg.jpeg", // Chinese Horoscope
-      "/astro/CARD 6.jpg.jpeg", // Today's Panchang
+      "/astro/CARD 6.jpg.jpeg", // Today Panchang
     ] : [
-      "/astro/light/CARD3.jpeg", // Free Kundli
-      "/astro/light/CARD2.jpeg", // Kundli Matching
-      "/astro/light/CARD4.jpeg", // Compatibility
       "/astro/light/CARD1.jpeg", // Daily Horoscope
+      "/astro/light/CARD2.jpeg", // Kundli Matching
+      "/astro/light/CARD3.jpeg", // Free Kundli
+      "/astro/light/CARD4.jpeg", // Compatibility
       "/astro/light/CARD5.jpeg", // Chinese Horoscope
-      "/astro/light/CARD6.jpeg", // Today's Panchang
+      "/astro/light/CARD6.jpeg", // Today Panchang
     ],
     [isDark]
   );
@@ -104,14 +107,26 @@ function CardsOrbit() {
   const radius = 3.2;
   const scale = 0.9;
 
-  const handlers = [
-    () => (window as any).__horoscopesYesterday?.(),
-    () => (window as any).__horoscopesTomorrow?.(),
-    () => (window as any).__horoscopesYearly?.(),
-    () => (window as any).__horoscopesDaily?.(),
-    () => (window as any).__horoscopesWeekly?.(),
-    () => (window as any).__horoscopesMonthly?.(),
-  ];
+  const handlers = useMemo(() => {
+    if (isDark) {
+      return [
+        () => navigate('/horoscope/daily'),
+        () => navigate('/kundli'),
+        () => navigate('/compatibility'),
+        () => navigate('/matching'),
+        () => navigate('/horoscope/chinese'),
+        () => navigate('/panchang'),
+      ];
+    }
+    return [
+      () => navigate('/horoscope/daily'),
+      () => navigate('/matching'),
+      () => navigate('/kundli'),
+      () => navigate('/compatibility'),
+      () => navigate('/horoscope/chinese'),
+      () => navigate('/panchang'),
+    ];
+  }, [isDark, navigate]);
 
   const cardGeometry = useMemo(() => createRoundedPlane(1.3, 2.4, 0.12), []);
 
@@ -187,6 +202,12 @@ function StarField() {
     return geo;
   }, []);
 
+  useEffect(() => {
+    return () => {
+      if (geometry) geometry.dispose();
+    };
+  }, [geometry]);
+
   useFrame(() => {
     if (pointsRef.current) {
       pointsRef.current.rotation.y += 0.0002;
@@ -215,7 +236,19 @@ export default function HeroSection({ onShopNow }: { onShopNow?: () => void }) {
 
       {/* 3D Canvas Layer */}
       <div className="absolute inset-0 z-6">
-        <Canvas camera={{ position: [0, 0, 9], fov: 45 }}>
+        <Canvas 
+          camera={{ position: [0, 0, 11], fov: 45 }}
+          onCreated={({ gl }) => {
+            gl.setClearColor('#000000', 0);
+          }}
+          onPointerMissed={() => {}} // Stability hint
+          gl={{ 
+            powerPreference: "high-performance",
+            antialias: true,
+            stencil: false,
+            depth: true
+          }}
+        >
           <ambientLight intensity={0.6} />
           <pointLight position={[5, 5, 5]} intensity={1.2} color="#edbc7d" />
           <pointLight position={[-5, 3, 2]} intensity={0.5} color="#f5d9a8" />

@@ -794,8 +794,14 @@ html:not(.dark) a[class*="bg-green"]:hover {
 }
 
 /* Icon colors */
-html:not(.dark) i {
+html:not(.dark) i,
+html:not(.dark) .material-symbols-outlined {
   color: #0A4F23;
+}
+
+.material-symbols-outlined {
+  vertical-align: middle;
+  line-height: 1;
 }
 
 /* Active states */

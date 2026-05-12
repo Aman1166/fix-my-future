@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { LanguageContext, ThemeContext } from '../App';
-import { ScrollReveal } from './Animations';
+import { ScrollReveal } from '../components/Animations';
 
 const animals = [
   { name: 'Rat', pin: 'Shu', image: '/astro/chinese/rat.png', desc: 'People born in the Year of the Rat are intuitive, versatile, and quick-witted. They have strong curiosity and are good at dealing with difficulties. They are often successful in their careers due to their hardworking nature and positive attitude.', years: '1924, 1936, 1948, 1960, 1972, 1984, 1996, 2008, 2020' },

@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react';
-import { LanguageContext, ThemeContext } from '../App';
+import { LanguageContext } from '../contexts/LanguageContext';
+import { ThemeContext } from '../contexts/ThemeContext';
 import { useCart } from '../store';
+import { gemstoneProducts, rudrakshaProducts, braceletProducts } from '../constants/data';
 
 export interface Product {
   id: number;
@@ -15,7 +17,6 @@ export interface Product {
 function ProductCard({ product, isDark }: { product: Product; isDark: boolean }) {
   const { lang } = useContext(LanguageContext);
   const { addToCart } = useCart();
-  const [isHovered, setIsHovered] = useState(false);
   const [added, setAdded] = useState(false);
 
   const priceNum = parseInt(product.price.replace(/[^\d]/g, '')) || 0;
@@ -37,8 +38,6 @@ function ProductCard({ product, isDark }: { product: Product; isDark: boolean })
 
   return (
     <div
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
       className={`group relative rounded-2xl border overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer ${isDark ? 'bg-gray-800/80 border-white/10 backdrop-blur-md' : 'bg-white border-gray-200 shadow-md'}`}
     >
       <div className={`relative h-48 overflow-hidden ${isDark ? 'bg-gray-800' : 'bg-gray-100'}`}>
@@ -47,7 +46,7 @@ function ProductCard({ product, isDark }: { product: Product; isDark: boolean })
           alt={product.name}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
         />
-        <div className={`absolute inset-0 ${isDark ? 'bg-gradient-to-t from-gray-800 via-transparent to-transparent' : 'bg-gradient-to-t from-white via-transparent to-transparent'} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
+        <div className={`absolute inset-0 ${isDark ? 'bg-linear-to-t from-gray-800 via-transparent to-transparent' : 'bg-linear-to-t from-white via-transparent to-transparent'} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
       </div>
 
       <div className="p-4">
@@ -71,7 +70,7 @@ function ProductCard({ product, isDark }: { product: Product; isDark: boolean })
 
         <button 
           onClick={handleAddToCart}
-          className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-black py-2.5 rounded-xl transition-all text-xs uppercase tracking-wider"
+          className="w-full bg-linear-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-black py-2.5 rounded-xl transition-all text-xs uppercase tracking-wider"
         >
           {lang === 'hi' ? 'कार्ट में जोड़ें' : 'Add to Cart'} 🛒
         </button>
@@ -100,6 +99,12 @@ const ProductCategoryPage: React.FC<ProductCategoryPageProps> = ({
   const { lang } = useContext(LanguageContext);
   const { isDark } = useContext(ThemeContext);
 
+  const displayProducts = products.length > 0 ? products : (
+    category === 'gemstones' ? gemstoneProducts :
+    category === 'rudraksha' ? rudrakshaProducts :
+    category === 'bracelets' ? braceletProducts : []
+  );
+
   if (!isOpen) return null;
 
   const descriptions: Record<string, string> = {
@@ -115,7 +120,7 @@ const ProductCategoryPage: React.FC<ProductCategoryPageProps> = ({
   };
 
   return (
-    <div className={`fixed inset-0 z-[64] overflow-y-auto ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
+    <div className={`fixed inset-0 z-64 overflow-y-auto ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
       {/* Close Button */}
       <button
         onClick={onClose}
@@ -129,7 +134,7 @@ const ProductCategoryPage: React.FC<ProductCategoryPageProps> = ({
       {/* Hero Section */}
       <div className="relative h-[32vh] md:h-[40vh] overflow-hidden">
         <div className="absolute inset-0 bg-[url('/astro/g.jpeg')] bg-cover bg-center">
-          <div className={`absolute inset-0 ${isDark ? 'bg-gradient-to-b from-gray-800/60 via-gray-950/40 to-gray-900' : 'bg-gradient-to-b from-white/60 via-white/40 to-white'}`}></div>
+          <div className={`absolute inset-0 ${isDark ? 'bg-linear-to-b from-gray-800/60 via-gray-950/40 to-gray-900' : 'bg-linear-to-b from-white/60 via-white/40 to-white'}`}></div>
         </div>
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
           <span className="text-5xl md:text-7xl mb-4 animate-float">{categoryIcon}</span>
@@ -156,12 +161,12 @@ const ProductCategoryPage: React.FC<ProductCategoryPageProps> = ({
           <h2 className={`text-2xl md:text-3xl font-black text-center mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             {categoryTitle} - {products.length} {lang === 'hi' ? 'उत्पाद' : 'Products'}
           </h2>
-          <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-amber-500 to-transparent mx-auto mb-6"></div>
+          <div className="w-16 h-0.5 bg-linear-to-r from-transparent via-amber-500 to-transparent mx-auto mb-6"></div>
         </div>
 
-        {products.length > 0 ? (
+        {displayProducts.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {products.map((product) => (
+            {displayProducts.map((product) => (
               <ProductCard key={product.id} product={product} isDark={isDark} />
             ))}
           </div>
@@ -172,7 +177,7 @@ const ProductCategoryPage: React.FC<ProductCategoryPageProps> = ({
             <p className="text-sm mb-6">Check back later for new arrivals</p>
             <button 
               onClick={onClose}
-              className="bg-gradient-to-r from-amber-500 to-amber-600 text-white font-black px-8 py-3 rounded-xl transition-all uppercase tracking-wider"
+              className="bg-linear-to-r from-amber-500 to-amber-600 text-white font-black px-8 py-3 rounded-xl transition-all uppercase tracking-wider"
             >
               {lang === 'hi' ? 'वापस जाएं' : 'Go Back'}
             </button>

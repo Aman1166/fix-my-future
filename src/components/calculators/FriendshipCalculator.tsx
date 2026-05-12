@@ -31,12 +31,12 @@ export default function FriendshipCalculator({ isOpen, onClose }: { isOpen: bool
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[64] overflow-y-auto bg-gray-800">
+    <div className="fixed inset-0 z-64 overflow-y-auto bg-gray-800">
       <button onClick={onClose} className="fixed top-6 right-6 z-30 w-12 h-12 bg-gray-800/80 backdrop-blur-md border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-gray-700 transition-all shadow-xl hover:scale-110 active:scale-95">
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
       </button>
       <div className="relative h-[32vh] md:h-[40vh] overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/astro/g.jpeg')] bg-cover bg-center"><div className="absolute inset-0 bg-gradient-to-b from-gray-800/60 via-gray-950/40 to-gray-900"></div></div>
+        <div className="absolute inset-0 bg-[url('/astro/g.jpeg')] bg-cover bg-center"><div className="absolute inset-0 bg-linear-to-b from-gray-800/60 via-gray-950/40 to-gray-900"></div></div>
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
           <span className="text-5xl md:text-7xl mb-4 animate-float">👫</span>
           <h1 className="text-4xl md:text-6xl font-black text-white mb-3 tracking-tight drop-shadow-xl animate-slideInUp">
@@ -53,7 +53,7 @@ export default function FriendshipCalculator({ isOpen, onClose }: { isOpen: bool
                 <div><label className="block text-gray-300 font-bold mb-2">{lang === 'hi' ? 'पहला नाम' : 'First Name'}</label><input type="text" name="firstName" value={formData.firstName} onChange={handleInputChange} className="w-full bg-gray-700 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-stone-500 focus:outline-none focus:border-amber-500/50" placeholder={lang === 'hi' ? 'पहला नाम दर्ज करें' : 'Enter first name'} required /></div>
                 <div><label className="block text-gray-300 font-bold mb-2">{lang === 'hi' ? 'दूसरा नाम' : 'Second Name'}</label><input type="text" name="secondName" value={formData.secondName} onChange={handleInputChange} className="w-full bg-gray-700 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-stone-500 focus:outline-none focus:border-amber-500/50" placeholder={lang === 'hi' ? 'दूसरा नाम दर्ज करें' : 'Enter second name'} required /></div>
               </div>
-              <div className="text-center"><button type="submit" className="bg-gradient-to-r from-blue-500 to-amber-600-500 hover:from-blue-600 hover:to-amber-600-600 text-white font-black py-4 px-8 rounded-xl transition-all shadow-xl hover:shadow-blue-500/30 text-lg">{lang === 'hi' ? 'मित्रता कैल्कुलेट करें' : 'Calculate Friendship'}</button></div>
+              <div className="text-center"><button type="submit" className="bg-linear-to-r from-blue-500 to-amber-600-500 hover:from-blue-600 hover:to-amber-600-600 text-white font-black py-4 px-8 rounded-xl transition-all shadow-xl hover:shadow-blue-500/30 text-lg">{lang === 'hi' ? 'मित्रता कैल्कुलेट करें' : 'Calculate Friendship'}</button></div>
             </form>
           ) : (
             <div className="text-center">

@@ -59,7 +59,7 @@ function ProductCard({ product }: { product: Product }) {
           alt={product.name}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div className="absolute inset-0 bg-linear-to-t from-gray-800 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       </div>
 
       <div className="p-4">
@@ -83,7 +83,7 @@ function ProductCard({ product }: { product: Product }) {
 
         <button 
           onClick={handleAddToCart}
-          className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-black py-2.5 rounded-xl transition-all text-xs uppercase tracking-wider"
+          className="w-full bg-linear-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-black py-2.5 rounded-xl transition-all text-xs uppercase tracking-wider"
         >
           {lang === 'hi' ? 'कार्ट में जोड़ें' : 'Add to Cart'} 🛒
         </button>
@@ -104,7 +104,7 @@ const ShopNowPage: React.FC<ShopNowPageProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className={`fixed inset-0 z-[64] overflow-y-auto ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
+    <div className={`fixed inset-0 z-64 overflow-y-auto ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
       {/* Close Button */}
       <button
         onClick={onClose}
@@ -118,7 +118,7 @@ const ShopNowPage: React.FC<ShopNowPageProps> = ({ isOpen, onClose }) => {
       {/* Hero Section */}
       <div className="relative h-[32vh] md:h-[40vh] overflow-hidden">
         <div className="absolute inset-0 bg-[url('/astro/g.jpeg')] bg-cover bg-center">
-          <div className={`absolute inset-0 ${isDark ? 'bg-gradient-to-b from-gray-800/60 via-gray-950/40 to-gray-900' : 'bg-gradient-to-b from-white/60 via-white/40 to-white'}`}></div>
+          <div className={`absolute inset-0 ${isDark ? 'bg-linear-to-b from-gray-800/60 via-gray-950/40 to-gray-900' : 'bg-linear-to-b from-white/60 via-white/40 to-white'}`}></div>
         </div>
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
           <span className="text-5xl md:text-7xl mb-4 animate-float">🛍️</span>
@@ -145,7 +145,7 @@ const ShopNowPage: React.FC<ShopNowPageProps> = ({ isOpen, onClose }) => {
           <h2 className={`text-2xl md:text-3xl font-black text-center mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             {allProducts.length} {lang === 'hi' ? 'उत्पाद उपलब्ध' : 'Products Available'}
           </h2>
-          <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-amber-500 to-transparent mx-auto mb-6"></div>
+          <div className="w-16 h-0.5 bg-linear-to-r from-transparent via-amber-500 to-transparent mx-auto mb-6"></div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">

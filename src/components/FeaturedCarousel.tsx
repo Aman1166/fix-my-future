@@ -1,6 +1,6 @@
 const FeaturedCarousel = () => {
   return (
-    <section className="py-16 bg-gradient-to-r from-gray-800 to-gray-800">
+    <section className="py-16 bg-linear-to-r from-gray-800 to-gray-800">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-100 mb-4 gradient-text-strong">
@@ -13,7 +13,7 @@ const FeaturedCarousel = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Placeholder products */}
           <div className="glass-strong rounded-2xl p-8 text-center hover:scale-105 transition-all">
-            <div className="w-24 h-24 bg-gradient-to-br from-amber-600-500 to-blue-500 rounded-xl mx-auto mb-4 flex items-center justify-center text-2xl">
+            <div className="w-24 h-24 bg-linear-to-br from-amber-500 to-blue-500 rounded-xl mx-auto mb-4 flex items-center justify-center text-2xl">
               💎
             </div>
             <h3 className="font-bold text-xl mb-2 text-gray-100">Premium Emerald</h3>
@@ -23,7 +23,7 @@ const FeaturedCarousel = () => {
             </button>
           </div>
           <div className="glass-strong rounded-2xl p-8 text-center hover:scale-105 transition-all">
-            <div className="w-24 h-24 bg-gradient-to-br from-emerald-500 to-green-500 rounded-xl mx-auto mb-4 flex items-center justify-center text-2xl">
+            <div className="w-24 h-24 bg-linear-to-br from-emerald-500 to-green-500 rounded-xl mx-auto mb-4 flex items-center justify-center text-2xl">
               📿
             </div>
             <h3 className="font-bold text-xl mb-2 text-gray-100">7 Mukhi Rudraksha</h3>
@@ -33,7 +33,7 @@ const FeaturedCarousel = () => {
             </button>
           </div>
           <div className="glass-strong rounded-2xl p-8 text-center hover:scale-105 transition-all">
-            <div className="w-24 h-24 bg-gradient-to-br from-amber-500 to-amber-600-500 rounded-xl mx-auto mb-4 flex items-center justify-center text-2xl">
+            <div className="w-24 h-24 bg-linear-to-br from-amber-500 to-amber-600 rounded-xl mx-auto mb-4 flex items-center justify-center text-2xl">
               🧿
             </div>
             <h3 className="font-bold text-xl mb-2 text-gray-100">Zodiac Bracelet</h3>

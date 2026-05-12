@@ -77,7 +77,7 @@ export default function ChatRoom({
   };
 
   return (
-    <div className="fixed inset-0 z-[64] bg-gray-800 flex flex-col">
+    <div className="fixed inset-0 z-64 bg-gray-800 flex flex-col">
       {/* Header */}
       <div className="bg-gray-800/95 backdrop-blur-md border-b border-white/10 p-4 flex items-center justify-between">
         <button
@@ -149,7 +149,7 @@ export default function ChatRoom({
           <button
             onClick={handleSendMessage}
             disabled={!newMessage.trim()}
-            className="bg-gradient-to-r from-amber-600-500 to-blue-500 hover:from-amber-600-600 hover:to-blue-600 disabled:from-gray-700 disabled:to-gray-800 text-white font-bold px-6 py-3 rounded-xl transition-all shadow-lg hover:shadow-amber-600-500/30 disabled:cursor-not-allowed flex items-center space-x-2"
+            className="bg-linear-to-r from-amber-500 to-blue-500 hover:from-amber-600 hover:to-blue-600 disabled:from-gray-700 disabled:to-gray-800 text-white font-bold px-6 py-3 rounded-xl transition-all shadow-lg hover:shadow-amber-500/30 disabled:cursor-not-allowed flex items-center space-x-2"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
