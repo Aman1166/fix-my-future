@@ -23,6 +23,9 @@ const PanchangPage = lazy(() => import('../pages/PanchangPage'));
 const ProductCategoryPage = lazy(() => import('../pages/ProductCategoryPage'));
 const ShopNowPage = lazy(() => import('../pages/ShopNowPage'));
 const InformationPage = lazy(() => import('../pages/InformationPage'));
+const TarotPage = lazy(() => import('../pages/TarotPage'));
+const WalletPage = lazy(() => import('../pages/WalletPage'));
+const KundliResultPage = lazy(() => import('../pages/KundliResultPage'));
 
 const Loading = () => <div className="min-h-screen flex items-center justify-center bg-gray-900 text-amber-500 font-bold">Loading...</div>;
 
@@ -72,6 +75,11 @@ export default function AppRoutes() {
           <Route path="/pooja" element={<InformationPage isOpen={true} onClose={() => window.history.back()} page="pooja" />} />
           <Route path="/store" element={<InformationPage isOpen={true} onClose={() => window.history.back()} page="store" />} />
           <Route path="/blogs" element={<InformationPage isOpen={true} onClose={() => window.history.back()} page="blogs" />} />
+          
+          {/* New Pages */}
+          <Route path="/tarot" element={<TarotPage isOpen={true} onClose={() => window.history.back()} />} />
+          <Route path="/wallet" element={<WalletPage isOpen={true} onClose={() => window.history.back()} />} />
+          <Route path="/kundli/details" element={<KundliResultPage isOpen={true} onClose={() => window.history.back()} formData={{}} />} />
         </Route>
       </Routes>
     </Suspense>

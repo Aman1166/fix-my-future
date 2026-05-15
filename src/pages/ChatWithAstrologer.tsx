@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { LanguageContext, ThemeContext } from '../App';
-import ChatRoom from './ChatRoom';
+import ChatRoom from '../components/ChatRoom';
 
 export default function ChatWithAstrologer({
   isOpen,

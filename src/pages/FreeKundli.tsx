@@ -1,5 +1,7 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { LanguageContext, ThemeContext } from '../App';
+import KundliForm from '../components/kundli/KundliForm';
+import KundliResultPage from './KundliResultPage';
 
 export default function FreeKundli({
   isOpen,
@@ -10,33 +12,50 @@ export default function FreeKundli({
 }) {
   const { lang } = useContext(LanguageContext);
   const { isDark } = useContext(ThemeContext);
-  const [formData, setFormData] = useState({
-    name: '',
-    gender: '',
-    birthDate: '',
-    birthTime: '',
-    birthPlace: '',
+  
+  // Load initial state from localStorage if available
+  const [formData, setFormData] = useState(() => {
+    const saved = localStorage.getItem('kundliFormData');
+    return saved ? JSON.parse(saved) : {
+      name: '',
+      gender: '',
+      birthDate: '',
+      birthTime: '',
+      birthPlace: '',
+    };
   });
-  const [showResult, setShowResult] = useState(false);
+  
+  const [showResult, setShowResult] = useState(() => {
+    return localStorage.getItem('showKundliResult') === 'true';
+  });
+  
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
+  // Sync state to localStorage
+  useEffect(() => {
+    localStorage.setItem('kundliFormData', JSON.stringify(formData));
+  }, [formData]);
+
+  useEffect(() => {
+    localStorage.setItem('showKundliResult', showResult.toString());
+  }, [showResult]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.name && formData.gender && formData.birthDate && formData.birthTime && formData.birthPlace) {
-      setShowResult(true);
+      setIsLoading(true);
+      // Simulate API call
+      setTimeout(() => {
+        setIsLoading(false);
+        setShowResult(true);
+        // Scroll to top of result
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 1500);
     }
   };
 
-  const handleLogin = () => {
-    (window as any).__setAuth?.(true);
-  };
-
-  const handleTalkToAstrologer = () => {
-    (window as any).__talk?.();
+  const handleBackToForm = () => {
+    setShowResult(false);
   };
 
   if (!isOpen) return null;
@@ -68,155 +87,31 @@ export default function FreeKundli({
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 md:px-8 py-12">
-        {/* Description */}
-        <div className={`rounded-2xl border p-6 mb-8 ${isDark ? 'bg-gray-800/80 backdrop-blur-md border-white/10' : 'bg-gray-50 border-gray-200'}`}>
-          <p className={`text-lg leading-relaxed ${isDark ? 'text-white' : 'text-gray-700'}`}>
-            {lang === 'hi'
-              ? 'क्या आपने कभी सोचा है कि आपका भविष्य क्या लेकर आया है? एक मुफ्त ऑनलाइन कुंडली आपके व्यक्तित्व, करियर, रिश्तों और भविष्य के बारे में विवरण दिखा सकती है।'
-              : 'Ever thought about what your future holds? A free online kundli can show details about your personality, career, relationships, and future.'}
-          </p>
-        </div>
-
-        {/* Form */}
+      <div className="max-w-6xl mx-auto px-4 md:px-8 py-12">
         {!showResult ? (
-          <div className={`rounded-2xl border p-8 ${isDark ? 'bg-gray-800/80 backdrop-blur-md border-white/10' : 'bg-gray-50 border-gray-200'}`}>
-            <h3 className={`font-black text-2xl mb-6 text-center ${isDark ? 'text-white' : 'text-gray-900'}`}>
-              {lang === 'hi' ? 'अपनी कुंडली बनाएं' : 'Create Your Kundli'}
-            </h3>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label className={`block font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-700'}`}>
-                    {lang === 'hi' ? 'नाम' : 'Name'}
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    className={`w-full rounded-xl px-4 py-3 focus:outline-none focus:border-amber-500/50 ${isDark ? 'bg-gray-700 border border-white/10 text-white placeholder-stone-500' : 'bg-white border border-gray-200 text-gray-900 placeholder-gray-400'}`}
-                    placeholder={lang === 'hi' ? 'अपना नाम दर्ज करें' : 'Enter your name'}
-                    required
-                  />
-                </div>
-                <div>
-                  <label className={`block font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-700'}`}>
-                    {lang === 'hi' ? 'लिंग' : 'Gender'}
-                  </label>
-                  <select
-                    name="gender"
-                    value={formData.gender}
-                    onChange={handleInputChange}
-                    className={`w-full rounded-xl px-4 py-3 focus:outline-none focus:border-amber-500/50 ${isDark ? 'bg-gray-700 border border-white/10 text-white' : 'bg-white border border-gray-200 text-gray-900'}`}
-                    required
-                  >
-                    <option value="">
-                      {lang === 'hi' ? 'लिंग चुनें' : 'Select gender'}
-                    </option>
-                    <option value="male">
-                      {lang === 'hi' ? 'पुरुष' : 'Male'}
-                    </option>
-                    <option value="female">
-                      {lang === 'hi' ? 'महिला' : 'Female'}
-                    </option>
-                  </select>
-                </div>
-              </div>
-              <div className="grid md:grid-cols-3 gap-6">
-                <div>
-                  <label className={`block font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-700'}`}>
-                    {lang === 'hi' ? 'जन्म तिथि' : 'Birth Date'}
-                  </label>
-                  <input
-                    type="date"
-                    name="birthDate"
-                    value={formData.birthDate}
-                    onChange={handleInputChange}
-                    className={`w-full rounded-xl px-4 py-3 focus:outline-none focus:border-amber-500/50 ${isDark ? 'bg-gray-700 border border-white/10 text-white' : 'bg-white border border-gray-200 text-gray-900'}`}
-                    required
-                  />
-                </div>
-                <div>
-                  <label className={`block font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-700'}`}>
-                    {lang === 'hi' ? 'जन्म समय' : 'Birth Time'}
-                  </label>
-                  <input
-                    type="time"
-                    name="birthTime"
-                    value={formData.birthTime}
-                    onChange={handleInputChange}
-                    className={`w-full rounded-xl px-4 py-3 focus:outline-none focus:border-amber-500/50 ${isDark ? 'bg-gray-700 border border-white/10 text-white' : 'bg-white border border-gray-200 text-gray-900'}`}
-                    required
-                  />
-                </div>
-                <div>
-                  <label className={`block font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-700'}`}>
-                    {lang === 'hi' ? 'जन्म स्थान' : 'Birth Place'}
-                  </label>
-                  <input
-                    type="text"
-                    name="birthPlace"
-                    value={formData.birthPlace}
-                    onChange={handleInputChange}
-                    className={`w-full rounded-xl px-4 py-3 focus:outline-none focus:border-amber-500/50 ${isDark ? 'bg-gray-700 border border-white/10 text-white placeholder-stone-500' : 'bg-white border border-gray-200 text-gray-900 placeholder-gray-400'}`}
-                    placeholder={lang === 'hi' ? 'जन्म स्थान दर्ज करें' : 'Enter birth place'}
-                    required
-                  />
-                </div>
-              </div>
-              <button
-                type="submit"
-                className="w-full bg-linear-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-black py-3.5 rounded-xl transition-all"
-              >
-                {lang === 'hi' ? 'कुंडली बनाएं' : 'Create Kundli'}
-              </button>
-            </form>
+          <div className="max-w-4xl mx-auto">
+            {/* Description */}
+            <div className={`rounded-2xl border p-6 mb-8 animate-fadeIn ${isDark ? 'bg-gray-800/80 backdrop-blur-md border-white/10' : 'bg-gray-50 border-gray-200'}`}>
+              <p className={`text-lg leading-relaxed ${isDark ? 'text-white' : 'text-gray-700'}`}>
+                {lang === 'hi'
+                  ? 'क्या आपने कभी सोचा है कि आपका भविष्य क्या लेकर आया है? एक मुफ्त ऑनलाइन कुंडली आपके व्यक्तित्व, करियर, रिश्तों और भविष्य के बारे में विवरण दिखा सकती है।'
+                  : 'Ever thought about what your future holds? A free online kundli can show details about your personality, career, relationships, and future.'}
+              </p>
+            </div>
+
+            <KundliForm 
+              formData={formData} 
+              setFormData={setFormData} 
+              onSubmit={handleSubmit} 
+              isLoading={isLoading} 
+            />
           </div>
         ) : (
-          <div className={`rounded-2xl border p-8 ${isDark ? 'bg-gray-800/80 backdrop-blur-md border-white/10' : 'bg-gray-50 border-gray-200'}`}>
-            <h3 className={`font-black text-2xl mb-6 text-center ${isDark ? 'text-white' : 'text-gray-900'}`}>
-              {lang === 'hi' ? 'आपकी कुंडली' : 'Your Kundli'}
-            </h3>
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className={`rounded-xl p-4 ${isDark ? 'bg-gray-700/50' : 'bg-white border border-gray-200'}`}>
-                <h4 className={`font-bold mb-2 ${isDark ? 'text-amber-500' : 'text-amber-600'}`}>
-                  {lang === 'hi' ? 'व्यक्तिगत विवरण' : 'Personal Details'}
-                </h4>
-                <div className={`space-y-2 ${isDark ? 'text-white' : 'text-gray-700'}`}>
-                  <div><span className="font-bold">{lang === 'hi' ? 'नाम:' : 'Name:'}</span> {formData.name}</div>
-                  <div><span className="font-bold">{lang === 'hi' ? 'लिंग:' : 'Gender:'}</span> {formData.gender}</div>
-                  <div><span className="font-bold">{lang === 'hi' ? 'जन्म तिथि:' : 'Birth Date:'}</span> {formData.birthDate}</div>
-                  <div><span className="font-bold">{lang === 'hi' ? 'जन्म समय:' : 'Birth Time:'}</span> {formData.birthTime}</div>
-                  <div><span className="font-bold">{lang === 'hi' ? 'जन्म स्थान:' : 'Birth Place:'}</span> {formData.birthPlace}</div>
-                </div>
-              </div>
-              <div className={`rounded-xl p-4 ${isDark ? 'bg-gray-700/50' : 'bg-white border border-gray-200'}`}>
-                <h4 className={`font-bold mb-2 ${isDark ? 'text-amber-500' : 'text-amber-600'}`}>
-                  {lang === 'hi' ? 'राशिफल' : 'Horoscope'}
-                </h4>
-                <p className={`text-lg ${isDark ? 'text-white' : 'text-gray-700'}`}>
-                  {lang === 'hi'
-                    ? 'आपकी कुंडली सफलतापूर्वक बनाई गई है। विस्तृत विश्लेषण के लिए लॉगिन करें।'
-                    : 'Your kundli has been created successfully. Login for detailed analysis.'}
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4 mt-6">
-              <button
-                onClick={handleLogin}
-                className="flex-1 bg-linear-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-black py-3 rounded-xl transition-all"
-              >
-                {lang === 'hi' ? 'लॉगिन करें' : 'Login'}
-              </button>
-              <button
-                onClick={handleTalkToAstrologer}
-                className="flex-1 bg-linear-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-black py-3 rounded-xl transition-all"
-              >
-                {lang === 'hi' ? 'ज्योतिषी से बात करें' : 'Talk to Astrologer'}
-              </button>
-            </div>
-          </div>
+          <KundliResultPage 
+            isOpen={showResult} 
+            onClose={handleBackToForm} 
+            formData={formData}
+          />
         )}
       </div>
     </div>
