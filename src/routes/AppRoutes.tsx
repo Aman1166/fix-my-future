@@ -26,6 +26,7 @@ const InformationPage = lazy(() => import('../pages/InformationPage'));
 const TarotPage = lazy(() => import('../pages/TarotPage'));
 const WalletPage = lazy(() => import('../pages/WalletPage'));
 const KundliResultPage = lazy(() => import('../pages/KundliResultPage'));
+const HoroscopeDetailsPage = lazy(() => import('../pages/HoroscopeDetailsPage'));
 
 const Loading = () => <div className="min-h-screen flex items-center justify-center bg-gray-900 text-amber-500 font-bold">Loading...</div>;
 
@@ -80,6 +81,7 @@ export default function AppRoutes() {
           <Route path="/tarot" element={<TarotPage isOpen={true} onClose={() => window.history.back()} />} />
           <Route path="/wallet" element={<WalletPage isOpen={true} onClose={() => window.history.back()} />} />
           <Route path="/kundli/details" element={<KundliResultPage isOpen={true} onClose={() => window.history.back()} formData={{}} />} />
+          <Route path="/horoscope/:type/:sign" element={<HoroscopeDetailsPage />} />
         </Route>
       </Routes>
     </Suspense>

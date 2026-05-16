@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { LanguageContext, ThemeContext } from '../App';
 
 export default function TodaysHoroscope({
@@ -154,8 +155,9 @@ export default function TodaysHoroscope({
         {/* Zodiac Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
           {zodiacSigns.map((sign) => (
-            <div 
+            <Link 
               key={sign.name}
+              to={`/horoscope/today/${sign.name.toLowerCase()}`}
               className={`flex items-start p-6 rounded-3xl border transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 ${isDark ? 'bg-gray-800/50 border-white/5 hover:border-amber-500/30' : 'bg-white border-gray-100 hover:border-amber-500/30'}`}
             >
               <div className={`w-24 h-24 shrink-0 rounded-2xl flex items-center justify-center text-4xl mr-6 ${sign.color} ${sign.textColor} shadow-inner`}>
@@ -169,7 +171,7 @@ export default function TodaysHoroscope({
                   {sign.desc}
                 </p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 
