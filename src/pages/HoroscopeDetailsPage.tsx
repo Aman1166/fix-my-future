@@ -1,6 +1,6 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { LanguageContext, ThemeContext } from '../App';
+import { ThemeContext } from '../App';
 import { ScrollReveal } from '../components/Animations';
 
 const zodiacSigns = [
@@ -47,7 +47,7 @@ const horoscopeTypes = [
 export default function HoroscopeDetailsPage() {
   const { type, sign } = useParams();
   const navigate = useNavigate();
-  const { lang } = useContext(LanguageContext);
+
   const { isDark } = useContext(ThemeContext);
 
   const currentSign = zodiacSigns.find(s => s.slug === sign?.toLowerCase()) || zodiacSigns[6]; // Default Libra
